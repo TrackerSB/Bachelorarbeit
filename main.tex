@@ -1,4 +1,22 @@
-\documentclass[12pt]{article}
+\documentclass[a4paper, ngerman]{scrreprt}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic-verb]{biblatex}
+\usepackage[babel,german=guillemets]{csquotes}
+
+\addbibresource{references.bib}
+
 \begin{document}
+
 \input{title_page_1.tex}
+
+\tableofcontents
+
+\chapter{Motivation}
+\input{chapter01_Motivation.tex}
+
+\chapter{Begriffsklaerung}
+\input{chapter02_Begriffsklaerung.tex}
+
 \end{document}
