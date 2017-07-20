@@ -8,7 +8,7 @@ $(FILENAME).pdf: $(FILENAME).tex references.bib
 
 .PHONY: clean
 clean:
-	rm *.toc *.aux *.out *.nav *.log *.snm *.pdf *.bbl *.blg *.bcf *.run.xml
+	rm -f *.toc *.aux *.out *.nav *.log *.snm *.pdf *.bbl *.blg *.bcf *.run.xml
 
 .PHONY: show
 show: $(FILENAME).pdf
