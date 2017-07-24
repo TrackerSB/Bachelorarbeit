@@ -1,3 +1,4 @@
+#LaTeX
 *.aux
 *.bbl
 *.bcf
@@ -7,3 +8,7 @@
 *.pdf
 *.run.xml
 *.toc
+
+#LLVM/Polly/Polli/benchbuild
+*.ll
+*.log
