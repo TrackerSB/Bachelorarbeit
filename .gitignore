@@ -8,6 +8,8 @@
 *.pdf
 *.run.xml
 *.toc
+*.fls
+*.fdb_latexmk
 
 #LLVM/Polly/Polli/benchbuild
 *.ll
