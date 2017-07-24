@@ -1,3 +1,71 @@
 \section{Vorgehen}
+
 \section{Resultate}
+\subsection{Gründe für die Ablehnung von SCoPs}
+\begin{itemize}
+    \item CFG
+    \item Unsupported terminator instruction
+    \item Unreachable in exit exit block
+    \item Irreducible loops
+    \item LastCFG
+    \item AffFunc
+    \item Undefinded branch condition
+    \item Non-integer branch condition
+    \item Undefined operands in comparison
+    \item Non-affine branch condition
+    \item No base pointer
+    \item Undefinded base pointer
+    \item Variant base pointer
+    \item Non-affine memory accesses
+    \item Accesses with differing sizes
+    \item LastAffFunc
+    \item Uncomputable loop bounds
+    \item Loop without exit
+    \item Function call with side effects
+    \item Complicated access semantics (volatile or atomic)
+    \item Base address aliasing
+    \item Other
+    \item Integer to pointer conversion
+        \lstinputlisting{cpp/IntegerToPointerConversion.cpp}
+    \item Stack allocations
+    \item Unknown instructions
+    \item Contains entry block
+    \item Assumed to be unprofitable
+    \item LastOther
+\end{itemize}
+
+\begin{comment}
+    Following is copy\&pasted from pollys ScopDetectionDiagnostic.cpp
+
+SCOP_STAT(CFG, ""),
+SCOP_STAT(InvalidTerminator, "Unsupported terminator instruction"),
+SCOP_STAT(UnreachableInExit, "Unreachable in exit block"),
+SCOP_STAT(IrreducibleRegion, "Irreducible loops"),
+SCOP_STAT(LastCFG, ""),
+SCOP_STAT(AffFunc, ""),
+SCOP_STAT(UndefCond, "Undefined branch condition"),
+SCOP_STAT(InvalidCond, "Non-integer branch condition"),
+SCOP_STAT(UndefOperand, "Undefined operands in comparison"),
+SCOP_STAT(NonAffBranch, "Non-affine branch condition"),
+SCOP_STAT(NoBasePtr, "No base pointer"),
+SCOP_STAT(UndefBasePtr, "Undefined base pointer"),
+SCOP_STAT(VariantBasePtr, "Variant base pointer"),
+SCOP_STAT(NonAffineAccess, "Non-affine memory accesses"),
+SCOP_STAT(DifferentElementSize, "Accesses with differing sizes"),
+SCOP_STAT(LastAffFunc, ""),
+SCOP_STAT(LoopBound, "Uncomputable loop bounds"),
+SCOP_STAT(LoopHasNoExit, "Loop without exit"),
+SCOP_STAT(FuncCall, "Function call with side effects"),
+SCOP_STAT(NonSimpleMemoryAccess,
+          "Compilated access semantics (volatile or atomic)"),
+SCOP_STAT(Alias, "Base address aliasing"),
+SCOP_STAT(Other, ""),
+SCOP_STAT(IntToPtr, "Integer to pointer conversions"),
+SCOP_STAT(Alloca, "Stack allocations"),
+SCOP_STAT(UnknownInst, "Unknown Instructions"),
+SCOP_STAT(Entry, "Contains entry block"),
+SCOP_STAT(Unprofitable, "Assumed to be unprofitable"),
+SCOP_STAT(LastOther, "")
+\end{comment}
+
 \section{Analyse}

@@ -4,13 +4,17 @@
 \usepackage{hyperref}
 \usepackage[backend=biber, style=alphabetic, citestyle=alphabetic-verb]{biblatex}
 \usepackage[babel,german=guillemets]{csquotes}
+\usepackage{comment}
+\usepackage{listings}
+
+\lstset{numbers=left, numberstyle=\tinym numbersep=5pt}
+\lstset{language=c++}
 
 \addbibresource{references.bib}
 
 \begin{document}
 
 \input{title_page.tex}
-
 \tableofcontents
 
 \chapter{Motivation}
@@ -22,9 +26,6 @@
 \chapter{Begriffsklärung}
 \input{Begriffsklaerung.tex}
 
-\chapter{Verwendete Software}
-\input{VerwendeteSoftware.tex}
-
 \chapter{Aufbau LLVM}
 \input{AufbauLLVM.tex}
 
@@ -34,7 +35,7 @@
 \chapter{Quellen}
 \nocite{*}
 \printbibliography[heading=bibintoc, title={Literatur}, keyword=Literature]
-\printbibliography[title={Diagramme}, keyword=Diagram]
-\printbibliography[title={Sonstige}, notkeyword=Literature, notkeyword=Diagram]
+\printbibliography[title={Diagramme}, title={Anhang}, keyword=Appendix]
+\printbibliography[title={Sonstige}, title={Sonstige}, notkeyword=Literature, notkeyword=Diagram]
 
 \end{document}
