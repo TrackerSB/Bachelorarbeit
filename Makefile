@@ -1,7 +1,7 @@
-FILENAME=main
-$(FILENAME).pdf: $(FILENAME).tex references.bib
-	latexmk -pdf $(FILENAME).tex
+FILENAME=ClassicThesis
 
+$(FILENAME).pdf: $(FILENAME).tex
+	latexmk -pdf $(FILENAME).tex
 
 .PHONY: clean
 clean:

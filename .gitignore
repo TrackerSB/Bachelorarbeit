@@ -10,6 +10,10 @@
 *.toc
 *.fls
 *.fdb_latexmk
+*-blx.bib
+*.lol
+*.lof
+*.lot
 
 #LLVM/Polly/Polli/benchbuild
 *.ll
