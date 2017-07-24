@@ -3,9 +3,11 @@
 \section{Resultate}
 \subsection{Gründe für die Ablehnung von SCoPs}
 \begin{itemize}
+    \item Parent is toplevel
+        \lstinputlisting{cpp/ParentIsTopLevelRegion.cpp}
     \item CFG
     \item Unsupported terminator instruction
-    \item Unreachable in exit exit block
+    \item Unreachable in exit block
     \item Irreducible loops
     \item LastCFG
     \item AffFunc
@@ -21,6 +23,7 @@
     \item LastAffFunc
     \item Uncomputable loop bounds
     \item Loop without exit
+        \lstinputlisting{cpp/LoopWithoutExit.cpp}
     \item Function call with side effects
     \item Complicated access semantics (volatile or atomic)
     \item Base address aliasing
