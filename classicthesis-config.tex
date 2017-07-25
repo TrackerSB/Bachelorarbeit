@@ -60,10 +60,8 @@
 \newcounter{dummy} % necessary for correct hyperlinks (to index, bib, etc.)
 \newlength{\abcd} % for ab..z string length calculation
 \providecommand{\mLyX}{L\kern-.1667em\lower.25em\hbox{Y}\kern-.125emX\@}
-\newcommand{\ie}{i.\,e.}
-\newcommand{\Ie}{I.\,e.}
-\newcommand{\eg}{e.\,g.}
-\newcommand{\Eg}{E.\,g.} 
+\newcommand{\zb}{z.\,B.}
+\newcommand{\Zb}{Z.\,B.} 
 % ****************************************************************************************************
 
 
@@ -138,14 +136,14 @@
 % ****************************************************************************************************
 \usepackage{listings} 
 %\lstset{emph={trueIndex,root},emphstyle=\color{BlueViolet}}%\underbar} % for special keywords
-\lstset{language=[LaTeX]Tex,%C++,
+\lstset{language=C++,
     morekeywords={PassOptionsToPackage,selectlanguage},
     keywordstyle=\color{RoyalBlue},%\bfseries,
     basicstyle=\small\ttfamily,
     %identifierstyle=\color{NavyBlue},
     commentstyle=\color{Green}\ttfamily,
     stringstyle=\rmfamily,
-    numbers=none,%left,%
+    numbers=left,
     numberstyle=\scriptsize,%\tiny
     stepnumber=5,
     numbersep=8pt,
