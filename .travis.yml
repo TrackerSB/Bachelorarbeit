@@ -1,0 +1,18 @@
+sudo: false
+language: tex
+
+branches:
+    only:
+        - master
+
+addons:
+    apt:
+        packages:
+            - texlive-full
+
+notification:
+    email:
+        recipients:
+            - junktogo@web.de
+        on_success: change
+        on_failure: always
