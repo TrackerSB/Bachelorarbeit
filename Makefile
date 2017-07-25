@@ -1,6 +1,6 @@
 FILENAME=ClassicThesis
 
-$(FILENAME).pdf: $(FILENAME).tex
+$(FILENAME).pdf: $(FILENAME).tex Chapters/*.tex
 	latexmk -pdf $(FILENAME).tex
 
 .PHONY: clean
