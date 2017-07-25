@@ -10,8 +10,11 @@ addons:
         packages:
             - texlive-full
 
+cache:
+    apt: true
+
 script:
-    - latexmk -pdf ClassicThesis.tex
+    - latexmk -silent -pdf ClassicThesis.tex
 
 notification:
     email:
