@@ -1,5 +1,24 @@
-\chapter{Polly}\label{Polly}
+\chapter{Polly}
+Polly ist eines der zahlreichen Unterprojekte der \ac{LLVM} und stellt Möglichkeiten bereit, automatische Optimierungen auf Basis des Polyedermodells auf \ac{LLVM-IR} durchzuführen.
+Diese Optimierungen können über den \ac{LLVM} Optimizer genutzt werden.
 \section{Geschichte}
-\section{Pipeline}
+Polly wurde mit der Veröffentlichung (\cite{PollyGrosser}) eingeführt. TODO Mehr Informationen?
+
+\section{Pipeline \cite{PollyPresentation}}
+Die Einbindung von Polly wird über den \ac{LLVM} Optimizer realisiert.
+\begin{center}
+    \begin{tikzpicture}
+        \coordinate(clang);
+        \node(opt)[myNode, right=of clang]{\ac{LLVM} Optimizer};
+        \node(polly)[myNode, below=of opt]{\ac{LLVM} Polly};
+        \coordinate[right=of opt](generator);
+        \path[myPath] (clang) to node[auto]{\ac{LLVM-IR}}(opt);
+        \path[myPath, bend right] (opt.south west) to (polly);
+        \path[myPath, bend right] (polly) to (opt.south east);
+        \path[myPath] (opt) to node[auto]{\ac{LLVM-IR}}(generator);
+        \path[myPath] (polly) edge[loop below] ();
+    \end{tikzpicture}
+\end{center}
 \subsection{Definition Region}
-\subsection{Definition SCoP}
+
+\subsection{Definition \ac{SCoP}}

@@ -1,19 +1,52 @@
 \chapter{LLVM}
 \section{Geschichte \cite{LLVMWebsite}\cite{LLVMResearchBeginning}}
 Die \ac{LLVM} ist eine Zusammenfassung von modularen und wiederverwendbaren Compilern und Toolchain Technologien.\\
-Die \ac{LLVM} war ursprünglich ein Forschungsprojekt an der Universität in Illinois mit dem Ziel, sowohl statische als auch dynamische Kompilation sowie Transformationen und Analysen von beliebigen Programmiersprachen zu verwirklichen. Zum aktuellen Zeitpunkt umfasst die \ac{LLVM} aber auch eine Vielzahl an Unterprojekten \ua Polly (Siehe \ref{Polly}).
+Die \ac{LLVM} war ursprünglich ein Forschungsprojekt an der Universität in Illinois mit dem Ziel, sowohl statische als auch dynamische Kompilation sowie Transformationen und Analysen von beliebigen Programmiersprachen zu verwirklichen.
+Um die Optimierungen und Analysen von der ursprünglich verwendeten Programmiersprache möglichst unabhängig zu machen, wurde die \ac{LLVM-IR} entworfen. Innerhalb der Pipeline wird ausschließlich auf Basis der \ac{LLVM-IR} gearbeitet.
 
-\section{Pipeline\cite{IntroLLVM}}
-Bei der Übersetzung eines Programms in einer beliebigen Programmiersprache zu einem ausführbaren Programm sind folgende Komponenten in der LLVM beteiligt:
+\section{Pipeline \cite{IntroLLVM}}
+Die Pipeline hat strukturell folgenden Aufbau:
+\begin{comment}
+    \begin{center}
+        \smartdiagramset{
+            back arrow disabled=true,
+            uniform color list=blue!50!white for 5 items,
+            additions={
+                additional arrow tip=to,
+                additional item shadow=drop shadow,
+                additional item bottom color=blue!50!white
+            }
+        }
+        \smartdiagramadd[flow diagram:horizontal]{
+            C/C++/\\Obj-C/\dots,
+            clang frontend,
+            \ac{LLVM} Optimizer,
+            \ac{LLVM} Code Generator
+        }{
+            below of module4/Linker,
+            below of module3/Programm
+        }
+        \smartdiagramconnect{}{module4/additional-module1}
+        \smartdiagramconnect{}{additional-module1/additional-module2}
+    \end{center}
+\end{comment}
 \begin{center}
-    \smartdiagramset{
-        back arrow disabled=true
-    }
-    \smartdiagram[flow diagram:horizontal]{
-        C/C++/\dots,
-        clang frontend,
-        LLVM Optimizer,
-        LLVM Code Generator,
-        Compiler
-    }
+    \begin{tikzpicture}
+        \node(languages)[myNode]{C/C++/Obj-C};
+        %\coordinate[below right=of languages](a);
+        \node(clang)[myNode, right=of languages]{clang frontend};
+        \node(opt)[myNode, right=of clang]{\ac{LLVM} Optimizer};
+        \node(generator)[myNode, below=of opt]{\ac{LLVM} Code Generator};
+        \node(linker)[myNode, left=of generator]{\ac{LLVM} Linker};
+        \path[myPath] (languages) to (clang);
+        \path[myPath] (clang) to node[auto]{\ac{LLVM-IR}} (opt);
+        \path[myPath] (opt) -| ($(opt.north east) + (0.5,0.5)$) -| (opt);
+        \path[myPath] (opt) to node[auto]{\ac{LLVM-IR}} (generator);
+        \path[myPath] (generator) to (linker);
+    \end{tikzpicture}
 \end{center}
+Demnach wird beliebiger Quelltext -- zurzeit werden vor allem C, C++ und C-nahe Sprachen unterstützt -- mittels clang und der Option \texttt{-emit-llvm} in \ac{LLVM-IR} übersetzt.
+Auf dieser Zwischensprache können dann durch den \ac{LLVM} Optimizer opt beliebige Analysen und Optimierungen durchgeführt werden.
+Die Schritte, die dabei von opt durchgeführt werden, werden als Passes bezeichnet.
+Mittels dem \ac{LLVM} Code Generator kann die \ac{LLVM-IR} in Assembler übersetzt werden.
+Der \ac{LLVM} Linker erzeugt dann ein ausführbares Binary.
