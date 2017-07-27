@@ -50,6 +50,13 @@
       %\phantomsection 
     \refstepcounter{dummy}
     %\addcontentsline{toc}{chapter}{\lstlistlistingname}
+    % https://tex.stackexchange.com/a/99656/5125
+    \renewcommand{\listoflistings}{%
+        \cleardoublepage
+        \phantomsection
+        \addcontentsline{toc}{chapter}{\listoflistingscaption}%
+        \listof{listing}{\listoflistingscaption}%
+    }
     \pdfbookmark[1]{\lstlistlistingname}{lol}
     \listoflistings 
 
