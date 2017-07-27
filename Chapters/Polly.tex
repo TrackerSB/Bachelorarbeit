@@ -23,5 +23,13 @@ Die Einbindung von Polly wird über den \ac{LLVM} Optimizer realisiert, indem di
 \end{figure}\\
 Zwei essentielle Begriffe von Polly sind \enquote{Region} und \enquote{\ac{SCoP}}.
 \subsection{Definition Region}
-
+In \cite{Drachenbuch} a region is defined as:
+\begin{quote} Seite 672, Chapter 9. Machine-independent optimizations, 9.7.1 Regions
+    Formally, a region of a flow graph is a collection of nodes N and edges E such that:
+    \begin{enumerate}
+        \item There is a header h in N that dominates all the nodes in N.
+        \item If some node m can reach a node n in N without going through h, then m is also in N.
+        \item E is the set of all the control flow edges between nodes \(n_1\) and \(n_2\) in N, except (possibly) for some that enter h.
+    \end{enumerate}
+\end{quote}
 \subsection{Definition SCoP}
