@@ -25,13 +25,14 @@ At the end assembler is generated out of the (possibly) newly formed \llvmir by 
         \path[nonLlvmIrPath] (generator) to (linker);
     \end{tikzpicture}
 \end{figure}\\
-\subsection{clang frontend}
+\subsection{clang frontend}\label{subsec:clangfrontend}
 More precisly files containing sourcecode are translated by the clang frontend -- currently at least C, C++ and languages based on C are supported -- into \llvmir by adding the option \texttt{-emit-llvm} \enquote{to abstract away from the specifics} \cite{FastScopDetection} of a programming language.
 Often also the option \texttt{-S} is passed in order to generate a human readable textfile instead of a \llvmir binary.
 \subsection{LLVM Optimizer}\label{subsec:optimizer}
 On the received files the \opt can perform steps optimizing and analysing the code.
 These steps are called \enquote{Passes}.
 They can be explicitly added by specifying appropriate options to the command \texttt{opt} of the \opt.
+The option \texttt{-S} can also be specified for the same reasons as in \autoref{subsec:clangfrontend}.\\
 It is also possible to add further options by loading multiple libraries using the flag \texttt{-load}.
 \subsection{LLVM Code Generator}
 When all desired passes are performed the \generator translates the \llvmir into assembler.
