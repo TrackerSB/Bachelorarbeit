@@ -50,7 +50,7 @@ In \autoref{fig:exampleRegion} some sourcecode and its corresponding regions are
 For visualizing the regions of this program a dot file was generated executing the following steps/commands:
 \begin{enumerate}
     \item Translate the C++ sourcecode into \llvmir (\autoref{lst:matmulll})\\
-        \texttt{clang -S -std=c++14 -O3 -emit-llvm matmul.cpp -o matmul.ll}
+        \texttt{clang -S -O3 -emit-llvm matmul.cpp -o matmul.ll}
     \item Prepare the \llvmir for Polly (\autoref{lst:matmulpreoptll})\\
         \texttt{opt -load LLVMPolly.so -S -polly-canonicalize matmul.ll > matmul.preopt.ll}
     \item Generate the dot file\\
@@ -84,16 +84,15 @@ For visualizing the regions of this program a dot file was generated executing t
     Function calls and intrinsics that do not have side effects (readnone)
     or memory intrinsics (memset, memcpy, memmove) are allowed.
 \end{comment}
-A static control part (Scop) is a subgraph of the control flow graph (CFG) that only has statically known control flow and can therefore be described within the polyhedral model.
-
+A \scop is a subgraph of the \cfg that only has statically known control flow and can therefore be described within the polyhedral model.
 Every Scop fulfills these restrictions:
 \begin{itemize}
     \item It is a single entry single exit region.
     \item Only affine linear bounds in the loops.\\
-        Every natural loop in a Scop must have a number of loop iterations that can be described as an affine linear function in surrounding loop iterators or parameters. (A parameter is a scalar that does not change its value during execution of the Scop).
+        Every natural loop in a \scop must have a number of loop iterations that can be described as an affine linear function in surrounding loop iterators or parameters. (A parameter is a scalar that does not change its value during execution of the Scop).
     \item Only comparisons of affine linear expressions in conditions.
     \item All loops and conditions perfectly nested.\\
-        The control flow needs to be structured such that it could be written using just 'for' and 'if' statements, without the need for any 'goto', 'break' or 'continue'.
+        The control flow needs to be structured such that it could be written using just \lstinline$for$ and \lstinline$if$ statements, without the need for any \lstinline$goto$, \lstinline$break$ or \lstinline$continue$.
     \item Side effect free functions call.\\
-        Function calls and intrinsics that do not have side effects (readnone) or "emory intrinsics (memset, memcpy, memmove) are allowed".
+        Function calls and intrinsics that do not have side effects (readnone) or \enquote{emory intrinsics (memset, memcpy, memmove) are allowed}.
 \end{itemize}
