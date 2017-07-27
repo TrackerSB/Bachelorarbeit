@@ -14,12 +14,12 @@ Ich habe eine empirische Studie durchgeführt, um...
 \subsection{Reasons for SCoPs being invalid}
 \begin{itemize}
     \item Parent is toplevel
-        \lstinputlisting{cpp/ParentIsTopLevelRegion.cpp}
+        \inputminted{c++}{cpp/ParentIsTopLevelRegion.cpp}
     \item Unsupported terminator instruction
     \item Unreachable in exit block
-        \lstinputlisting{cpp/UnreachableInExitBlock.cpp}
+        \inputminted{c++}{cpp/UnreachableInExitBlock.cpp}
     \item Irreducible loops
-        \lstinputlisting{cpp/IrreducibleRegion.cpp}
+        \inputminted{c++}{cpp/IrreducibleRegion.cpp}
     \item Undefinded branch condition
     \item Non-integer branch condition
     \item Undefined operands in comparison
@@ -27,26 +27,26 @@ Ich habe eine empirische Studie durchgeführt, um...
     \item No base pointer
     \item Undefinded base pointer
     \item Variant base pointer
-        \lstinputlisting{cpp/VariantBasePointer.cpp}
+        \inputminted{c++}{cpp/VariantBasePointer.cpp}
     \item Non-affine memory accesses
-        \lstinputlisting{cpp/NonAffineMemoryAccesses.cpp}
+        \inputminted{c++}{cpp/NonAffineMemoryAccesses.cpp}
     \item Accesses with differing sizes
     \item Uncomputable loop bounds
-        \lstinputlisting{cpp/UncomputableLoopBounds.cpp}
+        \inputminted{c++}{cpp/UncomputableLoopBounds.cpp}
     \item Loop without exit
-        \lstinputlisting{cpp/LoopWithoutExit.cpp}
+        \inputminted{c++}{cpp/LoopWithoutExit.cpp}
     \item Function call with side effects
-        \lstinputlisting{cpp/FunctionCall.cpp}
+        \inputminted{c++}{cpp/FunctionCall.cpp}
     \item Complicated access semantics (volatile or atomic)
     \item Base address aliasing
-        \lstinputlisting{cpp/BaseAddressAliasing.cpp}
+        \inputminted{c++}{cpp/BaseAddressAliasing.cpp}
     \item Integer to pointer conversion
-        \lstinputlisting{cpp/IntegerToPointerConversion.cpp}
+        \inputminted{c++}{cpp/IntegerToPointerConversion.cpp}
     \item Stack allocations
     \item Unknown instructions
     \item Contains entry block
     \item Assumed to be unprofitable
-        \lstinputlisting{cpp/AssumedToBeUnprofitable.cpp}
+        \inputminted{c++}{cpp/AssumedToBeUnprofitable.cpp}
 \end{itemize}
 
 \begin{comment}

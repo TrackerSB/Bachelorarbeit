@@ -18,3 +18,6 @@
 #LLVM/Polly/Polli/benchbuild
 *.ll
 *.log
+
+#minted
+_minted-ClassicThesis/

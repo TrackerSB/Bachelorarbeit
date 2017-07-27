@@ -41,7 +41,7 @@ In \autoref{fig:exampleRegion} some sourcecode and its corresponding regions are
     \caption{A simple example of regions}
     \label{fig:exampleRegion}
     \begin{minipage}{.7\textwidth}
-        \lstinputlisting[language=c++]{cpp/matmul.cpp}
+        \inputminted{c++}{cpp/matmul.cpp}
     \end{minipage}
     \begin{minipage}{.2\textwidth}
         \includegraphics[height=12cm]{gfx/matmulRegions.png}
@@ -92,7 +92,7 @@ Every Scop fulfills these restrictions:
         Every natural loop in a \scop must have a number of loop iterations that can be described as an affine linear function in surrounding loop iterators or parameters. (A parameter is a scalar that does not change its value during execution of the Scop).
     \item Only comparisons of affine linear expressions in conditions.
     \item All loops and conditions perfectly nested.\\
-        The control flow needs to be structured such that it could be written using just \lstinline$for$ and \lstinline$if$ statements, without the need for any \lstinline$goto$, \lstinline$break$ or \lstinline$continue$.
+        The control flow needs to be structured such that it could be written using just \mintinline{c++}{for} and \mintinline{c++}{if} statements, without the need for any \mintinline{c++}{goto}, \mintinline{c++}{break} or \mintinline{c++}{continue}.
     \item Side effect free functions call.\\
         Function calls and intrinsics that do not have side effects (readnone) or \enquote{emory intrinsics (memset, memcpy, memmove) are allowed}.
 \end{itemize}

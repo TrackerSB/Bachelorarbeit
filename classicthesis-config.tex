@@ -1,3 +1,10 @@
+%Added by Stefan Huber
+\usepackage{comment}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{minted} % should be added before scrhack %newfloat now working
+\usepackage{smartdiagram}
+\usesmartdiagramlibrary{additions}
+
 % ****************************************************************************************************
 % classicthesis-config.tex
 % formerly known as loadpackages.sty, classicthesis-ldpkg.sty, and classicthesis-preamble.sty
@@ -134,26 +141,28 @@
 % ****************************************************************************************************
 % 5. Setup code listings
 % ****************************************************************************************************
-\usepackage{listings}
-%\lstset{emph={trueIndex,root},emphstyle=\color{BlueViolet}}%\underbar} % for special keywords
-\lstset{language=C++,
-    morekeywords={PassOptionsToPackage,selectlanguage},
-    keywordstyle=\color{NavyBlue},%\bfseries,
-    basicstyle=\small\ttfamily,
-    %identifierstyle=\color{NavyBlue},
-    commentstyle=\color{Green}\ttfamily,
-    stringstyle=\rmfamily,
-    numbers=left,
-    numberstyle=\scriptsize,%\tiny
-    %stepnumber=5,
-    numbersep=8pt,
-    showstringspaces=false,
-    breaklines=true,
-    %frameround=ftff,
-    %frame=single,
-    belowcaptionskip=.75\baselineskip,
-    frame=L
-}
+\begin{comment}
+    \usepackage{listings}
+    %\lstset{emph={trueIndex,root},emphstyle=\color{BlueViolet}}%\underbar} % for special keywords
+    \lstset{language=C++,
+        morekeywords={PassOptionsToPackage,selectlanguage},
+        keywordstyle=\color{NavyBlue},%\bfseries,
+        basicstyle=\small\ttfamily,
+        %identifierstyle=\color{NavyBlue},
+        commentstyle=\color{Green}\ttfamily,
+        stringstyle=\rmfamily,
+        numbers=left,
+        numberstyle=\scriptsize,%\tiny
+        %stepnumber=5,
+        numbersep=8pt,
+        showstringspaces=false,
+        breaklines=true,
+        %frameround=ftff,
+        %frame=single,
+        belowcaptionskip=.75\baselineskip,
+        frame=L
+    }
+\end{comment}
 % ****************************************************************************************************
 
 
@@ -284,16 +293,18 @@
 % ****************************************************************************************************
 
 
-%Added by Stefan Huber
-\usepackage{comment}
-\usepackage[dvipsnames]{xcolor}
-\usepackage{smartdiagram}
-\usesmartdiagramlibrary{additions}
-
+%Customization Stefan Huber
 %custom colors
 \definecolor{defaultColor}{HTML}{1E90FF}
 \definecolor{llvmIrColor}{HTML}{228B22}
 \definecolor{nonLlvmIrColor}{HTML}{B22222}
+
+%minted configure
+\setminted{
+    linenos,
+    breaklines
+}
+\newenvironment{code}{\captionsetup{type=listing}}{}
 
 %Tikz
 \usepackage{tikz}
