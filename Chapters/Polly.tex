@@ -39,11 +39,20 @@ In \autoref{fig:exampleRegion} some sourcecode and its corresponding regions are
 \begin{figure}
     \caption{A simple example of regions}
     \label{fig:exampleRegion}
-    \begin{minipage}{.5\textwidth}
-        TODO Sourcecode
+    \begin{minipage}{.7\textwidth}
+        \lstinputlisting[language=c++]{cpp/matmul.cpp}
     \end{minipage}
-    \begin{minipage}{.5\textwidth}
-        TODO corresponding regions
+    \begin{minipage}{.2\textwidth}
+        \includegraphics[height=12cm]{gfx/matmulRegions.png}
     \end{minipage}
 \end{figure}
+For visualizing the regions of this program a dot file was generated executing the following steps/commands:
+\begin{enumerate}
+    \item Translate the C++ sourcecode into \llvmir (\autoref{lst:matmulll})\\
+        \texttt{clang -S -std=c++14 -O3 -emit-llvm matmul.cpp -o matmul.ll}
+    \item Prepare the \llvmir for Polly (\autoref{lst:matmulpreoptll})\\
+        \texttt{opt -load LLVMPolly.so -S -polly-canonicalize matmul.ll > matmul.preopt.ll}
+    \item Generate a dot file\\
+        \texttt{opt -load LLVMPolly.so -view-regions-only matmul.preopt.ll}
+\end{enumerate}
 \subsection{Definition SCoP}
