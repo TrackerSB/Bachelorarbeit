@@ -1,24 +1,27 @@
 \chapter{Polly}
-Polly ist eines der zahlreichen Unterprojekte der \ac{LLVM} und stellt Möglichkeiten bereit, automatische Optimierungen auf Basis des Polyedermodells auf \ac{LLVM-IR} durchzuführen.
-Diese Optimierungen können über den \ac{LLVM} Optimizer genutzt werden.
+Polly\footnote{Der Name Polly ist eine Kombination von \enquote{Polyhedral} und \enquote{\ac{LLVM}} \cite{PollyGrosser}} ist eines der zahlreichen Unterprojekte der \ac{LLVM} und stellt Möglichkeiten bereit, automatische Optimierungen auf Basis des Polyedermodells auf \ac{LLVM-IR} durchzuführen.
+Diese Optimierungen können über Flags des \ac{LLVM} Optimizers genutzt werden.
 \section{Geschichte}
 Polly wurde mit der Veröffentlichung (\cite{PollyGrosser}) eingeführt. TODO Mehr Informationen?
 
 \section{Pipeline \cite{PollyPresentation}}
-Die Einbindung von Polly wird über den \ac{LLVM} Optimizer realisiert.
-\begin{center}
+Die Einbindung von Polly wird über den \ac{LLVM} Optimizer realisiert, indem die Bibliothek von Polly geladen wird (\autoref{subsec:optimizer}).
+\begin{figure}[h]
+    \caption{Die Pipeline von Polly}
+    \centering
     \begin{tikzpicture}
         \coordinate(clang);
-        \node(opt)[myNode, right=of clang]{\ac{LLVM} Optimizer};
-        \node(polly)[myNode, below=of opt]{\ac{LLVM} Polly};
+        \node(opt)[llvmIrNode, right=of clang]{\ac{LLVM} Optimizer};
+        \node(polly)[llvmIrNode, below=of opt]{\ac{LLVM} Polly};
         \coordinate[right=of opt](generator);
-        \path[myPath] (clang) to node[auto]{\ac{LLVM-IR}}(opt);
-        \path[myPath, bend right] (opt.south west) to (polly);
-        \path[myPath, bend right] (polly) to (opt.south east);
-        \path[myPath] (opt) to node[auto]{\ac{LLVM-IR}}(generator);
-        \path[myPath] (polly) edge[loop below] ();
+        \path[llvmIrPath] (clang) to (opt);
+        \path[llvmIrPath, bend right] (opt.south west) to node[auto, swap]{SCoP Detection} (polly);
+        \path[llvmIrPath, bend right] (polly) to node[auto, swap]{Code Generation} (opt.south east);
+        \path[llvmIrPath] (opt) to (generator);
+        \path[llvmIrPath] (polly) edge[loop below] ();
     \end{tikzpicture}
-\end{center}
+\end{figure}\\
+Zwei essentielle Begriffe von Polly sind \enquote{Region} und \enquote{\ac{SCoP}}.
 \subsection{Definition Region}
 
-\subsection{Definition \ac{SCoP}}
+\subsection{Definition SCoP}

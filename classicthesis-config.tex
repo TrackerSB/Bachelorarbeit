@@ -285,12 +285,20 @@
 \usepackage{smartdiagram}
 \usesmartdiagramlibrary{additions}
 
+%custom colors
+\definecolor{defaultColor}{HTML}{1E90FF}
+\definecolor{llvmIrColor}{HTML}{228B22}
+\definecolor{nonLlvmIrColor}{HTML}{B22222}
+
 %Tikz
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning, shapes, snakes}
 \tikzset{
     node distance = 5mm and 15mm,
-    myNode/.style = {rectangle, rounded corners, draw=gray, drop shadow, very thick, bottom color=blue!50!white,
-    text centered, top color=white, minimum height=1.2em, minimum width=3em},
-    myPath/.style = {-{Stealth[length=4mm]}, color=NavyBlue, line width=0.2em, draw, rounded corners}
+    defaultNode/.style = {rectangle, rounded corners, draw=gray, drop shadow, very thick, bottom color=defaultColor!50!white, text centered, top color=white, minimum height=1.2em, minimum width=3em},
+    llvmIrNode/.style = {defaultNode, bottom color=llvmIrColor!50!white},
+    nonLlvmIrNode/.style = {defaultNode, bottom color=nonLlvmIrColor!50!white},
+    defaultPath/.style = {-{Stealth[length=4mm]}, color=defaultColor, line width=0.2em, draw, rounded corners},
+    llvmIrPath/.style = {defaultPath, color=llvmIrColor},
+    nonLlvmIrPath/.style = {defaultPath, color=nonLlvmIrColor}
 }
