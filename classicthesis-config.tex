@@ -60,12 +60,8 @@
 \newcounter{dummy} % necessary for correct hyperlinks (to index, bib, etc.)
 \newlength{\abcd} % for ab..z string length calculation
 \providecommand{\mLyX}{L\kern-.1667em\lower.25em\hbox{Y}\kern-.125emX\@}
-\newcommand{\zb}{z.\,B.}
-\newcommand{\Zb}{Z.\,B.}
-\newcommand{\ua}{u.\,a.}
-\newcommand{\Ua}{U.\,a.}
-\renewcommand{\dh}{d.\,h.}
-\newcommand{\Dh}{D.\,h.}
+\newcommand{\eg}{e.\,g.}
+\newcommand{\Eg}{E.\,g.}
 % ****************************************************************************************************
 
 
@@ -75,7 +71,7 @@
 % ********************************************************************
 % Packages with options that might require adjustments
 % ********************************************************************
-\PassOptionsToPackage{ngerman}{babel}   % change this to your language(s)
+\PassOptionsToPackage{british}{babel}   % change this to your language(s)
 % Spanish languages need extra options in order to work with this template
 %\PassOptionsToPackage{spanish,es-lcroman}{babel}
 	\usepackage{babel}
@@ -218,6 +214,15 @@
 			\renewcommand*{\subsectionautorefname}{Section}%
 			\renewcommand*{\subsubsectionautorefname}{Section}%
                 }%
+       \addto\extrasbritish{%
+			\renewcommand*{\figureautorefname}{Figure}%
+			\renewcommand*{\tableautorefname}{Table}%
+			\renewcommand*{\partautorefname}{Part}%
+			\renewcommand*{\chapterautorefname}{Chapter}%
+			\renewcommand*{\sectionautorefname}{Section}%
+			\renewcommand*{\subsectionautorefname}{Section}%
+			\renewcommand*{\subsubsectionautorefname}{Section}%
+                }%
        \addto\extrasngerman{%
 			\renewcommand*{\paragraphautorefname}{Absatz}%
 			\renewcommand*{\subparagraphautorefname}{Unterabsatz}%
@@ -302,3 +307,11 @@
     llvmIrPath/.style = {defaultPath, color=llvmIrColor},
     nonLlvmIrPath/.style = {defaultPath, color=nonLlvmIrColor}
 }
+
+%Shortcuts
+\newcommand{\scop}{\ac{SCoP}}
+\newcommand{\llvmir}{\ac{LLVM-IR} }
+\newcommand{\llvm}{\ac{LLVM} }
+\newcommand{\opt}{\llvm Optimizer }
+\newcommand{\generator}{\llvm Code Generator }
+\newcommand{\linker}{\llvm Linker }

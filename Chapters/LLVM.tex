@@ -1,37 +1,39 @@
 \chapter{LLVM}
-\section{Geschichte \cite{LLVMResearchBeginning}}
-Die \ac{LLVM} ist eine Zusammenfassung von modularen und wiederverwendbaren Compilern und Toolchain Technologien zur Unterstützung von sowohl statischer als auch dynamischer Kompilation sowie transparenter und ?lifelong? Programm Analysen und Transformationen für beliebige Programme. \cite{LLVMWebsite}\\
-Die \ac{LLVM} war ursprünglich ein Forschungsprojekt an der Universität in Illinois, das 2004 erstmals in einer Veröffentlichung erläutert wurde TODO: Ändere Formulierung.
-Aufgrund des starken Zuwachses an Community und der steigenden Zahl an Unterprojekten wurde 2014 die \enquote{\ac{LLVM} Foundation} gegründet, welche seitdem das Projekt verwaltet. \cite{LLVMFoundation}\\
-Um die Optimierungen und Analysen von der ursprünglich verwendeten Programmiersprache möglichst unabhängig zu machen, wurde die \ac{LLVM-IR} entworfen.
+\section{History}
+The \llvm is a collection of modular and reusable compiler and toolchain technologies to support of static and dynamic Compilation as well as tranparent and lifelong program analysis and transformations of arbitrary programs. \cite{LLVMWebsite, LLVMResearchBeginning}\\
+The \llvm former was a reasearch project at the university of Illinois, which was first descripted in a publication in 2004. TODO: Think about sentence
+The project was getting so popular that in 2014 the \llvm Foundation was founded for organizing and maintaining the project. \cite{LLVMFoundation}\\
+In order to make the \llvm as independent as possible of the programming language used, the \llvmir was created.
 
 \section{Pipeline \cite{IntroLLVM}}
-Die Pipeline der \ac{LLVM} (\autoref{fig:llvmPipeline}) erhält als Eingabe beliebigen Quelltext, welcher in die \ac{LLVM-IR} übersetzt wird, auf der die folgenden Komponenten arbeiten.
-Am Ende der Pipeline wird die \ac{LLVM-IR} in ein ausführbares Binary übersetzt.
+The pipeline of the \llvm (\autoref{fig:llvmPipeline}) translates files containing sourcecode written in an arbitrary programming language into \llvmir, on which the following components operate.
+At the end assembler is generated out of the (possibly) newly formed \llvmir by the \generator.
 \begin{figure}[!ht]
-    \caption{Die Pipeline der \ac{LLVM}}
+    \caption{The pipeline of \llvm}
     \label{fig:llvmPipeline}
     \centering
     \begin{tikzpicture}
         \node(languages)[nonLlvmIrNode]{C/C++/Obj-C};
         \node(clang)[nonLlvmIrNode, right=of languages]{clang frontend};
-        \node(opt)[llvmIrNode, right=of clang]{\ac{LLVM} Optimizer};
-        \node(generator)[llvmIrNode, below=of opt]{\ac{LLVM} Code Generator};
-        \node(linker)[nonLlvmIrNode, left=of generator]{\ac{LLVM} Linker};
+        \node(opt)[llvmIrNode, right=of clang]{\opt};
+        \node(generator)[llvmIrNode, below=of opt]{\generator};
+        \node(linker)[nonLlvmIrNode, left=of generator]{\linker};
         \path[nonLlvmIrPath] (languages) to (clang);
         \path[llvmIrPath] (clang) to (opt);
-        \path[llvmIrPath] (opt) -| ($(opt.north east) + (0.5,0.5)$) node[auto]{Pass} -| (opt);
+        \path[llvmIrPath] (opt) -| ($(opt.north east) + (0.5,0.5)$) -| node[auto]{Pass} (opt);
         \path[llvmIrPath] (opt) to (generator);
         \path[nonLlvmIrPath] (generator) to (linker);
     \end{tikzpicture}
 \end{figure}\\
 \subsection{clang frontend}
-Genauer wird beliebiger Quelltext -- zurzeit werden vor allem C, C++ und C-nahe Sprachen unterstützt -- mittels dem clang frontend und der Option \texttt{-emit-llvm} in die \ac{LLVM-IR} übersetzt.
-Wird zusätzlich das Flag \texttt{-S} gesetzt, erzeugt clang eine Textdatei mit \ac{LLVM-IR}; ohne diese Option wird ein \ac{LLVM-IR}-Binary erzeugt.
+More precisly files containing sourcecode are translated by the clang frontend -- currently at least C, C++ and languages based on C are supported -- into \llvmir by adding the option \texttt{-emit-llvm} \enquote{to abstract away from the specifics} \cite{FastScopDetection} of a programming language.
+Often also the option \texttt{-S} is passed in order to generate a human readable textfile instead of a \llvmir binary.
 \subsection{LLVM Optimizer}\label{subsec:optimizer}
-Auf dieser Zwischensprache können durch den \ac{LLVM} Optimizer über den Befehl opt beliebige Analysen und Optimierungen durchgeführt werden.
-Die Schritte, die dabei von opt durchgeführt und per Flag aktiviert werden können, werden als \enquote{Passes} bezeichnet.
+On the received files the \opt can perform steps optimizing and analysing the code.
+These steps are called \enquote{Passes}.
+They can be explicitly added by specifying appropriate options to the command \texttt{opt} of the \opt.
+It is also possible to add further options by loading multiple libraries using the flag \texttt{-load}.
 \subsection{LLVM Code Generator}
-Wurden die gewünschten Passes durchgeführt, übersetzt der \ac{LLVM} Code Generator die \ac{LLVM-IR} in Assembler.
+When all desired passes are performed the \generator translates the \llvmir into assembler.
 \subsection{LLVM Linker}
-Der \ac{LLVM} Linker kompiliert daraus ein ausführbares Binary.
+The \linker finally compiles an executable binary.

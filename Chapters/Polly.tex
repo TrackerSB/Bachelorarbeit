@@ -1,13 +1,13 @@
 \chapter{Polly}
-Polly\footnote{Der Name Polly ist eine Kombination von \enquote{Polyhedral} und \enquote{\ac{LLVM}} \cite{PollyGrosser}} ist eines der zahlreichen Unterprojekte der \ac{LLVM} und stellt Möglichkeiten bereit, automatische Optimierungen auf Basis des Polyedermodells auf \ac{LLVM-IR} durchzuführen.
-Diese Optimierungen können über Flags des \ac{LLVM} Optimizers genutzt werden.
-\section{Geschichte}
-Polly wurde mit der Veröffentlichung (\cite{PollyGrosser}) eingeführt. TODO Mehr Informationen?
+Polly\footnote{The name \enquote{Polly} is combination of \enquote{Polyhedral} and \enquote{\llvm}. \cite{PollyGrosser}} is one of the numerous subprojects of \llvm and provides ways for automatic optimizations based on the polyhedral model operating on \llvmir.
 
-\section{Pipeline \cite{PollyPresentation}}
-Die Einbindung von Polly wird über den \ac{LLVM} Optimizer realisiert, indem die Bibliothek von Polly geladen wird (\autoref{subsec:optimizer}).
+\section{Geschichte}
+Polly was first described in the publication \cite{PollyGrosser}. TODO: More information?
+
+\section{The pipeline of Polly}
+The optimizations implemented by Polly can be used by flags of the \opt when loading the library of Polly (\autoref{subsec:optimizer}).
 \begin{figure}[h]
-    \caption{Die Pipeline von Polly}
+    \caption{Die Pipeline von Polly \cite{PollyPresentation}}
     \centering
     \begin{tikzpicture}
         \coordinate(clang);
@@ -21,8 +21,8 @@ Die Einbindung von Polly wird über den \ac{LLVM} Optimizer realisiert, indem di
         \path[llvmIrPath] (polly) edge[loop below] ();
     \end{tikzpicture}
 \end{figure}\\
-Zwei essentielle Begriffe von Polly sind \enquote{Region} und \enquote{\ac{SCoP}}.
-\subsection{Definition Region}
+There are two essential terms for understanding Polly. On the one hand it is \enquote{region} on the other hand it is \enquote{\scop}.
+\subsection{Definition region}
 In \cite[chapter 9.7.1, p.~672]{Drachenbuch} a region is defined as:
 \begin{comment}
     Seite 672, Chapter 9. Machine-independent optimizations, 9.7.1 Regions
@@ -35,4 +35,15 @@ In \cite[chapter 9.7.1, p.~672]{Drachenbuch} a region is defined as:
         \item E is the set of all the control flow edges between nodes \(n_1\) and \(n_2\) in N, except (possibly) for some that enter h.
     \end{enumerate}
 \end{quote}
+In \autoref{fig:exampleRegion} some sourcecode and its corresponding regions are shown.
+\begin{figure}
+    \caption{A simple example of regions}
+    \label{fig:exampleRegion}
+    \begin{minipage}{.5\textwidth}
+        TODO Sourcecode
+    \end{minipage}
+    \begin{minipage}{.5\textwidth}
+        TODO corresponding regions
+    \end{minipage}
+\end{figure}
 \subsection{Definition SCoP}
