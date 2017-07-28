@@ -23,6 +23,63 @@ vidit exerci appetere ad, ut vel zzril intellegam interpretaris.
     \label{lst:matmulpreoptll}
 \end{code}
 
+\subsection{Examples for invalid SCoPs}
+\begin{code}
+    \caption{Parent is toplevel}
+    \inputminted{c++}{cpp/ParentIsTopLevelRegion.cpp}
+    \label{lst:parentIsToplevel}
+\end{code}
+\begin{code}
+    \caption{Unreachable in exit block}
+    \inputminted{c++}{cpp/UnreachableInExitBlock.cpp}
+    \label{lst:unreachableExitBlock}
+\end{code}
+\begin{code}
+    \caption{Irreducible loops}
+    \inputminted{c++}{cpp/IrreducibleRegion.cpp}
+    \label{lst:irreducibleLoops}
+\end{code}
+\begin{code}
+    \caption{Variant base pointer}
+    \inputminted{c++}{cpp/VariantBasePointer.cpp}
+    \label{lst:variantBasePointer}
+\end{code}
+\begin{code}
+    \caption{Non-affine memory accesses}
+    \inputminted{c++}{cpp/NonAffineMemoryAccesses.cpp}
+    \label{lst:nonAffineMemoryAccesses}
+\end{code}
+\begin{code}
+    \caption{Uncomputable loop bounds}
+    \inputminted{c++}{cpp/UncomputableLoopBounds.cpp}
+    \label{lst:uncomputeableLoopBounds}
+\end{code}
+\begin{code}
+    \caption{Loop without exit}
+    \inputminted{c++}{cpp/LoopWithoutExit.cpp}
+    \label{lst:loopWithoutExit}
+\end{code}
+\begin{code}
+    \caption{Function call with side effects}
+    \inputminted{c++}{cpp/FunctionCall.cpp}
+    \label{lst:functionCallSideEffects}
+\end{code}
+\begin{code}
+    \caption{Base address aliasing}
+    \inputminted{c++}{cpp/BaseAddressAliasing.cpp}
+    \label{lst:baseAddressAliasing}
+\end{code}
+\begin{code}
+    \caption{Integer to pointer conversion}
+    \inputminted{c++}{cpp/IntegerToPointerConversion.cpp}
+    \label{lst:integerToPointer}
+\end{code}
+\begin{code}
+    \caption{Assumed to be unprofitable}
+    \inputminted{c++}{cpp/AssumedToBeUnprofitable.cpp}
+    \label{lst:assumedUnprofitable}
+\end{code}
+
 \begin{comment}
     \section{Appendix Section Test}
     Test: \autoref{tab:moreexample} (This reference should have a

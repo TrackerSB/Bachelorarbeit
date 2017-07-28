@@ -1,52 +1,60 @@
 \chapter{Empirische Studie - Aufbau und Durchführung}
-Ich habe eine empirische Studie durchgeführt, um...
 \section{Goals}
+
 \section{Measurement Methology}
+What is measured?
+\begin{itemize}
+    \item ratio sequential and parallel instructions
+    \item reasons for parents of SCoPs being invalid as SCoP
+    \item Theoretical impact if certain reasons would not appear
+\end{itemize}
+\subsection{Definition ratio sequential/parallel}
+Let \(S\in\mathbb{N}\) be the number of sequential instructions, \(P\in\mathbb{N}\) the number of parallel instructions and \(I\in\mathbb{N}\) the number of all instructions such that \(S + P = I\).
+Then the sequential ratio is defined as:
+\[R_{seq} := \frac{S}{I}\]
+Analogue the parallel ratio is defined as:
+\[R_{par} := \frac{P}{I}\]
+
 \section{Experiment Variables}
+
 \section{Hypotheses}
+
 \section{Subject Programs}
+
 \section{Tasks}
+
 \section{Design}
+
 \section{Experiment Setting}
+
 \section{Deviations}
 
 \section{Results}
 \subsection{Reasons for SCoPs being invalid}
 \begin{itemize}
-    \item Parent is toplevel
-        \inputminted{c++}{cpp/ParentIsTopLevelRegion.cpp}
+    \item Parent is toplevel (\autoref{lst:parentIsToplevel})
     \item Unsupported terminator instruction
-    \item Unreachable in exit block
-        \inputminted{c++}{cpp/UnreachableInExitBlock.cpp}
-    \item Irreducible loops
-        \inputminted{c++}{cpp/IrreducibleRegion.cpp}
+    \item Unreachable in exit block (\autoref{lst:unreachableExitBlock})
+    \item Irreducible loops (\autoref{lst:irreducibleLoops})
     \item Undefinded branch condition
     \item Non-integer branch condition
     \item Undefined operands in comparison
     \item Non-affine branch condition
     \item No base pointer
     \item Undefinded base pointer
-    \item Variant base pointer
-        \inputminted{c++}{cpp/VariantBasePointer.cpp}
-    \item Non-affine memory accesses
-        \inputminted{c++}{cpp/NonAffineMemoryAccesses.cpp}
+    \item Variant base pointer (\autoref{lst:variantBasePointer})
+    \item Non-affine memory accesses (\autoref{lst:nonAffineMemoryAccesses})
     \item Accesses with differing sizes
-    \item Uncomputable loop bounds
-        \inputminted{c++}{cpp/UncomputableLoopBounds.cpp}
-    \item Loop without exit
-        \inputminted{c++}{cpp/LoopWithoutExit.cpp}
-    \item Function call with side effects
-        \inputminted{c++}{cpp/FunctionCall.cpp}
+    \item Uncomputable loop bounds (\autoref{lst:uncomputeableLoopBounds})
+    \item Loop without exit (\autoref{lst:loopWithoutExit})
+    \item Function call with side effects (\autoref{lst:functionCallSideEffects})
     \item Complicated access semantics (volatile or atomic)
-    \item Base address aliasing
-        \inputminted{c++}{cpp/BaseAddressAliasing.cpp}
-    \item Integer to pointer conversion
-        \inputminted{c++}{cpp/IntegerToPointerConversion.cpp}
+    \item Base address aliasing (\autoref{lst:baseAddressAliasing})
+    \item Integer to pointer conversion (\autoref{lst:integerToPointer})
     \item Stack allocations
     \item Unknown instructions
     \item Contains entry block
-    \item Assumed to be unprofitable
-        \inputminted{c++}{cpp/AssumedToBeUnprofitable.cpp}
+    \item Assumed to be unprofitable (\autoref{lst:assumedUnprofitable})
 \end{itemize}
 
 \begin{comment}
