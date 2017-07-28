@@ -50,10 +50,5 @@ At any point the current \cfg of a \llvmir file can be visualized:
         \includegraphics[height=12cm]{gfx/matmulCfg.png}
     \end{minipage}
 \end{figure}\\
-This can be performed by the following steps/commands:
-\begin{enumerate}
-    \item Translate the program into \llvmir using the clang frontend.\\
-        \texttt{clang -S -emit-llvm matmul.cpp -o matmul.ll}
-    \item Show the current \cfg using the \opt.\\
-        \texttt{opt -disable-output matmul.ll -view-cfg-only}
-\end{enumerate}
+This can be performed by specifying the option \texttt{-view-cfg-only} or \texttt{-view-cfg} to opt.
+The \cfg is used by many analysis passes for determining which optimizations can or should be applied.

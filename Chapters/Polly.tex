@@ -23,7 +23,7 @@ Afterwards the additional options implemented by Polly can be used specifying fl
     \end{tikzpicture}
 \end{figure}\\
 There are two essential terms for understanding Polly. On the one hand it is \enquote{region} on the other hand it is \enquote{\scop}.
-\subsection{Definition region}
+\subsection{Definition region}\label{subsec:definitionRegion}
 In \cite[chapter 9.7.1, p.~672]{Drachenbuch} a region is defined as:
 \begin{comment}
     Seite 672, Chapter 9. Machine-independent optimizations, 9.7.1 Regions
@@ -56,7 +56,7 @@ For visualizing the regions of this program a dot file was generated executing t
     \item Generate the dot file\\
         \texttt{opt -load LLVMPolly.so -view-regions-only matmul.preopt.ll}
 \end{enumerate}
-\subsection{Definition SCoP}
+\subsection{Definition SCoP}\label{subsec:definitionScop}
 \begin{comment}
     Copy\&pasted from polly/lib/Analysis/ScopDetection.cpp
 
