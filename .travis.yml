@@ -1,4 +1,3 @@
-sudo: false
 language: tex
 
 branches:
@@ -8,13 +7,83 @@ branches:
 addons:
     apt:
         packages:
-            - texlive-full
+            #- texlive
+            #- texlive-latex-extra #comment.sty
+            #- texlive-latex-recommended #xcolor.sty?!
+
+            #- texlive-extra-utils %Does not contain xcolor.sty
+            #- texlive-font-utils           
+            #- texlive-fonts-extra          
+            #- texlive-fonts-extra-doc      
+            #- texlive-fonts-recommended    
+            #- texlive-fonts-recommended-doc
+            #- texlive-formats-extra        
+
+            #Tested until here
+            #- texlive-games                
+            #- texlive-generic-extra        
+            #- texlive-generic-recommended  
+            #- texlive-htmlxml              
+            #- texlive-humanities           
+            #- texlive-humanities-doc       
+            #- texlive-lang-african         
+            #- texlive-lang-arabic          
+            #- texlive-lang-chinese         
+            #- texlive-lang-cjk             
+            #- texlive-lang-cyrillic        
+            #- texlive-lang-czechslovak     
+            #- texlive-lang-english         
+            #- texlive-lang-european        
+            #- texlive-lang-french          
+            #- texlive-lang-german          
+            #- texlive-lang-greek           
+            #- texlive-lang-indic           
+            #- texlive-lang-italian         
+            #- texlive-lang-japanese        
+            #- texlive-lang-korean          
+            #- texlive-lang-other           
+            #- texlive-lang-polish          
+            #- texlive-lang-portuguese      
+            #- texlive-lang-spanish         
+            #- texlive-latex-base           
+            #- texlive-latex-base-doc       
+            #- texlive-latex-extra-doc      
+            #- texlive-latex-recommended    
+            #- texlive-latex-recommended-doc
+            #- texlive-luatex               
+            #- texlive-metapost             
+            #- texlive-metapost-doc         
+            #- texlive-music                
+            #- texlive-omega                
+            #- texlive-pictures             
+            #- texlive-pictures-doc         
+            #- texlive-plain-extra          
+            #- texlive-pstricks             
+            #- texlive-pstricks-doc         
+            #- texlive-publishers           
+            #- texlive-publishers-doc       
+            #- texlive-science              
+            #- texlive-science-doc          
+            #- texlive-xetex                
+            - texinfo
+            - equivs
+            - perl-tk
+            - latexmk
+            - xzdec
+            - python3-pip
+
 
 cache:
     apt: true
 
+install: 
+    - sudo pip3 install Pygments
+    - wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+    - tar -xzf install-tl-unx.tar.gz
+    - echo i | sudo ./install-tl-20170728/install-tl
+
 script:
-    - latexmk -silent -pdf ClassicThesis.tex
+    - latexmk -pvc -e '$pdflatex=q/pdflatex %O -shell-escape %S/' -pdf ClassicThesis.tex
 
 notification:
     email:
