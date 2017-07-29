@@ -30,8 +30,8 @@
     %*******************************************************
     %\phantomsection
     \refstepcounter{dummy}
-    %\addcontentsline{toc}{section}{\listfigurename}
-    \pdfbookmark[1]{\listfigurename}{lof}
+    \addcontentsline{toc}{section}{\listfigurename}
+    %\pdfbookmark[1]{\listfigurename}{lof}
     \listoffigures
 
     \vspace{8ex}
@@ -41,8 +41,8 @@
     %*******************************************************
     %\phantomsection
     \refstepcounter{dummy}
-    %\addcontentsline{toc}{chapter}{\listtablename}
-    \pdfbookmark[1]{\listtablename}{lot}
+    \addcontentsline{toc}{section}{\listtablename}
+    %\pdfbookmark[1]{\listtablename}{lot}
     \listoftables
 
     \vspace{8ex}
@@ -53,7 +53,7 @@
     %*******************************************************
       %\phantomsection
     \refstepcounter{dummy}
-    %\addcontentsline{toc}{chapter}{\lstlistlistingname}
+    \addcontentsline{toc}{section}{\listoflistingscaption}
 
     % https://tex.stackexchange.com/a/99656/5125
     \renewcommand{\listoflistings}{%
@@ -63,7 +63,7 @@
         \listof{listing}{\listoflistingscaption}%
     }
 
-    \pdfbookmark[1]{\listoflistingscaption}{lol}
+    %\pdfbookmark[1]{\listoflistingscaption}{lol}
     \listoflistings
 
     \vspace{8ex}
@@ -73,8 +73,8 @@
     %*******************************************************
     %\phantomsection
     \refstepcounter{dummy}
-    %\addcontentsline{toc}{chapter}{Acronyms}
-    \pdfbookmark[1]{List of Acronyms}{acronyms}
+    \addcontentsline{toc}{section}{List of Acronyms}
+    %\pdfbookmark[1]{List of Acronyms}{acronyms}
     \markboth{\spacedlowsmallcaps{Acronyms}}{\spacedlowsmallcaps{Acronyms}}
     \chapter*{Acronyms}
     \begin{acronym}[UMLX]
