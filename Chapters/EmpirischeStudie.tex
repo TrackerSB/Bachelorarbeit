@@ -15,6 +15,10 @@ Then the sequential ratio is defined as:
 \[R_{seq} := \frac{S}{I}\]
 Analogue the \scop ratio is defined as:
 \[R_{par} := \frac{P}{I}\]
+\subsection[Amdahl's Law]{Amdahl's Law \cite{AmdahlsLaw}}
+Let \(N\in\mathbb{N}\) be the number of processors and \(R_{seq}\in\mathbb{Q}\) be the sequential ratio.
+Then the speedup \(S\in\mathbb{Q}\) is defined as:
+\[S := \frac{N}{(R_{seq}*N)+(1-R_{seq})}\]
 \subsection{Reasons for SCoPs being invalid}
 These are the implemented criteria of Polly for rejecting a parent of a \scop being also a \scop.
 \begin{itemize}
@@ -78,13 +82,24 @@ SCOP_STAT(LastOther, "")
 \end{comment}
 
 \section{Experiment Variables}
+\begin{table}[H]
+    \myfloatalign
+    \begin{tabularx}{\textwidth}{Xccccc} \toprule
+        \tableheadline{Name} & \tableheadline{Abbr.} & \tableheadline{Type} & \tableheadline{Scale Type} & \tableheadline{Unit} & \tableheadline{Range} \\ \midrule
+        Ratio sequential & \(R_{seq}\) & ? & Ratio & \% & \([0, 100]\)\\
+        Ratio \scop & \(R_{par}\) & ? & Ratio & \% & \([0, 100]\)\\
+        Speedup & \(S\) & ? & Ratio & ? & \(\mathbb{Q}\)\\
+        \bottomrule
+    \end{tabularx}
+    \caption{Experiment Variables}
+\end{table}
 
 \section{Hypotheses}
 
 \section{Subject Programs}
 \begin{table}[H]
     \myfloatalign
-    \begin{tabularx}{\textwidth}{XXl} \toprule
+    \begin{tabularx}{\textwidth}{XcX} \toprule
         \tableheadline{Name} & \tableheadline{Version} & \tableheadline{Tested Inputs} \\ \midrule
         benchbuild\\
         llvm\\
