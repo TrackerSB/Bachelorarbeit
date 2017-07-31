@@ -29,6 +29,7 @@ At the end assembler is generated out of the (possibly) newly formed \llvmir by 
         \path[llvmIrPath] (opt) to (generator);
         \path[nonLlvmIrPath] (generator) to (linker);
     \end{tikzpicture}
+    \legend
 \end{figure}\\
 \subsection{clang frontend}\label{subsec:clangfrontend}
 More precisly files containing sourcecode are translated by the clang frontend -- currently at least C, C++ and languages based on C are supported -- into \llvmir by adding the option \texttt{-emit-llvm} \enquote{to abstract away from the specifics} \cite{FastScopDetection} of a programming language.
