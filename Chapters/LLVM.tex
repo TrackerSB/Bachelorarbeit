@@ -4,15 +4,16 @@
     \caption[The logo of LLVM]{The logo of LLVM \cite{llvmLogo}}
     \includegraphics[width=.5\textwidth]{gfx/llvmLogo.png}
 \end{wrapfigure}
-The \llvm is a collection of modular and reusable compiler and toolchain technologies to support of static and dynamic Compilation as well as tranparent and lifelong program analysis and transformations of arbitrary programs. \cite{LLVMWebsite, LLVMResearchBeginning}\\
-The \llvm former was a reasearch project at the university of Illinois, which was first described in a publication in 2004.\draftnote{TODO: Think about sentence}
-The project was getting so popular that in 2014 the \llvm Foundation was founded for organizing and maintaining the project. \cite{LLVMFoundation}\\
-In order to make the \llvm as independent as possible of the programming language used, the \llvmir was created which is solely used within the pipeline.
+\llvm is a collection of modular and reusable compiler and toolchain technologies to support static and dynamic compilation as well as transparent and lifelong program analysis and transformations of arbitrary programs. \cite{LLVMWebsite, LLVMResearchBeginning}\\
+Former \llvm has been a reasearch project at the university of Illinois, which was first described in a publication in 2004.\draftnote{TODO: Think about sentence}
+The project has grown so popular that in 2014 the LLVM Foundation was founded for organizing and maintaining the project. \cite{LLVMFoundation}\\
+The main goal of \llvm consists of the creation of a compiler framework in which the optimizations and analysis are independent from the underlying os and the used programming language.
+To archive the independency \llvmir was created which is solely used within the pipeline.
 \enquote{\llvmir is a strongly typed, \ac{SSA} language that connects to a wide variety of high-level languages.} \cite{PolyhedralEmpiricalStudy}
 
 \section{Pipeline}
-The pipeline of the \llvm (\autoref{fig:llvmPipeline}) translates files containing sourcecode written in an arbitrary programming language into \llvmir, on which the following components operate.
-At the end assembler is generated out of the (possibly) newly formed \llvmir by the \generator. \cite{IntroLLVM}
+The \llvmir, on which the components operate, is generated when entering the pipeline of \llvm (\autoref{fig:llvmPipeline}) by translating the files containing sourcecode written in an arbitrary programming language using a frontend like clang.
+When leaving the pipeline files containing the appropriate assembler instructions are created out of the (possibly) newly formed \llvmir by the \generator. \cite{IntroLLVM}
 \begin{figure}[!ht]
     \caption{The pipeline of LLVM}
     \label{fig:llvmPipeline}
@@ -32,16 +33,17 @@ At the end assembler is generated out of the (possibly) newly formed \llvmir by 
     \legend
 \end{figure}\\
 \subsection{clang frontend}\label{subsec:clangfrontend}
-More precisly files containing sourcecode are translated by the clang frontend -- currently at least C, C++ and languages based on C are supported -- into \llvmir by adding the option \texttt{-emit-llvm} \enquote{to abstract away from the specifics} \cite{FastScopDetection} of a programming language.
-The option \texttt{-S} can be passed to generate a human readable textfile instead of a \llvmir binary.
+So the first step at the beginning of the pipeline is translating the files containing sourcecode by a front end like the clang frontend -- currently at least C, C++ and other C based languages are supported.
+This is done by adding the option \texttt{-emit-llvm} in order \enquote{to abstract away from the specifics} \cite{FastScopDetection} of a programming language.
+The option \texttt{-S} may also be passed to generate a human readable textfile instead of a \llvmir binary.
 \subsection{LLVM Optimizer}\label{subsec:optimizer}
-On the received files the \opt can perform steps optimizing and analysing the code.
+On these files the the \opt can perform steps for optimizing and analysing the code.
 These steps are called \enquote{Passes}.
-These can be explicitly added by specifying appropriate options to the command \texttt{opt} of the \opt.
-The option \texttt{-S} can also be specified for generating a human readable textfile like in \autoref{subsec:clangfrontend}.\\
-It is also possible to add further options by loading multiple libraries using the flag \texttt{-load}.
+Such passes can be explicitly invoked by appending the appropriate options to the command \texttt{opt} of the the \opt.
+It is also possible to add further custom options by loading (multiple) libraries using the flag \texttt{-load}.
+When calling the the \opt the option \texttt{-S} may also be specified for generating a human readable textfile like in \autoref{subsec:clangfrontend}.\\
 \subsection{LLVM Code Generator}
-When all desired passes are performed the \generator translates the \llvmir into assembler.
+When all desired passes are performed the \generator translates \llvmir into assembler.
 \subsection{LLVM Linker}
 The \linker finally compiles an executable binary.
 \subsection{Control Flow Graph (CFG)}
@@ -50,5 +52,5 @@ The \linker finally compiles an executable binary.
     \label{fig:exampleCfg}
     \includegraphics[height=12cm]{gfx/matmulCfg.png}
 \end{wrapfigure}
-At any point the current \cfg of a \llvmir file can be visualized (like \autoref{fig:exampleCfg}) by passing one of the options \texttt{-view-cfg} or \texttt{-view-cfg-only} to opt.
-The \cfg is used by many analysis passes for determining which optimizations can or should be applied.
+At any point the current \cfg of a \llvmir file can be visualized (like \autoref{fig:exampleCfg}) by passing one of the options \texttt{-view-cfg} or \texttt{-view-cfg-only} to the the \opt.
+The \cfg is used by many analysis and optimization passes for determining which optimizations can or should be applied.
