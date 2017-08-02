@@ -106,40 +106,40 @@ SCOP_STAT(LastOther, "")
 \section{Subject Programs}
 \begin{table}[H]
     \myfloatalign
-    \begin{tabularx}{\textwidth}{XcX} \toprule
+    \begin{tabularx}{\textwidth}{XcC} \toprule
         \tableheadline{Name} & \tableheadline{Version} & \tableheadline{Tested Inputs} \\ \midrule
-        benchbuild\\
-        llvm\\
-        clang\\
-        polly\\
-        polli\\ \midrule
-        7z\\
-        Rasdam\\
-        bzip2\\
-        ccrypt & & Integrated tests\\
-        crafty & & Integrated benchmark\\
-        crocopat & & Integrated benchmark\\
-        ffmpeg\\
-        gzip\\
+        benchbuild & & ---\\
+        llvm & & ---\\
+        clang & & ---\\
+        polly & & ---\\
+        polli & & ---\\ \midrule
+        7z & 9.38.1\\
+        Rasdaman & \draftnote{git}\\
+        bzip2 & 1.0.6\\
+        ccrypt & 1.10 & Integrated tests\\
+        crafty & 25.2 & Integrated benchmark\\
+        crocopat & 2.1.4 & Integrated benchmark\\
+        ffmpeg & 3.1.3\\
+        gzip & 1.6\\
         js\\
-        lammps & & Integrated sample problems\\
+        lammps & \draftnote{git} & Integrated sample problems\\
         lapack & & Integrated tests\\
-        leveldb & & Integrated benchmark\\
-        libressl\\
+        leveldb & \draftnote{git} & Integrated benchmark\\
+        libressl & 2.1.6\\
         linpack & & Integrated benchmark\\
-        lulesh & & Integrated benchmark\\
-        lulesh-omp & & Integrated benchmark\\
-        mcrypt & & Integrated benchmark\\
-        minisat\\
-        openblas\\
+        lulesh & 1.0 & Integrated benchmark\\
+        lulesh-omp & 1.0 & Integrated benchmark\\
+        mcrypt & 2.6.8 & Integrated benchmark\\
+        minisat & \draftnote{git}\\
+        openblas & \draftnote{git}\\
         postgres & & Integrated benchmark\\
-        povray & & Integrated sample scenes\\
-        python\\
-        ruby\\
-        sqlite3 & & leveldb's integrated benchmark\\
-        tcc\\
-        x264 & & Integrated benchmark\\
-        xz\\
+        povray & \draftnote{git} & Integrated sample scenes\\
+        python & 3.4.3\\
+        ruby & 2.2.2\\
+        sqlite3 & \draftnote{3080900} & leveldb's integrated benchmark\\
+        tcc & 0.9.26\\
+        x264 & \draftnote{git} & Integrated benchmark\\
+        xz & 5.2.1\\
         \bottomrule
     \end{tabularx}
     \caption[Subject programs]{Subject programs and benchbuild used. (Versions in parenthesis represent git hashes)}
