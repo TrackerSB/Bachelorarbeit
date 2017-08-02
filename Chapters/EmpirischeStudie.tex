@@ -9,12 +9,17 @@
         \item Theoretical impact if certain reasons would not appear
     \end{itemize}
 }
-\subsection{Definition ratio sequential/parallel}
-Let \(S\in\mathbb{N}\) be the number of sequential instructions, \(P\in\mathbb{N}\) the number of instructions within a \scop and \(I\in\mathbb{N}\) the number of all instructions such that \(S + P = I\).
-Then the sequential ratio is defined as:
-\[R_{seq} := \frac{S}{I}\]
-Analogue the \scop ratio is defined as:
-\[R_{par} := \frac{P}{I}\]
+\subsection{Definition ratios}
+Let \(S_s\in\mathbb{N}\) be the number of instructions not within a \scop, \(P_s\in\mathbb{N}\) the number of instructions within a \scop and \(I\in\mathbb{N}\) the number of all instructions such that \(S_s + P_s = I\).
+Then the ratio of non-\scops is defined as:
+\[RS_{seq} := \frac{S_s}{I}\]
+And the \scop ratio is defined as:
+\[RS_{par} := \frac{P_s}{I}\]
+Let \(S_p\in\mathbb{N}\) be the number of instructions not within a parent of a \scop, \(P_p\in\mathbb{N}\) the number of instructions within a parent of a \scop and \(I\in\mathbb{N}\) the number of all instructions such that \(S_p + P_p = I\).
+Then the not-parent-of-\scop ratio is defined as:
+\[RP_{seq} := \frac{S_p}{I}\]
+Analogue the parent-of-\scop ratio is defined as:
+\[RP_{par} := \frac{P_p}{I}\]
 \subsection[Amdahl's Law]{Amdahl's Law \cite{AmdahlsLaw}}
 Let \(N\in\mathbb{N}\) be the number of processors and \(R_{seq}\in\mathbb{Q}\) be the sequential ratio.
 Then the speedup \(S\in\mathbb{Q}\) is defined as:
@@ -86,8 +91,10 @@ SCOP_STAT(LastOther, "")
     \myfloatalign
     \begin{tabularx}{\textwidth}{Xccccc} \toprule
         \tableheadline{Name} & \tableheadline{Abbr.} & \tableheadline{Type} & \tableheadline{Scale Type} & \tableheadline{Unit} & \tableheadline{Range} \\ \midrule
-        Ratio sequential & \(R_{seq}\) & ? & Ratio & \% & \([0, 100]\)\\
-        Ratio \scop & \(R_{par}\) & ? & Ratio & \% & \([0, 100]\)\\
+        Ratio non-\scop & \(RS_{seq}\) & ? & Ratio & \% & \([0, 100]\)\\
+        Ratio \scop & \(RS_{par}\) & ? & Ratio & \% & \([0, 100]\)\\
+        Ratio non-parent-of-\scop & \(RP_{seq}\) & ? & Ratio & \% & \([0, 100]\)\\
+        Ratio parent-of-\scop & \(RP_{par}\) & ? & Ratio & \% & \([0, 100]\)\\
         Speedup & \(S\) & ? & Ratio & ? & \(\mathbb{Q}\)\\
         \bottomrule
     \end{tabularx}
