@@ -233,6 +233,8 @@
             \renewcommand*{\sectionautorefname}{Section}%
             \renewcommand*{\subsectionautorefname}{Section}%
             \renewcommand*{\subsubsectionautorefname}{Section}%
+            \providecommand*{\listingsautorefname}{Listing}%
+            \providecommand*{\listingsname}{Listing}%
         }%
         \addto\extrasngerman{%
             \renewcommand*{\paragraphautorefname}{Absatz}%
@@ -306,10 +308,7 @@
     linenos,
     breaklines
 }
-\providecommand*{\listingautorefname}{Listing}
-\newenvironment{code}{\captionsetup{type=listing}}{}
-%\SetupFloatingEnvironment{listing}{name=Program code} %newfloat package
-%\renewcommand{\listoflistingscaption}{List of Program Code} %float package
+\newenvironment{code}{\captionsetup{type=listings}}{}
 
 %Tikz
 \usepackage{tikz}
