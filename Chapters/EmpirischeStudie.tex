@@ -21,6 +21,10 @@ Let \(N\in\mathbb{N}\) be the number of processors, \(RS_{par}\in\mathbb{Q}\) be
 Then the speedups \(S_s, S_p\in\mathbb{Q}\) are defined as:
 \[S_s := \frac{N}{(1-RS_{par})*N+RS_{par}}\]
 \[S_p := \frac{N}{(1-RP_{par})*N+RP_{par}}\]
+\subsection[Amdahl's Law Jenkov]{Amdahl's Law Jenkov \cite{AmdahlsLawJenkov}}
+Let \(T\in\mathbb{Q}\) be the overall execution time, \(B\in\mathbb{Q}\) the execution time of the non-paralizable parts and \(N\in\mathbb{N}\) the number of processors.
+Then the speedup \(S\in\mathbb{Q}\) is defined as:
+\[S(B) := B+\frac{T-B}{N}\]
 \subsection{Reasons for SCoPs being invalid}
 These are the implemented criteria of Polly for rejecting a parent of a \scop being also a \scop.
 \begin{itemize}
@@ -92,9 +96,15 @@ SCOP_STAT(LastOther, "")
         Ratio parent-of-\scop & \(RP_{par}\) & ? & Ratio & \% & \([0, 100]\)\\
         Speedup \scop & \(S_s\) & ? & Ratio & ? & \(\mathbb{Q}\)\\
         Speedup parent-of-\scop & \(S_p\) & ? & Ratio & ? & \(\mathbb{Q}\)\\
+        \midrule
+        Overall execution time                           & \(T\)   & Indep. & Ratio & - & \(\mathbb{Q}\)\\
+        Overall execution time without \scops            & \(B_s\) & Dep. & Ratio & - & \(\mathbb{Q}\)\\
+        Overall execution time without parents of \scops & \(B_p\) & Dep.  & Ratio & - & \(\mathbb{Q}\)\\
+        Speedup of \scops                                & \(S_s\) & Dep.  & Ratio & - & \(\mathbb{Q}\)\\
+        Speedup of parents of \scops                     & \(S_p\) & Dep.  & Ratio & - & \(\mathbb{Q}\)\\
         \bottomrule
     \end{tabularx}
-    \caption{Experiment Variables}
+    \caption[Experiment Variables]{Experiment Variables (Dep.=Dependant; Indep.=Independant)}
 \end{table}
 
 \section{Hypotheses}
