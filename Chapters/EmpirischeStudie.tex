@@ -10,20 +10,17 @@
     \end{itemize}
 }
 \subsection{Definition ratios}
-Let \(S_s\in\mathbb{N}\) be the number of instructions not within a \scop, \(P_s\in\mathbb{N}\) the number of instructions within a \scop and \(I\in\mathbb{N}\) the number of all instructions such that \(S_s + P_s = I\).
-Then the ratio of non-\scops is defined as:
-\[RS_{seq} := \frac{S_s}{I}\]
-And the \scop ratio is defined as:
-\[RS_{par} := \frac{P_s}{I}\]
-Let \(S_p\in\mathbb{N}\) be the number of instructions not within a parent of a \scop, \(P_p\in\mathbb{N}\) the number of instructions within a parent of a \scop and \(I\in\mathbb{N}\) the number of all instructions such that \(S_p + P_p = I\).
-Then the not-parent-of-\scop ratio is defined as:
-\[RP_{seq} := \frac{S_p}{I}\]
-Analogue the parent-of-\scop ratio is defined as:
-\[RP_{par} := \frac{P_p}{I}\]
+Let \(SI_s\in\mathbb{N}\) be the number of instructions not within a \scop, \(PI_s\in\mathbb{N}\) the number of instructions within a \scop and \(AI\in\mathbb{N}\) the number of all instructions such that \(SI_s + PI_s = AI\).
+Then the \scop ratio is defined as:
+\[RS_{par} := \frac{PI_s}{AI}\]
+Let \(SI_p\in\mathbb{N}\) be the number of instructions not within a parent of a \scop, \(PI_p\in\mathbb{N}\) the number of instructions within a parent of a \scop and \(AI\in\mathbb{N}\) the number of all instructions such that \(SI_p + PI_p = AI\).
+Then the parent-of-\scop ratio is defined as:
+\[RP_{par} := \frac{PI_p}{AI}\]
 \subsection[Amdahl's Law]{Amdahl's Law \cite{AmdahlsLaw}}
-Let \(N\in\mathbb{N}\) be the number of processors and \(R_{seq}\in\mathbb{Q}\) be the sequential ratio.
-Then the speedup \(S\in\mathbb{Q}\) is defined as:
-\[S := \frac{N}{(R_{seq}*N)+(1-R_{seq})}\]
+Let \(N\in\mathbb{N}\) be the number of processors, \(RS_{par}\in\mathbb{Q}\) be the \scops ratio and \(RP_{par}\in\mathbb{Q}\) the parent-of-\scop ratio.
+Then the speedups \(S_s, S_p\in\mathbb{Q}\) are defined as:
+\[S_s := \frac{N}{(1-RS_{par})*N+RS_{par}}\]
+\[S_p := \frac{N}{(1-RP_{par})*N+RP_{par}}\]
 \subsection{Reasons for SCoPs being invalid}
 These are the implemented criteria of Polly for rejecting a parent of a \scop being also a \scop.
 \begin{itemize}
@@ -91,11 +88,10 @@ SCOP_STAT(LastOther, "")
     \myfloatalign
     \begin{tabularx}{\textwidth}{Xccccc} \toprule
         \tableheadline{Name} & \tableheadline{Abbr.} & \tableheadline{Type} & \tableheadline{Scale Type} & \tableheadline{Unit} & \tableheadline{Range} \\ \midrule
-        Ratio non-\scop & \(RS_{seq}\) & ? & Ratio & \% & \([0, 100]\)\\
         Ratio \scop & \(RS_{par}\) & ? & Ratio & \% & \([0, 100]\)\\
-        Ratio non-parent-of-\scop & \(RP_{seq}\) & ? & Ratio & \% & \([0, 100]\)\\
         Ratio parent-of-\scop & \(RP_{par}\) & ? & Ratio & \% & \([0, 100]\)\\
-        Speedup & \(S\) & ? & Ratio & ? & \(\mathbb{Q}\)\\
+        Speedup \scop & \(S_s\) & ? & Ratio & ? & \(\mathbb{Q}\)\\
+        Speedup parent-of-\scop & \(S_p\) & ? & Ratio & ? & \(\mathbb{Q}\)\\
         \bottomrule
     \end{tabularx}
     \caption{Experiment Variables}
