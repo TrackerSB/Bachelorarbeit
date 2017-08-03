@@ -102,40 +102,60 @@ SCOP_STAT(LastOther, "")
 \section{Subject Programs}
 \begin{table}[H]
     \myfloatalign
-    \begin{tabularx}{\textwidth}{XcC} \toprule
-        \tableheadline{Name} & \tableheadline{Version} & \tableheadline{Tested Inputs} \\ \midrule
-        benchbuild & & ---\\
-        llvm & & ---\\
-        clang & & ---\\
-        polly & & ---\\
-        polli & & ---\\ \midrule
-        7z & 9.38.1\\
-        Rasdaman & \draftnote{git}\\
-        bzip2 & 1.0.6\\
+    \begin{tabularx}{\textwidth}{lcC} \toprule
+        \tableheadline{Name} & \tableheadline{Version} & \tableheadline{Tested Inputs}\\
+        \midrule
+        \draftnote{\textbf{Used software}}\\
+        benchbuild & \draftnote{git} & ---\\
+        llvm & \draftnote{git} & ---\\
+        clang & \draftnote{git} & ---\\
+        polly & \draftnote{git} & ---\\
+        polli & \draftnote{git} & ---\\
+        \midrule
+        \textbf{Compilation}\\
+        python & 3.4.3 & Integrated tests\\
+        ruby & 2.2.2 & Integrated tests\\
+        tcc & 0.9.26 & Integrated tests\\
+        \midrule
+        \textbf{Compression}\\
+        7z & 9.38.1 & \draftnote{SPEC input data (set:ref)}\\
+        bzip2 & 1.0.6 & \draftnote{SPEC input data (set:ref)}\\
+        gzip & 1.6 & \draftnote{SPEC input data (set:ref)}\\
+        xz & 5.2.1 & \draftnote{SPEC input data (set:ref)}\\
+        \midrule
+        \textbf{Database}\\
+        leveldb & \draftnote{git} & Integrated benchmark\\
+        postgres & & Integrated benchmark\\
+        sqlite3 & \draftnote{3080900} & leveldb's integrated benchmark\\
+        \midrule
+        \textbf{Encryption}\\
         ccrypt & 1.10 & Integrated tests\\
-        crafty & 25.2 & Integrated benchmark\\
-        crocopat & 2.1.4 & Integrated benchmark\\
-        ffmpeg & 3.1.3\\
-        gzip & 1.6\\
-        js\\
+        mcrypt & 2.6.8 & Integrated benchmark\\
+        \midrule
+        \textbf{Multimedia}\\
+        povray & \draftnote{git} & Integrated sample scenes\\
+        x264 & \draftnote{git} & Integrated benchmark\\
+        \midrule
+        \textbf{Scientific}\\
         lammps & \draftnote{git} & Integrated sample problems\\
         lapack & & Integrated tests\\
-        leveldb & \draftnote{git} & Integrated benchmark\\
-        libressl & 2.1.6\\
         linpack & & Integrated benchmark\\
+        \midrule
+        \textbf{Simulation}\\
+        crafty & 25.2 & Integrated benchmark\\
         lulesh & 1.0 & Integrated benchmark\\
         lulesh-omp & 1.0 & Integrated benchmark\\
-        mcrypt & 2.6.8 & Integrated benchmark\\
-        minisat & \draftnote{git}\\
+        \midrule
+        \textbf{Verification}\\
+        crocopat & 2.1.4 & Integrated benchmark\\
+        minisat & \draftnote{git} & SAT-Race 2008 (reduced)\\
+        \midrule
+        \textbf{Other}\\
+        ffmpeg & 3.1.3\\
+        js\\
+        libressl & 2.1.6\\
         openblas & \draftnote{git}\\
-        postgres & & Integrated benchmark\\
-        povray & \draftnote{git} & Integrated sample scenes\\
-        python & 3.4.3\\
-        ruby & 2.2.2\\
-        sqlite3 & \draftnote{3080900} & leveldb's integrated benchmark\\
-        tcc & 0.9.26\\
-        x264 & \draftnote{git} & Integrated benchmark\\
-        xz & 5.2.1\\
+        Rasdaman & \draftnote{git}\\
         \bottomrule
     \end{tabularx}
     \caption[Subject programs]{Subject programs and benchbuild used. (Versions in parenthesis represent git hashes)}
