@@ -92,16 +92,17 @@ SCOP_STAT(LastOther, "")
     \myfloatalign
     \begin{tabularx}{\textwidth}{Xccccc} \toprule
         \tableheadline{Name} & \tableheadline{Abbr.} & \tableheadline{Type} & \tableheadline{Scale Type} & \tableheadline{Unit} & \tableheadline{Range} \\ \midrule
-        Ratio \scop & \(RS_{par}\) & ? & Ratio & \% & \([0, 100]\)\\
-        Ratio parent-of-\scop & \(RP_{par}\) & ? & Ratio & \% & \([0, 100]\)\\
-        Speedup \scop & \(S_s\) & ? & Ratio & ? & \(\mathbb{Q}\)\\
-        Speedup parent-of-\scop & \(S_p\) & ? & Ratio & ? & \(\mathbb{Q}\)\\
+        Overall execution time                   & \(T\)   & Indep. & Ratio & - & \(\mathbb{Q}\)\\
+        Classification                           & \(C\)   & Indep. & ?     & - & -\\
         \midrule
-        Overall execution time                           & \(T\)   & Indep. & Ratio & - & \(\mathbb{Q}\)\\
-        Overall execution time without \scops            & \(B_s\) & Dep. & Ratio & - & \(\mathbb{Q}\)\\
-        Overall execution time without parents of \scops & \(B_p\) & Dep.  & Ratio & - & \(\mathbb{Q}\)\\
-        Speedup of \scops                                & \(S_s\) & Dep.  & Ratio & - & \(\mathbb{Q}\)\\
-        Speedup of parents of \scops                     & \(S_p\) & Dep.  & Ratio & - & \(\mathbb{Q}\)\\
+        Program inputs                           & \(P\)   & Con.   & ?     & - & -\\
+        Test inputs                              & \(TI\)  & Con.   & ?     & - & -\\
+        \midrule
+        Execution time of non-\scops             & \(T_s\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
+        Execution time of \scops                 & \(T_p\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
+        Ratio of paralizable regions             & \(R_p\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
+        Theoretical speedup of \scops            & \(S_s\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
+        Theoretical speedup of parents of \scops & \(S_p\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
         \bottomrule
     \end{tabularx}
     \caption[Experiment Variables]{Experiment Variables (Dep.=Dependant; Indep.=Independant)}
