@@ -7,11 +7,11 @@ One of the numerous subprojects of the \llvm is Polly\footnote{The name \enquote
     \includegraphics[width=.5\textwidth]{gfx/pollylabs.png}
 \end{wrapfigure}
 Polly is a practical implementation of the polyhedral model, which can be used as a plugin of \llvm.
-Originally the implementation could be used with gcc.
-The problem with it was, that gcc has an \ir that is not made for being human readable.
-To ease development the implementation was transfered to be used with \llvm, whose \ir is more human readable.
+The first implementation was accessible using gcc. The component for gcc was called Graphite and included an \ir called PCP for an independant interface between GIMPLE and the internal \ir GPoly. \cite{GrosserGraphite, gccGimple, gccGraphite} \draftnote{TODO: Make it more precisly}
+The problem with it was, that gcc has an \ir (GIMPLE) that is not made for being human readable.
+To ease developing and avoiding plenty of bugs the implementation was transfered to be used with \llvm, whose \ir is more human readable.
 Another advantage arises due to the fact, that \llvm is not bound to C or C++.
-As result the optimizations can be applied to even more programming languages.
+As result the optimizations can be applied to even more programming languages. \draftnote{Really?}\\
 In future releases Polly is going to be integrated directly into \llvm instead of serving as a separate plugin.
 \begin{comment}
     \draftnote{Polly was first described in the publication \cite{PollyGrosser}.}
