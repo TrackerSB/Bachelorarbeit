@@ -2,10 +2,23 @@
 One of the numerous subprojects of the \llvm is Polly\footnote{The name \enquote{Polly} is combination of \enquote{Polyhedral} and \enquote{\llvm}. \cite{PollyGrosser}} which provides plenty of options for automatic optimizations based on the polyhedral model operating on \llvmir.
 
 \section{Geschichte}
-Polly was first described in the publication \cite{PollyGrosser}.\draftnote{TODO: More information?}
+\begin{wrapfigure}{l}{.5\textwidth}
+    \caption[The logo of Polly Labs]{The Logo of Polly Labs \cite{PollyLabsLogo}}
+    \includegraphics[width=.5\textwidth]{gfx/pollylabs.png}
+\end{wrapfigure}
+Polly is a practical implementation of the polyhedral model, which can be used as a plugin of \llvm.
+Originally the implementation could be used with gcc.
+The problem with it was, that gcc has an \ir that is not made for being human readable.
+To ease development the implementation was transfered to be used with \llvm, whose \ir is more human readable.
+Another advantage arises due to the fact, that \llvm is not bound to C or C++.
+As result the optimizations can be applied to even more programming languages.
+In future releases Polly is going to be integrated directly into \llvm instead of serving as a separate plugin.
+\begin{comment}
+    \draftnote{Polly was first described in the publication \cite{PollyGrosser}.}
+\end{comment}
 
 \section{The pipeline of Polly}
-Polly uses the same pipeline as \llvm but it is a plugin for the \opt. Before using Polly the option \texttt{-O3} has to specified while generating \llvmir using the clang frontend.
+Polly uses the same pipeline as \llvm due to it is more precisly a plugin used by the \opt itself. Before using Polly the option \texttt{-O3} has to specified while generating \llvmir using the clang frontend.
 Afterwards the library of Polly and its additional options have to be loaded by the \opt (\autoref{subsec:optimizer}).
 \begin{figure}[h]
     \caption[The pipeline of Polly]{The pipeline of Polly \cite{PollyPresentation}}
@@ -52,9 +65,6 @@ For visualizing the regions of \autoref{lst:matmulcpp} a dot file is generated u
         \texttt{opt -view-regions-only matmul.ll}
 \end{enumerate}
 \subsection{Definition SCoP}\label{subsec:definitionScop}
-\draftnote{
-    Find formal definition
-}
 \begin{comment}
     Copy\&pasted from polly/lib/Analysis/ScopDetection.cpp
 
@@ -83,7 +93,7 @@ For visualizing the regions of \autoref{lst:matmulcpp} a dot file is generated u
     or memory intrinsics (memset, memcpy, memmove) are allowed.
 \end{comment}
 
-\draftnote{
+\begin{comment}
     A \scop is a certain type of region on which optimizations in top of the polyhedral model can be performed.
     More precisly it is a subgraph of the \cfg that only has statically known control flow and can therefore be described within the polyhedral model.
     Every \scop fulfills these restrictions according to ScopDetection:
@@ -97,9 +107,9 @@ For visualizing the regions of \autoref{lst:matmulcpp} a dot file is generated u
         \item Side effect free functions call.\\
             Function calls and intrinsics that do not have side effects (readnone) or \enquote{memory intrinsics (\mintinline{c++}{memset, memcpy, memmove}) are allowed}.
     \end{itemize}\cite{ScopDetection.cpp}
-}
+\end{comment}
 
-\draftnote{
+\begin{comment}
     The polyhedron model puts restrictions on the kind of programs that can be optimized.
     To be able to model a code region, it must have \textit{static control}.
     A code region with static control is called a static-control part or SCoP, for short. Loops should be for loops.
@@ -107,9 +117,14 @@ For visualizing the regions of \autoref{lst:matmulcpp} a dot file is generated u
     Structure parameters are integer variables whose values remain unchanged inside a SCoP.
     The statements in a SCoP may operate on linear data structures (typically arrays).
     Loop limits and array indices must be affine functions of the iteration variables and structure parameters. \cite{GanserIterativeSchedule}
-}
-A \scop is a specific region with further restrictions in order to model the region in the polyhedral model which Polly is based on.\\
-For being a valid \scop a region has to have \enquote{static control}.
+\end{comment}
+
+\begin{comment}
+    May use quiet mathematical description of \cite{PolyhedralEmpiricalStudy}.
+\end{comment}
+
+A \scop is a specific region with further restrictions for being representable by the polyhedral model.\\
+For being a valid \scop such a region has to have \enquote{static control}.
 This includes that the region is a single entry single exit region, the loops within have to have only affine linear bounds, these limits of the loops must depend only on structure parameters, numerical constants and iteration variables of enclosing loops.
 (Structure parameter are integer variables whose values remain unchanged inside a \scop.) \cite{GanserIterativeSchedule, ScopDetection.cpp}\\
 The visualization of the \scops of \autoref{lst:matmulcpp} is shown in \autoref{fig:exampleScop}.
