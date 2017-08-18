@@ -95,6 +95,12 @@ SCOP_STAT(LastOther, "")
 \end{comment}
 
 \section{Experiment Variables}
+The experment variables are listed in \autoref{tab:experimentVariables}.
+\draftnote{Which variable is dependant from who?}
+\(T_s\) and \(T_p\) are considered as dependant. They vary depending on the overall execution time \(T\).\\
+Also \(R_p\) is dependant as result of its calculation out of \(T_s\) and \(T_p\).\\
+Further \(S_s\) and \(S_p\) are calculated out of \(T_s\) and \(T_p\).
+So these are also dependant.
 \begin{table}[H]
     \myfloatalign
     \begin{tabularx}{\textwidth}{Xccccc} \toprule
@@ -112,10 +118,22 @@ SCOP_STAT(LastOther, "")
         Theoretical speedup of parents of \scops & \(S_p\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
         \bottomrule
     \end{tabularx}
-    \caption[Experiment Variables]{Experiment Variables (Dep.=Dependant; Indep.=Independant)}
+    \caption[Experiment Variables]{Experiment Variables (Dep.=Dependant; Indep.=Independant; Con.=Controlled)}
+    \label{tab:experimentVariables}
 \end{table}
 
 \section{Hypotheses}
+\draftnote{
+    \begin{itemize}
+        \item What's the problem?
+        \item What is expected?
+        \item research questions?
+            \begin{itemize}
+                \item Is it relevant in practice?
+                \item When is it relevant?
+            \end{itemize}
+    \end{itemize}
+}
 
 \section{Subject Programs}
 \draftnote{
@@ -197,6 +215,7 @@ SCOP_STAT(LastOther, "")
 
 \section{Tasks}
 \draftnote{
+    Is this what to write here?
     \begin{enumerate}
         \item Create Pass (\autoref{subsec:optimizer})
         \begin{itemize}
@@ -213,12 +232,22 @@ SCOP_STAT(LastOther, "")
 }
 
 \section{Design}
+\draftnote{
+    \begin{itemize}
+        \item Which experiments are done?
+        \item Multiple program instances?
+    \end{itemize}
+}
 
 \section{Experiment Setting}
 \draftnote{
     \begin{itemize}
         \item Maschine?
         \item Cluster?
+        \item LLVM used
+        \item LLVM-IR used
+        \item How instrumented? (Papi?,...)
+        \item Preprations done? (Avoid repeated compilation to LLVM-IR,...)
     \end{itemize}
 }
 
@@ -230,5 +259,3 @@ SCOP_STAT(LastOther, "")
         \item (Störeinfluss der Maschine (=Kontrollvariable))
     \end{itemize}
 }
-
-\section{Analyse}
