@@ -312,6 +312,9 @@
 }
 \newenvironment{code}{\captionsetup{type=listings}}{}
 
+%tabularx
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
 %Tikz
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning, shapes, snakes, fit}
@@ -325,34 +328,67 @@
     llvmIrPath/.style = {defaultPath, color=llvmIrColor},
     nonLlvmIrPath/.style = {defaultPath, color=nonLlvmIrColor}
 }
+
+%Another idea for a lenged
+\begin{comment}
+    \begin{mdframed}
+        \begin{tikzpicture}
+            \tikzstyle{every node}=[font=\footnotesize]
+            \coordinate (firstRowCenter);
+            \coordinate[left=of firstRowCenter] (firstRowLeft);
+            \coordinate[right=of firstRowCenter] (firstRowRight);
+            \path[llvmIrPath] (firstRowLeft) to (firstRowRight);
+            \node[legendNode, right=of firstRowRight] {Passing LLVM-IR};
+
+            \node[llvmIrNode, below=of firstRowCenter] (secondRowCenter) {Node};
+            \coordinate[left=of secondRowCenter] (secondRowLeft);
+            \coordinate[right=of secondRowCenter] (secondRowRight);
+            \node[legendNode, right=of secondRowRight] {Node using LLVM-IR};
+
+            \coordinate[below=of secondRowCenter] (thirdRowCenter);
+            \coordinate[left=of thirdRowCenter] (thirdRowLeft);
+            \coordinate[right=of thirdRowCenter] (thirdRowRight);
+            \path[nonLlvmIrPath] (thirdRowLeft) to (thirdRowRight);
+            \node[legendNode, right=of thirdRowRight] {Passing non-LLVM-IR};
+
+            \node[nonLlvmIrNode, below=of thirdRowCenter] (fourthRowCenter) {Node};
+            \coordinate[left=of fourthRowCenter] (fourthRowLeft);
+            \coordinate[right=of fourthRowCenter] (fourthRowRight);
+            \node[legendNode, right=of fourthRowRight] {Node not using LLVM-IR};
+        \end{tikzpicture}
+    \end{mdframed}
+\end{comment}
+
 \newcommand{\legend}[0]{
-    \begin{tikzpicture}
-        \coordinate (firstRowCenter);
-        \coordinate[left=of firstRowCenter] (firstRowLeft);
-        \coordinate[right=of firstRowCenter] (firstRowRight);
-        \path[llvmIrPath] (firstRowLeft) to (firstRowRight);
-        \node[legendNode, right=of firstRowRight] {Passing LLVM-IR};
-
-        \node[llvmIrNode, below=of firstRowCenter] (secondRowCenter) {Node};
-        \coordinate[left=of secondRowCenter] (secondRowLeft);
-        \coordinate[right=of secondRowCenter] (secondRowRight);
-        \node[legendNode, right=of secondRowRight] {Node using LLVM-IR};
-
-        \coordinate[below=of secondRowCenter] (thirdRowCenter);
-        \coordinate[left=of thirdRowCenter] (thirdRowLeft);
-        \coordinate[right=of thirdRowCenter] (thirdRowRight);
-        \path[nonLlvmIrPath] (thirdRowLeft) to (thirdRowRight);
-        \node[legendNode, right=of thirdRowRight] {Passing non-LLVM-IR};
-
-        \node[nonLlvmIrNode, below=of thirdRowCenter] (fourthRowCenter) {Node};
-        \coordinate[left=of fourthRowCenter] (fourthRowLeft);
-        \coordinate[right=of fourthRowCenter] (fourthRowRight);
-        \node[legendNode, right=of fourthRowRight] {Node not using LLVM-IR};
-    \end{tikzpicture}
+    \begin{table}[H]
+        \myfloatalign
+        \begin{tabularx}{\textwidth}{CX}
+            \begin{tikzpicture}
+                \coordinate(left);
+                \coordinate[right=of left] (right);
+                \path[llvmIrPath] (left) to (right);
+            \end{tikzpicture} & Passing LLVM-IR\\
+            \begin{tikzpicture}
+                \node[llvmIrNode] {Node};
+            \end{tikzpicture} & Node using LLVM-IR\\
+            \begin{tikzpicture}
+                \coordinate(left);
+                \coordinate[right=of left] (right);
+                \path[nonLlvmIrPath] (left) to (right);
+            \end{tikzpicture} & Passing non-LLVM-IR\\
+            \begin{tikzpicture}
+                \node[nonLlvmIrNode] {Node};
+            \end{tikzpicture} & Node not using LLVM-IR\\
+        \end{tabularx}
+    \end{table}
 }
 
-%tabularx
-\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newenvironment{tikzlegend}[0]{
+    \begin{tikzpicture}
+}{
+    \end{tikzpicture}\\
+    \legend
+}
 
 %Shortcuts
 \newcommand{\cfg}{\ac{CFG} }

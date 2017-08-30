@@ -18,7 +18,7 @@ When leaving the pipeline files containing the appropriate assembler instruction
     \caption{The pipeline of LLVM}
     \label{fig:llvmPipeline}
     \centering
-    \begin{tikzpicture}
+    \begin{tikzlegend}
         \node(languages)[nonLlvmIrNode, align=center]{C/C++, Obj-C,\\Python, Ruby,...};
         \node(frontend)[nonLlvmIrNode, right=of languages]{compiler frontend};
         \node(opt1)[llvmIrNode, right=of frontend]{\opt};
@@ -34,8 +34,7 @@ When leaving the pipeline files containing the appropriate assembler instruction
         \path[llvmIrPath] (llvmLinker) to (opt2);
         \path[llvmIrPath] (opt2) to (generator);
         \path[nonLlvmIrPath] (generator) to (linker);
-    \end{tikzpicture}
-    \legend
+    \end{tikzlegend}
 \end{figure}\\
 \subsection{compiler frontend}\label{subsec:compilerfrontend}
 So the first step at the beginning of the pipeline is translating the files containing sourcecode by a front end like the clang (C, C++, Objective-C), Fortran (llvm-gfortran), Python (PyLLVM) \draftnote{cite?}, Ruby (llvmRuby) \draftnote{Still existing?}, Java (IcedTea) and .NET (IcedTea?!) \draftnote{cite GrosserDiploma}.
