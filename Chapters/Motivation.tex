@@ -1,8 +1,9 @@
 \chapter{Motivation}
 \draftnote{
     As the number of cores of processors, the variety of devices and platforms is increasing there is a need for an efficient compiler infrastructure which is capable of performing language and platform independent optimizations for being able to utilize the capacity of the underlying hardware.
-    So projects like LLVM and Polly were developed for dealing with it.
-    But there is the need of checking whether the impact of the optimzations could be bigger referencing the sizes of the areas automatically optimizable by Polly.
+    A popular approach is LLVM.
+    One of its plugins is Polly which is able to apply optimizations in the polyhedral model.
+    There arises the question what is the ratio of the part which can currently be automatically optimized by Polly and what are the common reasons of these parts for not being even bigger.
 }
 
 \draftnote{
