@@ -130,7 +130,9 @@ For visualizing the regions of \autoref{lst:matmulcpp} a dot file is generated u
 A \scop is a specific region with further restrictions for being representable by the polyhedral model.\\
 For being a valid \scop such a region has to have \enquote{static control}.
 This includes that the region is a single entry single exit region, the loops within have to have only affine linear bounds, these limits of the loops must depend only on structure parameters, numerical constants and iteration variables of enclosing loops.
-(Structure parameter are integer variables whose values remain unchanged inside a \scop.) \cite{GanserIterativeSchedule, ScopDetection.cpp}\\
+(Structure parameter are integer variables whose values remain unchanged inside a \scop.) \cite{GanserIterativeSchedule, ScopDetection.cpp}
+Further a toplevel region can not be a \scop in Polly.
+This means a \scop has maximum size if its parent is the toplevel region.\\
 The visualization of the \scops of \autoref{lst:matmulcpp} is shown in \autoref{fig:exampleScop}.
 \begin{figure}[!ht]
     \centering
