@@ -21,3 +21,6 @@
 
 #minted
 _minted-ClassicThesis/
+
+#Vimtex
+*.synctex.gz
