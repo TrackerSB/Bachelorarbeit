@@ -26,6 +26,7 @@
     \end{itemize}
 }
 \section{Goals}
+As already mentioned this study is investigating the ratio of the part which already can be automatically optimized by Polly, the impact of various reasons for these parts not beeing even larger and the impact the ratio if these reasons could be eliminated.
 
 \section{Measurement Methology}
 \draftnote{What is measured?
@@ -149,6 +150,13 @@ So these are also dependant.
 \end{table}
 
 \section{Hypotheses}
+Already a lot of research is done in the field of polyhedral compilation.
+As result the \scops should have quite the maximum size, which is limited due to the fact that toplevel regions can never be a \scop within Polly.
+So the ratio \(R_p\) is expected to be high but is not going to be very near to 1.
+This means in practice that any program can not be optimized by Polly considering every instruction.\\
+The theoretical speedups \(S_s\) is also going to be high but significally lower than \(S_p\) which represents the speedup when every parent of any \scop could also be optimized by Polly.
+This is because there are reasons for regions not being a valid \scop which can also be reasons for a program being slow.
+In these situations the impact would be really crucial.
 \draftnote{
     \begin{itemize}
         \item What's the problem?
@@ -162,17 +170,6 @@ So these are also dependant.
 }
 
 \section{Subject Programs}
-\draftnote{
-    Not working projects:
-    \begin{itemize}
-        \item crocopat
-        \item js
-        \item ruby
-        \item mycrypt
-        \item ccrypt
-    \end{itemize}
-}
-
 \begin{table}[H]
     \resizebox{!}{\textwidth}{
         \begin{minipage}{\textwidth}
