@@ -24,3 +24,4 @@ _minted-ClassicThesis/
 
 #Vimtex
 *.synctex.gz
+*.synctex.gz(busy)
