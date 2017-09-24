@@ -45,12 +45,6 @@ Then the ratio of paralizable regions \(R_p\in\mathbb{Q}\) is defined as:
 Let \(N\in\mathbb{N}\) be the number of processors and \(R_p\in\mathbb{Q}\) be the ratio of paralizable regions.
 Then the speedup \(S\in\mathbb{Q}\) is defined as:
 \[S := \frac{N}{(1-R_p)*N+R_p}\]
-\begin{comment}
-    \subsection[Amdahl's Law Jenkov]{Amdahl's Law Jenkov \cite{AmdahlsLawJenkov}}
-    Let \(T\in\mathbb{Q}\) be the overall execution time, \(B\in\mathbb{Q}\) the execution time of the non-paralizable parts and \(N\in\mathbb{N}\) the number of processors.
-    Then the speedup \(S\in\mathbb{Q}\) is defined as:
-    \[S(B) := B+\frac{T-B}{N}\]
-\end{comment}
 \subsection{Reasons for SCoPs being invalid}
 These are the implemented criteria of Polly for rejecting a parent of a \scop being also a \scop.
 \begin{itemize}
