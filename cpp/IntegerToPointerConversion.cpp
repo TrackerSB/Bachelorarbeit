@@ -1,16 +1,12 @@
 #include <iostream>
 #include <stdlib.h>
 
-//Not working
+//Working?
 int main(int argc, char **argv){
+    int array[42];
     __int64_t foo = rand() % 42;
-
-    for(int i = 0; i < 42; i++){
-        int *bar = (int *) foo;
-        for(int j = 0; j < 42; j++){
-            std::cout << *bar << std::endl;
-        }
-    }
+    int *bar = (int *) foo;
+    std::cout << *(array + (__int64_t) bar) << std::endl;
 
     return 0;
 }
