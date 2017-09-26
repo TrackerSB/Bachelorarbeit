@@ -49,12 +49,38 @@ The \linker is an optional step which is taken if \draftnote{When?}.
 The \linker links the optimized \llvmir files into a single \llvmir file and applies further optimizations.
 \subsection{LLVM Code Generator}
 When all desired passes are performed the \generator translates \llvmir into target assembler.
+\subsection{Basic Blocks}
+The underlying structure the pipeline is working on are \enquote{basic blocks}.
+In \cite[chapter 8.4, p.~525]{Drachenbuch} basic blocks
+\begin{comment}
+    Seite 525, Chapter 8. Code Generation, 8.4 Basic Blocks and Flow Graphs
+\end{comment}
+\begin{quote}
+    [...] are maximal sequences of consecutive three-address instructions with the properties that
+    \begin{enumerate}[label=(\alph*)]
+        \item The flow of control can only enter the basic block through the first instruction in the block.
+        \item Control will leave the block without halting or branching, except possibly at the last instruction in the block.
+    \end{enumerate}
+\end{quote}
 \subsection{Control Flow Graph (CFG)}\label{subsec:cfg}
 \begin{wrapfigure}{I}{.3\textwidth}
     \caption{The CFG of \autoref{lst:matmulll}}
     \label{fig:exampleCfg}
     \includegraphics[height=12cm]{gfx/matmulCfg.png}
 \end{wrapfigure}
-The \cfg is very important to the pipeline as it is needed by many analysis passes and by optimization passes to determine whether certain optimizations can be applied and which way.
+The \cfg is a representation of the the control flow (connections between basic blocks) \cite[chapter 8.4.3, p.~529]{Drachenbuch}.
+\begin{comment}
+    Seite 529, Chapter 8. Code Generation, 8.4.3 Flow Graphs
+\end{comment}
+\begin{quote}
+    The nodes of the flow graph are the basic blocks.
+    There is an edge from block \(B\) to block \(C\) if and only if it is possible for the first instruction in block \(C\) to immediately follow the last instruction in block \(B\).
+    There are two ways that such an edge could be justified:
+    \begin{itemize}
+        \item There is a conditio nal or unconditional jump from the end of \(B\) to the beginning of \(C\).
+        \item \(C\) immediately follows \(B\) in the original ordera of the three-address instructions, and \(B\) does not end in an unconditional jump.
+    \end{itemize}
+\end{quote}
+Therefore the \cfg is very important to the pipeline as it is needed by many analysis passes and by optimization passes to determine whether certain optimizations can be applied and which way.
 The current \cfg of a \llvmir file can be generated at any point of the pipeline.
 It also can be visualized (like \autoref{fig:exampleCfg}) by passing one of the options \texttt{-view-cfg} or \texttt{-view-cfg-only} to the \opt.

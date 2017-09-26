@@ -44,11 +44,11 @@ In \cite[chapter 9.7.1, p.~672]{Drachenbuch} a region is defined as:
     Seite 672, Chapter 9. Machine-independent optimizations, 9.7.1 Regions
 \end{comment}
 \begin{quote}
-    Formally, a region of a flow graph is a collection of nodes N and edges E such that:
+    Formally, a region of a flow graph is a collection of nodes \(N\) and edges \(E\) such that:
     \begin{enumerate}
-        \item There is a header h in N that dominates all the nodes in N.
-        \item If some node m can reach a node n in N without going through h, then m is also in N.
-        \item E is the set of all the control flow edges between nodes \(n_1\) and \(n_2\) in N, except (possibly) for some that enter h.
+        \item There is a header \(h\) in \(N\) that dominates all the nodes in \(N\).
+        \item If some node \(m\) can reach a node \(n\) in \(N\) without going through \(h\), then m is also in \(N\).
+        \item \(E\) is the set of all the control flow edges between nodes \(n_1\) and \(n_2\) in \(N\), except (possibly) for some that enter \(h\).
     \end{enumerate}
 \end{quote}
 In \autoref{fig:exampleRegion} the regions of \autoref{lst:matmulll} are shown.
@@ -110,7 +110,7 @@ For visualizing the regions of \autoref{lst:matmulcpp} a dot file is generated u
 
 A \scop is a specific region with further restrictions for being representable by the polyhedral model.\\
 For being a valid \scop such a region has to have \enquote{static control flow}.
-This includes that the region is a single entry single exit region, the loops within have to have only affine linear bounds, \ie the limits only depend on structure parameters\footnote{Structure parameter are integer variables whose values remain unchanged inside a \scop.}, numerical constants and iteration variables of enclosing loops. \cite{GanserIterativeSchedule, ScopDetection.cpp}
+This includes that the region is a single entry single exit region, the loops within have to have only affine linear bounds, \eg the limits only depend on structure parameters\footnote{Structure parameter are integer variables whose values remain unchanged inside a \scop.}, numerical constants and iteration variables of enclosing loops. \cite{GanserIterativeSchedule, ScopDetection.cpp}
 Further a toplevel region can not be a \scop in Polly. \draftnote{Per definition? Why?}
 This means a \scop has maximum size if its parent is the toplevel region.\\
 The visualization of the \scops of \autoref{lst:matmulcpp} is shown in \autoref{fig:exampleScop}.
