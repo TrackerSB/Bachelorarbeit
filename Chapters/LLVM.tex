@@ -50,8 +50,8 @@ The \linker links the optimized \llvmir files into a single \llvmir file and app
 \subsection{LLVM Code Generator}
 When all desired passes are performed the \generator translates \llvmir into target assembler.
 \subsection{Basic Blocks}
-The underlying structure the pipeline is working on are \enquote{basic blocks}.
-In \cite[chapter 8.4, p.~525]{Drachenbuch} basic blocks
+The underlying structure the pipeline is working on are basic blocks.
+According to \cite[chapter 8.4, p.~525]{Drachenbuch} basic blocks
 \begin{comment}
     Seite 525, Chapter 8. Code Generation, 8.4 Basic Blocks and Flow Graphs
 \end{comment}
@@ -68,7 +68,7 @@ In \cite[chapter 8.4, p.~525]{Drachenbuch} basic blocks
     \label{fig:exampleCfg}
     \includegraphics[height=12cm]{gfx/matmulCfg.png}
 \end{wrapfigure}
-The \cfg is a representation of the the control flow (connections between basic blocks) \cite[chapter 8.4.3, p.~529]{Drachenbuch}.
+The \cfg is a representation of the connections between basic blocks called control flow \cite[chapter 8.4.3, p.~529]{Drachenbuch}.
 \begin{comment}
     Seite 529, Chapter 8. Code Generation, 8.4.3 Flow Graphs
 \end{comment}
