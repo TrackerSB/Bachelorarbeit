@@ -38,5 +38,14 @@ Vergleich: Wie ändert sich die Laufzeit, wenn die Regionerweitert wird?
 
 
 
-minted
-\end{comment}
+
+
+Vom 27.9.17:
+Entweder über CFG figure Text ODER komplett drunter/drüber
+C-Code weiter vor.
+Schleifennamen einfügen CFG und C-Code
+Compiler Explorer
+-O0
+arrays aus main raus (Global sichtbar)
+CFG add commands
+truncate not append using Logger
