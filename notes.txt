@@ -49,3 +49,7 @@ Compiler Explorer
 arrays aus main raus (Global sichtbar)
 CFG add commands
 truncate not append using Logger
+
+
+Deviations projeckte, Abweichungen der Art (Evtl. eine Rauspickerń; alle von dieser Art; Codebeispiel) Nicht tragisch weil.
+metrics, time, sql queries.
