@@ -31,7 +31,7 @@ When leaving the pipeline files containing the appropriate assembler instruction
         \path[llvmIrPath] (opt2) to (generator);
         \path[nonLlvmIrPath] (generator) to (linker);
     \end{tikzlegend}
-\end{figure}\\
+\end{figure}
 \subsection{compiler frontend}\label{subsec:compilerfrontend}
 The first step of the pipeline is translating the files containing sourcecode by a front end like clang (C, C++, Objective-C), flang (Fortran) \cite{fortranllvm}, llvm-ruby (Ruby) \cite{rubyllvm}, PyLLVM (Python) \cite{pyllvm}, llvm-lua (LUA) \cite{luallvm} and can be further extended to all languages gcc supports by using dragonegg \cite{dragonegg} which replaces the optimizers and code generators of gcc by the ones of \llvm.
 From now on this work is only discussing clang as frontend.
@@ -63,11 +63,6 @@ According to \cite[chapter 8.4, p.~525]{Drachenbuch} basic blocks
     \end{enumerate}
 \end{quote}
 \subsection{Control Flow Graph (CFG)}\label{subsec:cfg}
-\begin{wrapfigure}{I}{.3\textwidth}
-    \caption{The CFG of \autoref{lst:matmulll}}
-    \label{fig:exampleCfg}
-    \includegraphics[height=12cm]{gfx/matmulCfg.png}
-\end{wrapfigure}
 The \cfg is a representation of the connections between basic blocks called control flow \cite[chapter 8.4.3, p.~529]{Drachenbuch}.
 \begin{comment}
     Seite 529, Chapter 8. Code Generation, 8.4.3 Flow Graphs
@@ -81,6 +76,22 @@ The \cfg is a representation of the connections between basic blocks called cont
         \item \(C\) immediately follows \(B\) in the original ordera of the three-address instructions, and \(B\) does not end in an unconditional jump.
     \end{itemize}
 \end{quote}
+\begin{code}
+    \caption{Source of matmul.cpp}
+    \inputminted{c++}{cpp/matmul.cpp}
+    \label{lst:matmulcpp}
+\end{code}
+\begin{figure}[!h]
+    \caption{The CFG of \autoref{lst:matmulcpp}}
+    \label{fig:exampleCfg}
+    \includegraphics[width=\textwidth]{gfx/matmulCfg.png}
+\end{figure}
 Therefore the \cfg is very important to the pipeline as it is needed by many analysis passes and by optimization passes to determine whether certain optimizations can be applied and which way.
 The current \cfg of a \llvmir file can be generated at any point of the pipeline.
 It also can be visualized (like \autoref{fig:exampleCfg}) by passing one of the options \texttt{-view-cfg} or \texttt{-view-cfg-only} to the \opt.
+\begin{enumerate}
+    \item Translate the C++ sourcecode of \autoref{lst:matmulcpp} into \llvmir (\autoref{lst:matmulll})\\
+        \texttt{clang++ -S -emit-llvm matmul.cpp -o matmul.ll}
+    \item Generate the \cfg\\
+        \texttt{opt -view-cfg matmul.ll}
+\end{enumerate}

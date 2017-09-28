@@ -1,0 +1,75 @@
+digraph "Scop Graph for 'main' function" {
+	label="Scop Graph for 'main' function";
+
+	Node0x55c08eb3f5e0 [shape=record,label="{entry}"];
+	Node0x55c08eb3f5e0 -> Node0x55c08eb3f480;
+	Node0x55c08eb3f480 [shape=record,label="{entry.split}"];
+	Node0x55c08eb3f480 -> Node0x55c08eb314a0;
+	Node0x55c08eb314a0 [shape=record,label="{for.body}"];
+	Node0x55c08eb314a0 -> Node0x55c08eb31570;
+	Node0x55c08eb31570 [shape=record,label="{for.body4}"];
+	Node0x55c08eb31570 -> Node0x55c08eb315d0;
+	Node0x55c08eb31570 -> Node0x55c08eb31570[constraint=false];
+	Node0x55c08eb315d0 [shape=record,label="{for.cond.cleanup3}"];
+	Node0x55c08eb315d0 -> Node0x55c08eb31630;
+	Node0x55c08eb315d0 -> Node0x55c08eb314a0[constraint=false];
+	Node0x55c08eb31630 [shape=record,label="{for.body21.preheader}"];
+	Node0x55c08eb31630 -> Node0x55c08eb314c0;
+	Node0x55c08eb314c0 [shape=record,label="{for.body21}"];
+	Node0x55c08eb314c0 -> Node0x55c08eb31520;
+	Node0x55c08eb31520 [shape=record,label="{for.body26}"];
+	Node0x55c08eb31520 -> Node0x55c08eb31820;
+	Node0x55c08eb31820 [shape=record,label="{for.body36}"];
+	Node0x55c08eb31820 -> Node0x55c08eb31540;
+	Node0x55c08eb31820 -> Node0x55c08eb31820[constraint=false];
+	Node0x55c08eb31540 [shape=record,label="{for.cond.cleanup35}"];
+	Node0x55c08eb31540 -> Node0x55c08eb31480;
+	Node0x55c08eb31540 -> Node0x55c08eb31520[constraint=false];
+	Node0x55c08eb31480 [shape=record,label="{for.cond.cleanup25}"];
+	Node0x55c08eb31480 -> Node0x55c08eb318c0;
+	Node0x55c08eb31480 -> Node0x55c08eb314c0[constraint=false];
+	Node0x55c08eb318c0 [shape=record,label="{for.cond.cleanup20}"];
+	colorscheme = "paired12"
+        subgraph cluster_0x55c08eb23430 {
+          label = "";
+          style = solid;
+          color = 1
+          subgraph cluster_0x55c08eb254e0 {
+            label = "Call instruction:   %call = tail call i32 @rand() #2";
+            style = solid;
+            color = 6
+            subgraph cluster_0x55c08eb242b0 {
+              label = "Region can not profitably be optimized!";
+              style = solid;
+              color = 5
+              Node0x55c08eb31570;
+            }
+            Node0x55c08eb314a0;
+            Node0x55c08eb315d0;
+          }
+          subgraph cluster_0x55c08eb24230 {
+            label = "Call instruction:   %call27 = tail call i32 @rand() #2";
+            style = solid;
+            color = 6
+            subgraph cluster_0x55c08eb241b0 {
+              label = "Call instruction:   %call27 = tail call i32 @rand() #2";
+              style = solid;
+              color = 5
+              subgraph cluster_0x55c08eb23580 {
+                label = "Region can not profitably be optimized!";
+                style = solid;
+                color = 7
+                Node0x55c08eb31820;
+              }
+              Node0x55c08eb31520;
+              Node0x55c08eb31540;
+            }
+            Node0x55c08eb314c0;
+            Node0x55c08eb31480;
+          }
+          Node0x55c08eb3f5e0;
+          Node0x55c08eb3f480;
+          Node0x55c08eb31630;
+          Node0x55c08eb318c0;
+        }
+}
