@@ -36,6 +36,7 @@ As already mentioned this study is investigating the ratio of the part which alr
         \item Theoretical impact if certain reasons would not appear
     \end{itemize}
 }
+For measuring, analysis and evaluation of the results the following definitions are introduced.
 \subsection{Definition ratios}
 Let \(T_p\in\mathbb{N}\) be the execution time of all instructions within a \scop and \(T\in\mathbb{N}\) the overall exeuction time.
 Then the ratio of paralizable regions \(R_p\in\mathbb{Q}\) is defined as:
@@ -46,7 +47,7 @@ Let \(N\in\mathbb{N}\) be the number of processors and \(R_p\in\mathbb{Q}\) be t
 Then the speedup \(S\in\mathbb{Q}\) is defined as:
 \[S := \frac{N}{(1-R_p)*N+R_p}\]
 \subsection{Reasons for SCoPs being invalid}
-These are the implemented criteria of Polly for rejecting a parent of a \scop being also a \scop.
+These are the critieria implemented by Polly for rejecting a parent of a \scop being also a \scop.
 \begin{itemize}
     \item Parent is toplevel (\autoref{lst:parentIsToplevel})
     \item Unsupported terminator instruction
@@ -124,11 +125,12 @@ So these are also dependant.
         Program inputs                           & \(P\)   & Con.   & ?     & - & -\\
         Test inputs                              & \(TI\)  & Con.   & ?     & - & -\\
         \midrule
-        %Execution time of non-\scops             & \(T_s\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
-        Execution time of \scops                 & \(T_p\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
-        Ratio of paralizable regions             & \(R_p\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
+        Execution time of \scops                 & \(T_s\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
+        Execution time of parents                & \(T_p\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
+        Ratio of \scops                          & \(R_s\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
+        Ratio of parents                         & \(R_p\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
         Theoretical speedup of \scops            & \(S_s\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
-        %Theoretical speedup of parents of \scops & \(S_p\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
+        Theoretical speedup of parents           & \(S_p\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
         \bottomrule
     \end{tabularx}
     \caption[Experiment Variables]{Experiment Variables (Dep.=Dependant; Indep.=Independant; Con.=Controlled)}
@@ -137,10 +139,10 @@ So these are also dependant.
 
 \section{Hypotheses}
 Already a lot of research is done in the field of polyhedral compilation.
-As result the \scops should have quite the maximum size, which is limited due to the fact that toplevel regions can never be a \scop within Polly.
-So the ratio \(R_p\) is expected to be high but is not going to be very near to 1.
+\(H_1\): As result the \scops should have quite the maximum size, which is limited due to the fact that toplevel regions can not be classified as \scops by Polly per default.
+So the ratio \(R_s\) is expected to be high but significally lower than \(R_p\).
 This means that in practice some program can not be optimized by Polly considering every instruction.\\
-The theoretical speedups \(S_s\) is also going to be high but significally lower than \(S_p\) which represents the speedup when every parent of any \scop could also be optimized by Polly.
+\(H_2\): The theoretical speedup \(S_s\) is also going to be high but significally lower than \(S_p\) which represents the speedup when every parent of any \scop could also be optimized by Polly.
 This is because there are reasons for regions not being a valid \scop which can also be reasons for a program being slow.
 In these situations the impact would be really crucial.
 \draftnote{
@@ -156,6 +158,8 @@ In these situations the impact would be really crucial.
 }
 
 \section{Subject Programs}
+To target as much as possible real world optimization problems programs are measured which are well known and often used by the community.
+The selection of programs is limited due the list of programs available using benchbuild.
 \begin{table}[H]
     \resizebox{!}{\textwidth}{
         \begin{minipage}{\textwidth}
@@ -175,6 +179,13 @@ In these situations the impact would be really crucial.
                 %ruby & 2.2.2 & Integrated tests\\
                 %tcc & 0.9.26 & Integrated tests\\
                 %\midrule
+                \textbf{Benchmarks}\\
+                MultiSourceApplications & - & SPEC2006 input data (set:ref)\\
+                MultiSourceBenchmarks & - & SPEC2006 input data (set:ref)\\
+                SingleSourceBenchmarks & - & SPEC2006 input data (set:ref)\\
+                SPEC2006 & - & SPEC2006 input data (set:ref)\\
+                Povray & - & SPEC2006 input data (set:ref)\\
+                \midrule
                 \textbf{Compression}\\
                 7z & 9.38.1 & SPEC2006 input data (set:ref)\\
                 bzip2 & 1.0.6 & SPEC2006 input data (set:ref)\\
@@ -279,7 +290,12 @@ The measurement itself is done at run time and is realized using the papi librar
 \inputminted{text}{gfx/chimairaLscpu.log}
 
 \section{Deviations}
-For minimizing the influences to the measurement of the regions due to the instrumentation the data collected on run time is only written to the database once at the very end of the executed project.
+For minimizing the influences to the measurement of the regions due to the instrumentation the data collected on run time is only written to the database once at the very end of the executed project.\\
+Only about 97\% of the measured execution times can be used due to bugs in the implementation which could not be fixed because of time constraints.
+The bug is occuring in certain constellations of the basic blocks of a region to measure like the following one which is found in the project \draftnote{projectname}:
+\draftnote{Insert example}
+To cope with it the appropriate measurements are excluded from the analysis.
+\draftnote{Further parents are excluded if there measured children are invalid.}
 \draftnote{
     \begin{itemize}
         \item Instabile OS Laufzeit
