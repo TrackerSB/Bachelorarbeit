@@ -38,14 +38,14 @@ As already mentioned this study is investigating the ratio of the part which alr
 }
 For measuring, analysis and evaluation of the results the following definitions are introduced.
 \subsection{Definition ratios}
-Let \(T_p\in\mathbb{N}\) be the execution time of all instructions within a \scop and \(T\in\mathbb{N}\) the overall exeuction time.
-Then the ratio of paralizable regions \(R_p\in\mathbb{Q}\) is defined as:
-\[R_p := \frac{T_p}{T}\]
+Let \(T_i\in\mathbb{N}\) be the execution time of all instructions within all \scops of a project and \(T\in\mathbb{N}\) the overall exeuction time of that project.
+Then the ratio of paralizable regions \(R\in\mathbb{Q}\) is defined as:
+\[R := \frac{T_i}{T}\]
 
 \subsection[Amdahl's Law]{Amdahl's Law \cite{AmdahlsLaw}}
-Let \(N\in\mathbb{N}\) be the number of processors and \(R_p\in\mathbb{Q}\) be the ratio of paralizable regions.
+Let \(N\in\mathbb{N}\) be the number of processors and \(R\in\mathbb{Q}\) be the ratio of paralizable regions.
 Then the speedup \(S\in\mathbb{Q}\) is defined as:
-\[S := \frac{N}{(1-R_p)*N+R_p}\]
+\[S := \frac{N}{(1-R)*N+R}\]
 \subsection{Reasons for SCoPs being invalid}
 These are the critieria implemented by Polly for rejecting a parent of a \scop being also a \scop.
 \begin{itemize}
@@ -111,8 +111,9 @@ SCOP_STAT(LastOther, "")
 \section{Experiment Variables}
 The experment variables are listed in \autoref{tab:experimentVariables}.
 \draftnote{Which variable is dependant from who?}
-\(T_s\) and \(T_p\) are considered as dependant. They vary depending on the overall execution time \(T\).\\
-Also \(R_p\) is dependant as result of its calculation out of \(T_s\) and \(T_p\).\\
+\(T_s\) and \(T_p\) are considered as dependant.
+Both vary depending on the overall execution time \(T\).\\
+Also \(R_s\) and \(R_p\) are dependant as result of their calculation out of \(T_s\) and \(T_p\).\\
 Further \(S_s\) and \(S_p\) are calculated out of \(T_s\) and \(T_p\).
 So these are also dependant.
 \begin{table}[H]
@@ -138,11 +139,12 @@ So these are also dependant.
 \end{table}
 
 \section{Hypotheses}
-Already a lot of research is done in the field of polyhedral compilation.
-\(H_1\): As result the \scops should have quite the maximum size, which is limited due to the fact that toplevel regions can not be classified as \scops by Polly per default.
+Already a lot of research is done in the field of polyhedral compilation.\\
+\(H_1\): The main reason for rejecting a \scop is the parent already is a toplevel region.\\
+\(H_2\): As result the \scops should have quite the maximum size, which is limited due to the fact that toplevel regions can not be classified as \scops by Polly per default.
 So the ratio \(R_s\) is expected to be high but significally lower than \(R_p\).
 This means that in practice some program can not be optimized by Polly considering every instruction.\\
-\(H_2\): The theoretical speedup \(S_s\) is also going to be high but significally lower than \(S_p\) which represents the speedup when every parent of any \scop could also be optimized by Polly.
+\(H_3\): The theoretical speedup \(S_s\) is also going to be high but significally lower than \(S_p\) which represents the speedup when every parent of any \scop could also be optimized by Polly.
 This is because there are reasons for regions not being a valid \scop which can also be reasons for a program being slow.
 In these situations the impact would be really crucial.
 \draftnote{
@@ -269,6 +271,9 @@ The measurement itself is done at run time and is realized using the papi librar
 }
 
 \section{Design}
+Based on the variables in \autoref{tab:experimentVariables} \draftnote{X} experiments are performed.\\
+The first experiment is comparing the ratio of \scops \(R_s\) and their parents \(R_p\).\\
+In the second experiment the resulting speedups \(S_s\) and \(S_p\) are compared.
 \draftnote{
     \begin{itemize}
         \item Which experiments are done?
