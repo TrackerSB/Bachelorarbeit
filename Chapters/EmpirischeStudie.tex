@@ -120,14 +120,14 @@ So these are also dependant.
     \myfloatalign
     \begin{tabularx}{\textwidth}{Xccccc} \toprule
         \tableheadline{Name} & \tableheadline{Abbr.} & \tableheadline{Type} & \tableheadline{Scale Type} & \tableheadline{Unit} & \tableheadline{Range} \\ \midrule
-        Overall execution time                   & \(T\)   & Indep. & Ratio & \mu s & \(\mathbb{Q}^+\)\\
+        Overall execution time                   & \(T\)   & Indep. & Ratio & \(\mu s\) & \(\mathbb{Q}^+\)\\
         Classification                           & \(C\)   & Indep. & ?     & ? & Text\\
         \midrule
         Program inputs                           & \(P\)   & Con.   & ?     & ? & ?\\
         Test inputs                              & \(TI\)  & Con.   & ?     & ? & ?\\
         \midrule
-        Execution time of \scops                 & \(T_s\) & Dep.   & Ratio & \mu s & \(\mathbb{Q}^+\)\\
-        Execution time of parents                & \(T_p\) & Dep.   & Ratio & \mu s & \(\mathbb{Q}^+\)\\
+        Execution time of \scops                 & \(T_s\) & Dep.   & Ratio & \(\mu s\) & \(\mathbb{Q}^+\)\\
+        Execution time of parents                & \(T_p\) & Dep.   & Ratio & \(\mu s\) & \(\mathbb{Q}^+\)\\
         Ratio of \scops                          & \(R_s\) & Dep.   & Ratio & Nominal & \([0; 1[ \in \mathbb{Q}\)\\
         Ratio of parents                         & \(R_p\) & Dep.   & Ratio & Nominal & \([0; 1[ \in \mathbb{Q}\)\\
         Theoretical speedup of \scops            & \(S_s\) & Dep.   & Ratio & Nominal & \(\mathbb{Q}\)\\
@@ -139,8 +139,8 @@ So these are also dependant.
 \end{table}
 
 \section{Hypotheses}
-Already a lot of research is done in the field of polyhedral compilation.\\
-\(H_1\): The main reason for rejecting a \scop is the parent already is a toplevel region.\\
+\draftnote{Already a lot of research is done in the field of polyhedral compilation.}\\
+\(H_1\): The main reason for rejecting a \scop should be that its parent already is a toplevel region.\\
 \(H_2\): As result the \scops should have quite the maximum size, which is limited due to the fact that toplevel regions can not be classified as \scops by Polly per default.
 So the ratio \(R_s\) is expected to be high but significally lower than \(R_p\).
 This means that in practice some program can not be optimized by Polly considering every instruction.\\
@@ -176,11 +176,6 @@ The selection of programs is limited due the list of programs available using be
                 polly & \draftnote{git} & ---\\
                 polli & \draftnote{git} & ---\\
                 \midrule
-                %\textbf{Compilation}\\
-                %python & 3.4.3 & Integrated tests\\
-                %ruby & 2.2.2 & Integrated tests\\
-                %tcc & 0.9.26 & Integrated tests\\
-                %\midrule
                 \textbf{Benchmarks}\\
                 MultiSourceApplications & - & SPEC2006 input data (set:ref)\\
                 MultiSourceBenchmarks & - & SPEC2006 input data (set:ref)\\
@@ -202,7 +197,6 @@ The selection of programs is limited due the list of programs available using be
                 \textbf{Encryption}\\
                 ccrypt & 1.10 & Integrated tests\\
                 libressl & 2.1.6\\
-                %mcrypt & 2.6.8 & Integrated benchmark\\
                 \midrule
                 \textbf{Multimedia}\\
                 ffmpeg & 3.1.3\\
@@ -220,14 +214,12 @@ The selection of programs is limited due the list of programs available using be
                 lulesh-omp & 1.0 & Integrated benchmark\\
                 \midrule
                 \textbf{Verification}\\
-                %crocopat & 2.1.4 & Integrated benchmark\\
                 minisat & \draftnote{git} & SAT-Race 2008 (reduced)\\
                 \midrule
                 \textbf{Other}\\
                 js\\
-                %openblas & \draftnote{git}\\
-                %Rasdaman & \draftnote{git}\\
-                %scimark  & \draftnote{git?}\\
+                openblas & \draftnote{git}\\
+                Rasdaman & \draftnote{git}\\
                 \bottomrule
             \end{tabularx}
             \caption[Subject programs]{Subject programs and benchbuild used. (Versions in parenthesis represent git hashes)}
@@ -246,12 +238,12 @@ Once for instrumenting the actual \scops within, which also includes that ones c
 Even the \enquote{unprofitable} \scops are included because they may get profitable to optimize when they are extended to the size of their parents.
 To include these \scops the option \texttt{-polly-process-unprofitable} has to be specified using the \texttt{-mllvm} option of clang.
 While doing so the informations about why these parents were rejected as \scops are collected.\\
-The instrumentation is working for any region (\autoref{subsec:definitionRegion}).
-For a given region every incoming edge in the \cfg (\autoref{subsec:cfg}) a new node splitting the edge and pointing to the entry of the region is introduced.
-Within these new nodes insructions are placed starting the measurement of the execution time.
-These instructions have the same for regions unique id and remember the system date at the point where they were called.
-The same way every outgoing edges in the \cfg of this region are also split introducing further new nodes in which instructions are placed for stopping the measurement having the same id.
-When these are called the current system time is requested again and the difference to the starting call is caluculated providing the duration of the measured region.
+The instrumentation is designed to work for any region (\autoref{subsec:definitionRegion}).
+For a given region every incoming edge in the \cfg (\autoref{subsec:cfg}) is bendt to a new node splitting the edges and pointing to the entry of the region.
+Within this new node an insruction is placed starting the measurement of the execution time.
+This instruction has the same for regions unique id and remembers the system date at the point where it was called.
+The same way every outgoing edges in the \cfg of this region are also split introducing a further new node in which an instruction is placed for stopping the measurement having the same id.
+When it is called the current system time is requested again and the difference to the starting call is caluculated providing the duration of the measured region.
 The measurement itself is done at run time and is realized using the papi library.
 \\\draftnote{
     Is this what to write here?
@@ -292,7 +284,12 @@ In the second experiment the resulting speedups \(S_s\) and \(S_p\) are compared
         \item Preprations done? (Avoid repeated compilation to LLVM-IR,...)
     \end{itemize}
 }
-\inputminted{text}{gfx/chimairaLscpu.log}
+The specifications of the machine used for measurement are listed in \autoref{lst:specifications}.
+\begin{code}
+    \caption{Specifications of machine used for measurement}
+    \inputminted{text}{gfx/chimairaLscpu.log}
+    \label{lst:specifications}
+\end{code}
 
 \section{Deviations}
 The overhead of executing additional instructions for taking measurements is negligable because it is linear to the number of instrumented regions. \draftnote{Really?!}\\
