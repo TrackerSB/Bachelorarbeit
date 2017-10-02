@@ -120,18 +120,18 @@ So these are also dependant.
     \myfloatalign
     \begin{tabularx}{\textwidth}{Xccccc} \toprule
         \tableheadline{Name} & \tableheadline{Abbr.} & \tableheadline{Type} & \tableheadline{Scale Type} & \tableheadline{Unit} & \tableheadline{Range} \\ \midrule
-        Overall execution time                   & \(T\)   & Indep. & Ratio & - & \(\mathbb{Q}\)\\
-        Classification                           & \(C\)   & Indep. & ?     & - & -\\
+        Overall execution time                   & \(T\)   & Indep. & Ratio & \mu s & \(\mathbb{Q}^+\)\\
+        Classification                           & \(C\)   & Indep. & ?     & ? & Text\\
         \midrule
-        Program inputs                           & \(P\)   & Con.   & ?     & - & -\\
-        Test inputs                              & \(TI\)  & Con.   & ?     & - & -\\
+        Program inputs                           & \(P\)   & Con.   & ?     & ? & ?\\
+        Test inputs                              & \(TI\)  & Con.   & ?     & ? & ?\\
         \midrule
-        Execution time of \scops                 & \(T_s\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
-        Execution time of parents                & \(T_p\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
-        Ratio of \scops                          & \(R_s\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
-        Ratio of parents                         & \(R_p\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
-        Theoretical speedup of \scops            & \(S_s\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
-        Theoretical speedup of parents           & \(S_p\) & Dep.   & Ratio & - & \(\mathbb{Q}\)\\
+        Execution time of \scops                 & \(T_s\) & Dep.   & Ratio & \mu s & \(\mathbb{Q}^+\)\\
+        Execution time of parents                & \(T_p\) & Dep.   & Ratio & \mu s & \(\mathbb{Q}^+\)\\
+        Ratio of \scops                          & \(R_s\) & Dep.   & Ratio & Nominal & \([0; 1[ \in \mathbb{Q}\)\\
+        Ratio of parents                         & \(R_p\) & Dep.   & Ratio & Nominal & \([0; 1[ \in \mathbb{Q}\)\\
+        Theoretical speedup of \scops            & \(S_s\) & Dep.   & Ratio & Nominal & \(\mathbb{Q}\)\\
+        Theoretical speedup of parents           & \(S_p\) & Dep.   & Ratio & Nominal & \(\mathbb{Q}\)\\
         \bottomrule
     \end{tabularx}
     \caption[Experiment Variables]{Experiment Variables (Dep.=Dependant; Indep.=Independant; Con.=Controlled)}
