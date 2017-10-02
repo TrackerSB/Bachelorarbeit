@@ -161,7 +161,7 @@ In these situations the impact would be really crucial.
 
 \section{Subject Programs}
 To target as much as possible real world optimization problems programs are measured which are well known and often used by the community.
-The selection of programs is limited due the list of programs available using benchbuild.
+The selection of programs (\autoref{tab:subjectPrograms}) is limited due the list of programs available using benchbuild.
 \begin{table}[H]
     \resizebox{!}{\textwidth}{
         \begin{minipage}{\textwidth}
@@ -171,17 +171,17 @@ The selection of programs is limited due the list of programs available using be
                 \midrule
                 \draftnote{\textbf{Used software}}\\
                 benchbuild & \draftnote{git} & ---\\
-                llvm & \draftnote{git} & ---\\
-                clang & \draftnote{git} & ---\\
-                polly & \draftnote{git} & ---\\
+                llvm & (04facbb8) & ---\\
+                clang & (89be37b) & ---\\
+                polly & (0fd4fea) & ---\\
                 polli & \draftnote{git} & ---\\
                 \midrule
                 \textbf{Benchmarks}\\
-                MultiSourceApplications & - & SPEC2006 input data (set:ref)\\
-                MultiSourceBenchmarks & - & SPEC2006 input data (set:ref)\\
-                SingleSourceBenchmarks & - & SPEC2006 input data (set:ref)\\
-                SPEC2006 & - & SPEC2006 input data (set:ref)\\
-                Povray & - & SPEC2006 input data (set:ref)\\
+                MultiSourceApplications & \draftnote{git} & SPEC2006 input data (set:ref)\\
+                MultiSourceBenchmarks & \draftnote{git} & SPEC2006 input data (set:ref)\\
+                SingleSourceBenchmarks & \draftnote{git} & SPEC2006 input data (set:ref)\\
+                SPEC2006 & \draftnote{git} & SPEC2006 input data (set:ref)\\
+                Povray & (54474e8) & SPEC2006 input data (set:ref)\\
                 \midrule
                 \textbf{Compression}\\
                 7z & 9.38.1 & SPEC2006 input data (set:ref)\\
@@ -190,9 +190,8 @@ The selection of programs is limited due the list of programs available using be
                 xz & 5.2.1 & SPEC2006 input data (set:ref)\\
                 \midrule
                 \textbf{Database}\\
-                Leveldb & \draftnote{git} & Integrated benchmark\\
-                PostgreSQL & & Integrated benchmark\\
-                SQLite3 & \draftnote{3080900} & leveldb's integrated benchmark\\
+                Leveldb & (bcd9a8e) & Integrated benchmark\\
+                SQLite3 & (3080900) & leveldb's integrated benchmark\\
                 \midrule
                 \textbf{Encryption}\\
                 ccrypt & 1.10 & Integrated tests\\
@@ -201,12 +200,12 @@ The selection of programs is limited due the list of programs available using be
                 \textbf{Multimedia}\\
                 ffmpeg & 3.1.3\\
                 povRAY & \draftnote{git} & Integrated sample scenes\\
-                x264 & \draftnote{git} & Integrated benchmark\\
+                x264 & (ba24899) & Integrated benchmark\\
                 \midrule
                 \textbf{Scientific}\\
                 LAMMPS & \draftnote{git} & Integrated sample problems\\
-                LAPACK & & Integrated tests\\
-                LINPACK & & Integrated benchmark\\
+                LAPACK & 3.2.1 & Integrated tests\\
+                LINPACK & 25.2.1994 & Integrated benchmark\\
                 \midrule
                 \textbf{Simulation}\\
                 crafty & 25.2 & Integrated benchmark\\
@@ -214,15 +213,15 @@ The selection of programs is limited due the list of programs available using be
                 lulesh-omp & 1.0 & Integrated benchmark\\
                 \midrule
                 \textbf{Verification}\\
-                minisat & \draftnote{git} & SAT-Race 2008 (reduced)\\
+                minisat & (5dede3a) & SAT-Race 2008 (reduced)\\
                 \midrule
                 \textbf{Other}\\
-                js\\
-                openblas & \draftnote{git}\\
-                Rasdaman & \draftnote{git}\\
+                js & \draftnote{git} & ?\\
+                openblas & \draftnote{git} & ?\\
+                Rasdaman & \draftnote{git} & ?\\
                 \bottomrule
             \end{tabularx}
-            \caption[Subject programs]{Subject programs and benchbuild used. (Versions in parenthesis represent git hashes)}
+            \caption[Subject programs]{Subject programs and benchbuild used. (Versions in parenthesis represent short git hashes)}
             \label{tab:subjectPrograms}
         \end{minipage}
     }
