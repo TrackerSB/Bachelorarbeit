@@ -293,8 +293,8 @@ The specifications of the machine used for measurement are listed in \autoref{ls
 \section{Deviations}
 The overhead of executing additional instructions for taking measurements is negligable because it is linear to the number of instrumented regions. \draftnote{Really?!}\\
 For minimizing the influences to the measurement of the regions itself due the data collected on run time is only written to the database once at the very end of the executed project.\\
-Only about 97\% of the measured execution times can be used due to bugs in the implementation which could not be fixed because of time constraints.
-The bug is occuring in certain constellations of the basic blocks of a region to measure like the following one which is found in the project \draftnote{projectname}:
+Only about \draftnote{97\%} of the measured execution times can be used due to bugs in the implementation and the projects measured which could not be fixed because of time constraints.
+The bug in the implementation is occuring in certain constellations of the basic blocks of a region to measure like the following one which is found in the project \draftnote{projectname}:
 \draftnote{Insert example}
 To cope with it the appropriate measurements are excluded from the analysis.
 \draftnote{Further parents are excluded if there measured children are invalid.}
