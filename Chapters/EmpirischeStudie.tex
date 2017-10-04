@@ -53,10 +53,10 @@ These are the critieria implemented by Polly for rejecting a parent of a \scop b
     \item Unsupported terminator instruction
     \item Unreachable in exit block (\autoref{lst:unreachableExitBlock})
     \item Irreducible loops (\autoref{lst:irreducibleLoops})
-    \item Undefinded branch condition
+    \item Undefinded branch condition \draftnote{Condition in BB 'cleanup' neither constant nor an icmp instruction}
     \item Non-integer branch condition
     \item Undefined operands in comparison
-    \item Non-affine branch condition
+    \item Non-affine branch condition \draftnote{Non affine branch in BB 'entry.split' with LHS: \%call and RHS: 0}
     \item No base pointer
     \item Undefinded base pointer
     \item Variant base pointer (\autoref{lst:variantBasePointer})
@@ -68,7 +68,7 @@ These are the critieria implemented by Polly for rejecting a parent of a \scop b
     \item Complicated access semantics (volatile or atomic)
     \item Base address aliasing (\autoref{lst:baseAddressAliasing})
     \item Integer to pointer conversion (\autoref{lst:integerToPointer})
-    \item Stack allocations
+    \item Stack allocations \draftnote{Alloca instruction:   \%b = alloca i64, align 8}
     \item Unknown instructions
     \item Contains entry block
     \item Assumed to be unprofitable (\autoref{lst:assumedUnprofitable})
@@ -120,18 +120,18 @@ So these are also dependant.
     \myfloatalign
     \begin{tabularx}{\textwidth}{Xccccc} \toprule
         \tableheadline{Name} & \tableheadline{Abbr.} & \tableheadline{Type} & \tableheadline{Scale Type} & \tableheadline{Unit} & \tableheadline{Range} \\ \midrule
-        Overall execution time                   & \(T\)   & Indep. & Ratio & \(\mu s\) & \(\mathbb{Q}^+\)\\
-        Classification                           & \(C\)   & Indep. & ?     & ? & Text\\
+        Overall execution time                   & \(T\)   & Indep. & Ratio     & \(\mu s\) & \(\mathbb{Q}^+\)\\
+        Classification                           & \(C\)   & Indep. & Nominal   & ?         & Text\\
         \midrule
-        Program inputs                           & \(P\)   & Con.   & ?     & ? & ?\\
-        Test inputs                              & \(TI\)  & Con.   & ?     & ? & ?\\
+        Program inputs                           & \(P\)   & Con.   & Nominal   & ?         & Text\\
+        Test inputs                              & \(TI\)  & Con.   & Nominal   & \makecell{see\\\autoref{tab:subjectPrograms}} & Text\\
         \midrule
-        Execution time of \scops                 & \(T_s\) & Dep.   & Ratio & \(\mu s\) & \(\mathbb{Q}^+\)\\
-        Execution time of parents                & \(T_p\) & Dep.   & Ratio & \(\mu s\) & \(\mathbb{Q}^+\)\\
-        Ratio of \scops                          & \(R_s\) & Dep.   & Ratio & Nominal & \([0; 1[ \in \mathbb{Q}\)\\
-        Ratio of parents                         & \(R_p\) & Dep.   & Ratio & Nominal & \([0; 1[ \in \mathbb{Q}\)\\
-        Theoretical speedup of \scops            & \(S_s\) & Dep.   & Ratio & Nominal & \(\mathbb{Q}\)\\
-        Theoretical speedup of parents           & \(S_p\) & Dep.   & Ratio & Nominal & \(\mathbb{Q}\)\\
+        Execution time of \scops                 & \(T_s\) & Dep.   & Ratio     & \(\mu s\) & \(\mathbb{Q}^+\)\\
+        Execution time of parents                & \(T_p\) & Dep.   & Ratio     & \(\mu s\) & \(\mathbb{Q}^+\)\\
+        Ratio of \scops                          & \(R_s\) & Dep.   & Ratio     & \%        & \([0; 1[ \in \mathbb{Q}\)\\
+        Ratio of parents                         & \(R_p\) & Dep.   & Ratio     & \%        & \([0; 1[ \in \mathbb{Q}\)\\
+        Theoretical speedup of \scops            & \(S_s\) & Dep.   & Ratio     & \%        & \(\mathbb{Q}\)\\
+        Theoretical speedup of parents           & \(S_p\) & Dep.   & Ratio     & \%        & \(\mathbb{Q}\)\\
         \bottomrule
     \end{tabularx}
     \caption[Experiment Variables]{Experiment Variables (Dep.=Dependant; Indep.=Independant; Con.=Controlled)}
@@ -177,10 +177,10 @@ The selection of programs (\autoref{tab:subjectPrograms}) is limited due the lis
                 polli & \draftnote{git} & ---\\
                 \midrule
                 \textbf{Benchmarks}\\
-                MultiSourceApplications & \draftnote{git} & SPEC2006 input data (set:ref)\\
-                MultiSourceBenchmarks & \draftnote{git} & SPEC2006 input data (set:ref)\\
-                SingleSourceBenchmarks & \draftnote{git} & SPEC2006 input data (set:ref)\\
-                SPEC2006 & \draftnote{git} & SPEC2006 input data (set:ref)\\
+                MultiSourceApplications & \draftnote{(602882a)} & SPEC2006 input data (set:ref)\\
+                MultiSourceBenchmarks & \draftnote{(602882a)} & SPEC2006 input data (set:ref)\\
+                SingleSourceBenchmarks & \draftnote{(602882a)} & SPEC2006 input data (set:ref)\\
+                SPEC2006 & \draftnote{(602882a)} & SPEC2006 input data (set:ref)\\
                 Povray & (54474e8) & SPEC2006 input data (set:ref)\\
                 \midrule
                 \textbf{Compression}\\
@@ -199,11 +199,11 @@ The selection of programs (\autoref{tab:subjectPrograms}) is limited due the lis
                 \midrule
                 \textbf{Multimedia}\\
                 ffmpeg & 3.1.3\\
-                povRAY & \draftnote{git} & Integrated sample scenes\\
+                povRAY & (54474e8) & Integrated sample scenes\\
                 x264 & (ba24899) & Integrated benchmark\\
                 \midrule
                 \textbf{Scientific}\\
-                LAMMPS & \draftnote{git} & Integrated sample problems\\
+                LAMMPS & (9cf43f2) & Integrated sample problems\\
                 LAPACK & 3.2.1 & Integrated tests\\
                 LINPACK & 25.2.1994 & Integrated benchmark\\
                 \midrule
@@ -216,9 +216,9 @@ The selection of programs (\autoref{tab:subjectPrograms}) is limited due the lis
                 minisat & (5dede3a) & SAT-Race 2008 (reduced)\\
                 \midrule
                 \textbf{Other}\\
-                js & \draftnote{git} & ?\\
-                openblas & \draftnote{git} & ?\\
-                Rasdaman & \draftnote{git} & ?\\
+                js & (0f32b67) & ?\\
+                openblas & (0e68beb) & ?\\
+                Rasdaman & (eb42c3e) & ?\\
                 \bottomrule
             \end{tabularx}
             \caption[Subject programs]{Subject programs and benchbuild used. (Versions in parenthesis represent short git hashes)}
