@@ -128,21 +128,24 @@ SCOP_STAT(LastOther, "")
 \end{comment}
 
 \section{Experiment Variables}
-The experment variables are listed in \autoref{tab:experimentVariables}.
-\(DynCov_s\) and \(DynCov_p\) are depending on \(TI\) because the selection of tests to run influences the the regions executed and how often they are executed.
+The experment variables are listed in \autoref{tab:experimentVariables}.\\
+The classification \(C\) describes two types of regions handled within the study.
+The one is \enquote{\scop} like explained in \autoref{subsec:definitionScop}.
+The other is \enquote{parent} which is the next bigger region surrounding a \scop.\\
+The variables \(DynCov_s\) and \(DynCov_p\) are depending on \(TI\) because the selection of tests to run influences the the regions executed and how often they are executed.
 So \(TI\) has to be controlled.
 This is done by using on the one hand integrated benchmarks brough by the tested programs and on the other hand using benchmarks which are accepted by the community like SPEC2006. (see \autoref{tab:subjectPrograms})
 \begin{table}[H]
     \myfloatalign
     \begin{tabularx}{\textwidth}{Xccccc} \toprule
-        \tableheadline{Name} & \tableheadline{Abbr.} & \tableheadline{Type} & \tableheadline{Scale Type} & \tableheadline{Unit} & \tableheadline{Range} \\ \midrule
-        Classification                           & \(C\)   & Indep. & Nominal   & \makecell{\{Parent,\\\scop\}}         & Text\\
-        Test inputs                              & \(TI\)  & Con.   & Nominal   & \makecell{see\\\autoref{tab:subjectPrograms}} & Text\\
+        \tableheadline{Name}            & \tableheadline{Abbr.} & \tableheadline{Type} & \tableheadline{Scale Type} & \tableheadline{Unit}                          & \tableheadline{Range} \\ \midrule
+        Classification                  & \(C\)                 & Indep.               & Nominal                    & \makecell{\{Parent,\\\scop\}}                 & Text\\
+        Test inputs                     & \(TI\)                & Con.                 & Nominal                    & \makecell{see\\\autoref{tab:subjectPrograms}} & Text\\
         \midrule
-        Ratio of \scops                          & \(DynCov_s\) & Dep.   & Ratio     & \%        & \([0; 1[ \in \mathbb{Q}\)\\
-        Ratio of parents                         & \(DynCov_p\) & Dep.   & Ratio     & \%        & \([0; 1[ \in \mathbb{Q}\)\\
-        %Theoretical speedup of \scops            & \(S_s\) & Dep.   & Ratio     & \%        & \(\mathbb{Q}\)\\
-        %Theoretical speedup of parents           & \(S_p\) & Dep.   & Ratio     & \%        & \(\mathbb{Q}\)\\
+        Ratio of \scops                 & \(DynCov_s\)          & Dep.                 & Ratio                      & \%                                            & \([0; 1[ \in \mathbb{Q}\)\\
+        Ratio of parents                & \(DynCov_p\)          & Dep.                 & Ratio                      & \%                                            & \([0; 1[ \in \mathbb{Q}\)\\
+        %Theoretical speedup of \scops  & \(S_s\)               & Dep.                 & Ratio                      & \%                                            & \(\mathbb{Q}\)\\
+        %Theoretical speedup of parents & \(S_p\)               & Dep.                 & Ratio                      & \%                                            & \(\mathbb{Q}\)\\
         \bottomrule
     \end{tabularx}
     \caption[Experiment Variables]{Experiment Variables (Dep.=Dependant; Indep.=Independant; Con.=Controlled)}
