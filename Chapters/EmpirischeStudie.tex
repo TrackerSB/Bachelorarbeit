@@ -183,16 +183,6 @@ In the second experiment the resulting speedups \(S_s\) and \(S_p\) are compared
 }
 
 \section{Experiment Setting}
-\draftnote{
-    \begin{itemize}
-        \item Maschine?
-        \item Cluster?
-        \item LLVM used
-        \item LLVM-IR used
-        \item How instrumented? (Papi?,...)
-        \item Preprations done? (Avoid repeated compilation to LLVM-IR,...)
-    \end{itemize}
-}
 This study uses instrumentation to retrieve precise timing informations instead of using frameworks like OProfile \cite{oprofile} or \cite{gprof}.
 The measurement is realized using the \papi library \cite{papi}.\\
 To take these measurement the following steps are performed:\\
@@ -211,12 +201,12 @@ Within this new node an insruction is placed starting the measurement of the exe
 This instruction has the same for regions unique id and remembers the system date at the point where it was called.
 The same way every outgoing edges in the \cfg of this region are also split introducing a further new node in which an instruction is placed for stopping the measurement having the same id.
 When it is called the current system time is requested again and the difference to the starting call is caluculated providing the duration of the measured region.\\
-The specifications of the machine used for measurement are listed in \autoref{lst:specifications}.
+The specifications of the machine used for measurement are listed in \autoref{tab:specifications}.
 \begin{code}
     \captionsetup{type=table}
     \caption{Specifications of machine used for measurement}
     \inputminted{text}{gfx/chimairaLscpu.log}
-    \label{lst:specifications}
+    \label{tab:specifications}
 \end{code}
 
 \section{Deviations}
