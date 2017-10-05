@@ -4,11 +4,13 @@
 % If problems with the headers: get headings in appendix etc. right
 %\markboth{\spacedlowsmallcaps{Appendix}}{\spacedlowsmallcaps{Appendix}}
 \chapter{Appendix}
-This chapter contains mainly lots of the source code referenced within the study.
+This chapter contains mainly lots of the source code and complete tables of data referenced within the study.
 The main purpose is for getting an even more detailed impression of the used or generated files and for being able accurate reproducing the results of the study.
 %\graffito{More dummy text.}
 
 \section{Code Listings}
+\subsection{Matmul.cpp Code Listings}
+The following listings contain the (generated) code of the example matrix multiplication which is often used throuout the background chapters.
 \begin{code}
     \caption{LLVM-IR of \autoref{lst:matmulcpp}}
     \inputminted{LLVM}{ll/matmul.ll}
@@ -26,6 +28,7 @@ The main purpose is for getting an even more detailed impression of the used or 
 \end{code}
 
 \subsection{Examples for invalid SCoPs}
+These peaces of code illustrate simple situations where \scops are invalid.
 \begin{code}
     \caption{Parent is toplevel}
     \inputminted{c++}{cpp/ParentIsTopLevelRegion.cpp}
@@ -81,6 +84,9 @@ The main purpose is for getting an even more detailed impression of the used or 
     \inputminted{c++}{cpp/AssumedToBeUnprofitable.cpp}
     \label{lst:assumedUnprofitable}
 \end{code}
+
+\section{Data Tables}
+Here is the hole data listed collected throuout the entire study.
 
 \begin{comment}
     \section{Appendix Section Test}
