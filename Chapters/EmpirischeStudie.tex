@@ -129,27 +129,18 @@ SCOP_STAT(LastOther, "")
 
 \section{Experiment Variables}
 The experment variables are listed in \autoref{tab:experimentVariables}.
-\draftnote{Which variable is dependant from who?}
-\(T_s\) and \(T_p\) are considered as dependant.
-Both vary depending on the overall execution time \(T\).\\
-Also \(R_s\) and \(R_p\) are dependant as result of their calculation out of \(T_s\) and \(T_p\).\\
-Further \(S_s\) and \(S_p\) are calculated out of \(T_s\) and \(T_p\).
-So these are also dependant.
+\(R_s\) and \(R_p\) are 
 \begin{table}[H]
     \myfloatalign
     \begin{tabularx}{\textwidth}{Xccccc} \toprule
         \tableheadline{Name} & \tableheadline{Abbr.} & \tableheadline{Type} & \tableheadline{Scale Type} & \tableheadline{Unit} & \tableheadline{Range} \\ \midrule
-        %Overall execution time                   & \(T\)   & Indep. & Ratio     & \(\mu s\) & \(\mathbb{Q}^+\)\\
-        Classification                           & \(C\)   & Indep. & Nominal   & \{Parent, \scop\}         & Text\\
-        \midrule
+        Classification                           & \(C\)   & Indep. & Nominal   & \makecell{\{Parent,\\\scop\}}         & Text\\
         Test inputs                              & \(TI\)  & Con.   & Nominal   & \makecell{see\\\autoref{tab:subjectPrograms}} & Text\\
         \midrule
-        %Execution time of \scops                 & \(T_s\) & Indep.   & Ratio     & \(\mu s\) & \(\mathbb{Q}^+\)\\
-        %Execution time of parents                & \(T_p\) & Indep.   & Ratio     & \(\mu s\) & \(\mathbb{Q}^+\)\\
         Ratio of \scops                          & \(R_s\) & Dep.   & Ratio     & \%        & \([0; 1[ \in \mathbb{Q}\)\\
         Ratio of parents                         & \(R_p\) & Dep.   & Ratio     & \%        & \([0; 1[ \in \mathbb{Q}\)\\
-        Theoretical speedup of \scops            & \(S_s\) & Dep.   & Ratio     & \%        & \(\mathbb{Q}\)\\
-        Theoretical speedup of parents           & \(S_p\) & Dep.   & Ratio     & \%        & \(\mathbb{Q}\)\\
+        %Theoretical speedup of \scops            & \(S_s\) & Dep.   & Ratio     & \%        & \(\mathbb{Q}\)\\
+        %Theoretical speedup of parents           & \(S_p\) & Dep.   & Ratio     & \%        & \(\mathbb{Q}\)\\
         \bottomrule
     \end{tabularx}
     \caption[Experiment Variables]{Experiment Variables (Dep.=Dependant; Indep.=Independant; Con.=Controlled)}
