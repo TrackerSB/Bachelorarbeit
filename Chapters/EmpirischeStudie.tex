@@ -167,38 +167,9 @@ The selection of programs (\autoref{tab:subjectPrograms}) is limited due the lis
 \LTXtable{\textwidth}{tables/subjectPrograms.tex}
 
 \section{Tasks}
-The first step is creating a new so called experiment for benchbuild\footnote{Benchbuild is a tool for automating the process of downloading, building, applying an experiment at compile time and executing a project on a SLURM Cluster.}.
-This experiment is calling the actual pass of Polly for instrumenting a project by specifying the appropriate clang options using \texttt{-Xclang}, collects the generated data and persists it.\\
-The pass itself is a FunctionPass.
-Thus it is processing every function of the program
-In this case the pass is called twice.
-Once for instrumenting the actual \scops within, which also includes that ones classified by Polly as \enquote{unprofitable}, and once for instrumenting their parents.
-Even the \enquote{unprofitable} \scops are included because they may get profitable to optimize when they are extended to the size of their parents.
-To include these \scops the option \texttt{-polly-process-unprofitable} has to be specified using the \texttt{-mllvm} option of clang.
-While doing so the informations about why these parents were rejected as \scops are collected.\\
-The instrumentation is designed to work for any region (\autoref{subsec:definitionRegion}).
-For a given region every incoming edge in the \cfg (\autoref{subsec:cfg}) is bendt to a new node splitting the edges and pointing to the entry of the region.
-Within this new node an insruction is placed starting the measurement of the execution time.
-This instruction has the same for regions unique id and remembers the system date at the point where it was called.
-The same way every outgoing edges in the \cfg of this region are also split introducing a further new node in which an instruction is placed for stopping the measurement having the same id.
-When it is called the current system time is requested again and the difference to the starting call is caluculated providing the duration of the measured region.
-The measurement itself is done at run time and is realized using the \papi library.
-\\\draftnote{
-    Is this what to write here?
-    \begin{enumerate}
-        \item Create Pass (\autoref{subsec:optimizer})
-        \begin{itemize}
-            \item How does the pass work?
-        \end{itemize}
-        \item Run benchbuild over the group \enquote{benchbuild}
-        \item Analyse output
-            \begin{itemize}
-                \item Most common reasons for rejection?
-                \item Ratio of SCoPs?
-                \item Possible effect when theoretically solve reasons for rejection?
-            \end{itemize}
-    \end{enumerate}
-}
+To create a setup which targets as much as possible real world scenarios integrated benchmarks of programs or SPEC2006 were used.
+Further the \lnt provides a hole ranges of benchmarks of various programs.
+These will be annotated like \enquote{\(program_{lnt}\)}.
 
 \section{Design}
 Based on the variables in \autoref{tab:experimentVariables} \draftnote{X} experiments are performed.\\
@@ -222,27 +193,38 @@ In the second experiment the resulting speedups \(S_s\) and \(S_p\) are compared
         \item Preprations done? (Avoid repeated compilation to LLVM-IR,...)
     \end{itemize}
 }
+This study uses instrumentation to retrieve precise timing informations instead of using frameworks like OProfile \cite{oprofile} or \cite{gprof}.
+The measurement is realized using the \papi library \cite{papi}.\\
+To take these measurement the following steps are performed:\\
+The first step is creating a new so called experiment for benchbuild\footnote{Benchbuild is a tool for automating the process of downloading, building, applying an experiment at compile time and executing a project on a SLURM Cluster.}.
+This experiment is calling the actual pass of Polly for instrumenting a project by specifying the appropriate clang options using \texttt{-Xclang}, collects the generated data and persists it.\\
+The pass itself is a FunctionPass.
+Thus it is processing every function of the program
+In this case the pass is called twice.
+Once for instrumenting the actual \scops within, which also includes that ones classified by Polly as \enquote{unprofitable}, and once for instrumenting their parents.
+Even the \enquote{unprofitable} \scops are included because they may get profitable to optimize when they are extended to the size of their parents.
+To include these \scops the option \texttt{-polly-process-unprofitable} has to be specified using the \texttt{-mllvm} option of clang.
+While doing so the informations about why these parents were rejected as \scops are collected.\\
+The instrumentation is designed to work for any region (\autoref{subsec:definitionRegion}).
+For a given region every incoming edge in the \cfg (\autoref{subsec:cfg}) is bendt to a new node splitting the edges and pointing to the entry of the region.
+Within this new node an insruction is placed starting the measurement of the execution time.
+This instruction has the same for regions unique id and remembers the system date at the point where it was called.
+The same way every outgoing edges in the \cfg of this region are also split introducing a further new node in which an instruction is placed for stopping the measurement having the same id.
+When it is called the current system time is requested again and the difference to the starting call is caluculated providing the duration of the measured region.\\
 The specifications of the machine used for measurement are listed in \autoref{lst:specifications}.
 \begin{code}
+    \captionsetup{type=table}
     \caption{Specifications of machine used for measurement}
     \inputminted{text}{gfx/chimairaLscpu.log}
     \label{lst:specifications}
 \end{code}
 
 \section{Deviations}
-The overhead of executing additional instructions for taking measurements is negligable because it is linear to the number of instrumented regions. \draftnote{Really?!}\\
-For minimizing the influences to the measurement of the regions itself due the data collected on run time is only written to the database once at the very end of the executed project.\\
+The overhead of executing additional instructions for taking measurements is negligable because it takes about \draftnote{0.1 \(\mu s\)} to execute an enter and an exit \draftnote{1000000} times.\\
+For minimizing the influences of saving the data collected on run time it is only written to the database once at the very end of the executed project.\\
 Only about \draftnote{97\%} of the measured execution times can be used due to bugs in the implementation and the projects measured which could not be fixed because of time constraints.
 The bug in the implementation is occuring in certain constellations of the basic blocks of a region to measure like the following one which is found in the project \draftnote{projectname}:
 \draftnote{Insert example}
-To cope with it the appropriate measurements are excluded from the analysis.
+To cope with it measurements of regions which have a bigger duration than the hole execution time of the project are excluded.
 Also measurements of ratios are excluded where the ratio is greater than 100\%.
-These may also occurr due to the same bugs.
-\draftnote{Further parents are excluded if there measured children are invalid.}
-\draftnote{
-    \begin{itemize}
-        \item Instabile OS Laufzeit
-        \item Messzeit nicht linear zum Input (Messoverhead)
-        \item (Störeinfluss der Maschine (=Kontrollvariable))
-    \end{itemize}
-}
+These occurr because the filtering of the obviously bad measurements is not enough to exclude all bad ones.
