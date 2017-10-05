@@ -47,9 +47,9 @@ Some of these criteria are referencing to a \LLVM specific value called \undefv.
         This is simply when the parent of a \scop is the toplevel region.
         Per default a toplevel region can not be a \scop in Polly.
     \item Unsupported terminator instruction\\
-        This is occurring when a flow breaking instruction like \mintedinline{return} or \mintedinline{goto} is called within a loop.
+        This is occurring when a flow breaking instruction like \mintinline{c++}{return} or \mintinline{c++}{goto} is called within a loop.
     \item Unreachable in exit block (\autoref{lst:unreachableExitBlock})\\
-        \draftnote{TODO}
+        This is appearing when \mintinline{c++}{unreachable()} is called.\cite{llvmUnreachable}
     \item Irreducible loops (\autoref{lst:irreducibleLoops})\\
         \Eg a loop is interfering with another loop using labels.
         So that loop can not be changed in general.
@@ -84,7 +84,7 @@ Some of these criteria are referencing to a \LLVM specific value called \undefv.
     \item Integer to pointer conversion (\autoref{lst:integerToPointer})\\
         This occurs when a regular int is used as pointer somewhere into the memory.
     \item Stack allocations\\
-        Stack allocations like using \mintedinline{alloca} can not be handled.
+        Stack allocations like using \mintinline{c++}{alloca} can not be handled.
     \item Unknown instructions\\
         \draftnote{TODO}
     \item Contains entry block\\
