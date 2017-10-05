@@ -75,7 +75,7 @@ The measurements taken are listed in \autoref{tab:ratiosAndSpeedups}.
 }{Reasons for parents being rejected}{fig:rejectReasonsGrouped}
 But looking at the low coverage of the \scops these parents have to be toplevel regions of quiet small functions.\\
 Another common reason for rejection is that loop bounds can not be computed at compile time.
-This happend \eg when the boundaries of a loop are depending on a non-const variable.
+This happens \eg when the boundaries of a loop are depending on a non-const variable like a parameter.
 Such a loop can be found in lammps (\autoref{lst:couldNotCompute}).
 \begin{code}
     \caption{An example for 'loop bound could not be computed'}
