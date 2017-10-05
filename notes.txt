@@ -56,3 +56,114 @@ metrics, time, sql queries.
 
 EC: 124 = Timeout; limit hochsetzen
 git add -p
+
+
+
+ffmpeg nullchar
+unsupported terminattor instruction
+return in loop
+throw in loop
+undefined branch condition
+switch
+
+llvm doc
+undef
+
+Benchmarks = lnt (subscript)
+average coverage
+standardabweichung
+Bestimmte Projekte herausgreifen. (Evtl. Explizite Tabelle)
+
+Experiment variables
+Wie kontrolliert?
+slurm stellt Kriterien sicher (shell script)
+    no multithread
+    node exclusive
+fifo
+Convig abgeben
+
+R_1 Research questiions.
+H_x statistische Belegung. Welchen Signifikanztest und warum?
+mean + delte of means (scop and parent)
+(Withney-u-test)
+t-test (falls signifikanz)
+
+Tasks
+Was müssen die Projekte durchlaufen (Bekommen Test inputs)
+
+Experiment settings
+We use instrumentation
+No frameworks
+reference papi
+(Clock variant (real))
+
+c-programm
+1000000 times entry_region(...)
+=> small overhead
+(auf zeus)
+
+analysis: keine Interpretation (rule of the dump) wenn steigt, dann besser
+reine Beobachtungen
+
+Hypotheses testing
+signifikanztest
+concerning H_x, it is really like; it is not like.
+Sieht man auch in den Rohdaten.
+
+discussion
+"free style"
+Interessante Dinge herauspicken und erklären, was daran toll ist.
+Beispiel starker Anstieg
+
+B. Threads to Validity
+Gleiche Probleme wie ASE
+Arten von Problemen:
+Construct validity:
+    Bugs in library
+Internal validity:
+    Quality of input data
+    Auf benchbuild verlassen
+External Validity:
+    copy&paste (We controlled thread)
+    Kann ich das verallgemeinern?
+
+(C.Perspective)
+
+Related work
+Selbstbedienung
+Abgrenzung:
+Hypothetisch. Weniger eingeschränkt. Keine Domainen.
+
+Conclusion and future work
+Träumen, was man nicht alles machen könnte
+
+Konsistenztipp:
+var command
+project command
+breite (einzelne Seite drehen)
+
+areaset textfläche adjustieren
+longtable
+
+violinplot coverage
+
+R Studio:
+Console:
+    Import dataset: CSV
+    Plot
+    table$spalte
+    help(befehl)
+    help.search('freitext')
+    mean(vector)
+    median(vector)
+    t.test(...)
+    t.test(..., ...)
+    Evtl. in R-Script kopieren
+    table[column < value,] #Komma!
+Base R cheat sheet
+c=combine
+
+ggplot2
+R gallery
+
+legende in (Fließtext UND) Caption
