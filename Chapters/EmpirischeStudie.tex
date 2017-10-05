@@ -47,7 +47,7 @@ Some of these criteria are referencing to a \LLVM specific value called \undefv.
         This is simply when the parent of a \scop is the toplevel region.
         Per default a toplevel region can not be a \scop in Polly.
     \item Unsupported terminator instruction\\
-        This is occurring when a flow breaking instruction like \texttt{return} or \texttt{goto} is called within a loop.
+        This is occurring when a flow breaking instruction like \texttt{return}, \texttt{throw} or \texttt{goto} is called within a loop.
     \item Unreachable in exit block (\autoref{lst:unreachableExitBlock})\\
         This is appearing when \texttt{unreachable()} is called.\cite{llvmUnreachable}
     \item Irreducible loops (\autoref{lst:irreducibleLoops})\\
@@ -159,7 +159,7 @@ Even if there are a lot of \scops which are processed the big \scops and the -- 
 This may be a result of the fact that \(DynCov_p\) ignores whether the reasons of parents being rejected as \scop can be eliminated.
 
 \section{Subject Programs}
-To target as much as possible real world optimization problems programs are measured which are well known and often used by the community.
+The intention is to measure programs which are well known and often used by the community to get a more realistic picture.
 The selection of programs (\autoref{tab:subjectPrograms}) is limited due the list of programs available using benchbuild.
 \LTXtable{\textwidth}{tables/subjectPrograms.tex}
 
