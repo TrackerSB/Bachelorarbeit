@@ -297,6 +297,8 @@ Only about \draftnote{97\%} of the measured execution times can be used due to b
 The bug in the implementation is occuring in certain constellations of the basic blocks of a region to measure like the following one which is found in the project \draftnote{projectname}:
 \draftnote{Insert example}
 To cope with it the appropriate measurements are excluded from the analysis.
+Also measurements of ratios are excluded where the ratio is greater than 100\%.
+These may also occurr due to the same bugs.
 \draftnote{Further parents are excluded if there measured children are invalid.}
 \draftnote{
     \begin{itemize}
