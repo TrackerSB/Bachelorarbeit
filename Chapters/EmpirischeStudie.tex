@@ -29,13 +29,6 @@
 As already mentioned this study is investigating the ratio of the part which already can be automatically optimized by Polly, the impact of various reasons for these parts not beeing even larger and the impact the ratio if these reasons could be eliminated.
 
 \section{Measurement Methology}
-\draftnote{What is measured?
-    \begin{itemize}
-        \item ratio sequential and parallel instructions
-        \item reasons for parents of SCoPs being invalid as SCoP
-        \item Theoretical impact if certain reasons would not appear
-    \end{itemize}
-}
 For measuring, analysis and evaluation of the results the following definitions are introduced.
 \subsection{Definition ratios}
 Let \(T_i\in\mathbb{N}\) be the execution time of all instructions within all \scops of a project and \(T\in\mathbb{N}\) the overall exeuction time of that project.
@@ -48,30 +41,56 @@ Then the speedup \(S\in\mathbb{Q}\) is defined as:
 \[S := \frac{N}{(1-R)*N+R}\]
 \subsection{Reasons for SCoPs being invalid}
 These are the critieria implemented by Polly for rejecting a parent of a \scop being also a \scop.
+Some of these criteria are referencing to a \LLVM specific value called \undefv.\cite{llvmUndef}
 \begin{itemize}
-    \item Parent is toplevel (\autoref{lst:parentIsToplevel})
-    \item Unsupported terminator instruction
-    \item Unreachable in exit block (\autoref{lst:unreachableExitBlock})
-    \item Irreducible loops (\autoref{lst:irreducibleLoops})
-    \item Undefinded branch condition \draftnote{Condition in BB 'cleanup' neither constant nor an icmp instruction}
-    \item Non-integer branch condition
-    \item Undefined operands in comparison
-    \item Non-affine branch condition \draftnote{Non affine branch in BB 'entry.split' with LHS: \%call and RHS: 0}
-    \item No base pointer
-    \item Undefinded base pointer
-    \item Variant base pointer (\autoref{lst:variantBasePointer})
-    \item Non-affine memory accesses (\autoref{lst:nonAffineMemoryAccesses})
-    \item Accesses with differing sizes
-    \item Uncomputable loop bounds (\autoref{lst:uncomputeableLoopBounds})
-    \item Loop without exit (\autoref{lst:loopWithoutExit})
-    \item Function call with side effects (\autoref{lst:functionCallSideEffects})
-    \item Complicated access semantics (volatile or atomic)
-    \item Base address aliasing (\autoref{lst:baseAddressAliasing})
-    \item Integer to pointer conversion (\autoref{lst:integerToPointer})
-    \item Stack allocations \draftnote{Alloca instruction:   \%b = alloca i64, align 8}
-    \item Unknown instructions
-    \item Contains entry block
-    \item Assumed to be unprofitable (\autoref{lst:assumedUnprofitable})
+    \item Parent is toplevel (\autoref{lst:parentIsToplevel})\\
+        This is simply when the parent of a \scop is the toplevel region.
+        Per default a toplevel region can not be a \scop in Polly.
+    \item Unsupported terminator instruction\\
+        This is occurring when a flow breaking instruction like \mintedinline{return} or \mintedinline{goto} is called within a loop.
+    \item Unreachable in exit block (\autoref{lst:unreachableExitBlock})\\
+        \draftnote{TODO}
+    \item Irreducible loops (\autoref{lst:irreducibleLoops})\\
+        \Eg a loop is interfering with another loop using labels.
+        So that loop can not be changed in general.
+    \item Undefinded branch condition\\
+        It is occurring whenever within a branch condition the value \undefv is appearing.
+    \item Non-integer branch condition\\
+        \draftnote{This appears when a call instruction is used in the branch condition.}
+    \item Undefined operands in comparison\\
+        This one appears when the value \undefv.
+    \item Non-affine branch condition\\
+        This is raised when a non-affine expression like a call instruction is used.
+    \item No base pointer\\
+        \draftnote{TODO}
+    \item Undefinded base pointer\\
+        \drafnote{It is raised when a pointer holds the value \undefv.}
+    \item Variant base pointer (\autoref{lst:variantBasePointer})\\
+        \draftnote{TODO}
+    \item Non-affine memory accesses (\autoref{lst:nonAffineMemoryAccesses})\\
+        This is appearing when accessing memory in a non-affine way like using \(i^2\) as access steps.
+    \item Accesses with differing sizes\\
+        \draftnote{TODO}
+    \item Uncomputable loop bounds (\autoref{lst:uncomputeableLoopBounds})\\
+        It is occurring when the loop bounds could not be computed \eg when the loop bounds are depending on an input parameter.
+    \item Loop without exit (\autoref{lst:loopWithoutExit})\\
+        This occurrs when a loop is infinite but can not be thrown away because there are cases when the execution terminates.
+    \item Function call with side effects (\autoref{lst:functionCallSideEffects})\\
+        This is raised when a function is called which is not guaranteed to have no side effects.
+    \item Complicated access semantics (volatile or atomic)\\
+        \draftnote{TODO}
+    \item Base address aliasing (\autoref{lst:baseAddressAliasing})\\
+        \draftnote{This happens when it can not be determined whether two pointer have the same base address.}
+    \item Integer to pointer conversion (\autoref{lst:integerToPointer})\\
+        This occurs when a regular int is used as pointer somewhere into the memory.
+    \item Stack allocations\\
+        Stack allocations like using \mintedinline{alloca} can not be handled.
+    \item Unknown instructions\\
+        \draftnote{TODO}
+    \item Contains entry block\\
+        \draftnote{TODO}
+    \item Assumed to be unprofitable (\autoref{lst:assumedUnprofitable})\\
+        When the region is very small or it is not likely that an optimization improves the exection it is left out.
 \end{itemize}
 
 \begin{comment}
