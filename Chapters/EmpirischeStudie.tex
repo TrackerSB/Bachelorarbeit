@@ -129,7 +129,9 @@ SCOP_STAT(LastOther, "")
 
 \section{Experiment Variables}
 The experment variables are listed in \autoref{tab:experimentVariables}.
-\(R_s\) and \(R_p\) are 
+\(DynCov_s\) and \(DynCov_p\) are depending on \(TI\) because the selection of tests to run influences the the regions executed and how often they are executed.
+So \(TI\) has to be controlled.
+This is done by using on the one hand integrated benchmarks brough by the tested programs and on the other hand using benchmarks which are accepted by the community like SPEC2006. (see \autoref{tab:subjectPrograms})
 \begin{table}[H]
     \myfloatalign
     \begin{tabularx}{\textwidth}{Xccccc} \toprule
@@ -137,8 +139,8 @@ The experment variables are listed in \autoref{tab:experimentVariables}.
         Classification                           & \(C\)   & Indep. & Nominal   & \makecell{\{Parent,\\\scop\}}         & Text\\
         Test inputs                              & \(TI\)  & Con.   & Nominal   & \makecell{see\\\autoref{tab:subjectPrograms}} & Text\\
         \midrule
-        Ratio of \scops                          & \(R_s\) & Dep.   & Ratio     & \%        & \([0; 1[ \in \mathbb{Q}\)\\
-        Ratio of parents                         & \(R_p\) & Dep.   & Ratio     & \%        & \([0; 1[ \in \mathbb{Q}\)\\
+        Ratio of \scops                          & \(DynCov_s\) & Dep.   & Ratio     & \%        & \([0; 1[ \in \mathbb{Q}\)\\
+        Ratio of parents                         & \(DynCov_p\) & Dep.   & Ratio     & \%        & \([0; 1[ \in \mathbb{Q}\)\\
         %Theoretical speedup of \scops            & \(S_s\) & Dep.   & Ratio     & \%        & \(\mathbb{Q}\)\\
         %Theoretical speedup of parents           & \(S_p\) & Dep.   & Ratio     & \%        & \(\mathbb{Q}\)\\
         \bottomrule
@@ -267,7 +269,7 @@ The measurement itself is done at run time and is realized using the \papi libra
 
 \section{Design}
 Based on the variables in \autoref{tab:experimentVariables} \draftnote{X} experiments are performed.\\
-The first experiment is comparing the ratio of \scops \(R_s\) and their parents \(R_p\).\\
+The first experiment is comparing the ratio of \scops \(DynCov_s\) and their parents \(DynCov_p\).\\
 In the second experiment the resulting speedups \(S_s\) and \(S_p\) are compared.
 \draftnote{
     \begin{itemize}
