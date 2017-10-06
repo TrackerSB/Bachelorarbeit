@@ -173,15 +173,10 @@ Further the \lnt provides a hole ranges of benchmarks of various programs.
 These will be annotated like \enquote{\(program_{lnt}\)}.
 
 \section{Design}
-Based on the variables in \autoref{tab:experimentVariables} \draftnote{X} experiments are performed.\\
-The first experiment is comparing the ratio of \scops \(DynCov_s\) and their parents \(DynCov_p\).\\
-In the second experiment the resulting speedups \(S_s\) and \(S_p\) are compared.
-\draftnote{
-    \begin{itemize}
-        \item Which experiments are done?
-        \item Multiple program instances?
-    \end{itemize}
-}
+Based on the experiment variables (see \autoref{tab:experimentVariables}) three experiments are performed to validate the hypotheses.\\
+The first experiment takes the most common reason for rejecting a parent as valid \scop and checks whether it is \enquote{parent is toplevel region}.\\
+In the second experiment the average value of \(DynCov_s\) is calculated and checked whether it is near 60\%.\\
+The third experiment \(DynCov_p\) and \(DynCov_s\) are compared to check whether \(DynCov_p \gg DynCov_s\).
 
 \section{Experiment Setting}
 This study uses instrumentation to retrieve precise timing informations instead of using frameworks like OProfile \cite{oprofile} or \cite{gprof}.
