@@ -4,7 +4,7 @@ One of the numerous subprojects of the \llvm is Polly\footnote{The name \enquote
 \section{History}
 Polly is an implementation of a loop optimizer based on the polyhedral model.\\
 Before Polly there already existed an earlier implementation accessible using gcc.
-The component for gcc was called Graphite and included the \pcp which is an independant interface between the \ir of gcc called GIMPLE\footnote{\draftnote{The name \enquote{GIMPLE} is a result of \enquote{gcc} and \enquote{Simple II}, on which GIMPLE is based. \cite{GenericGimple}}} and the internal \ir \gpoly.
+The component for gcc was called Graphite and included the \pcp which is an independant interface between the \ir of gcc called GIMPLE\footnote{The name \enquote{GIMPLE} is a result of \enquote{gcc} and \enquote{Simple II}, on which GIMPLE is based. \cite{GenericGimple}} and the internal \ir \gpoly.
 The problem with it was, that GIMPLE is not made for being human readable.
 As consequence to ease developing and to avoid plenty of bugs the implementation was transfered to be used with \llvm, whose \ir is more human readable.
 Another advantage arises due to the fact, that \llvm is not bound to C or C++.
@@ -184,15 +184,3 @@ Following shows a list of assumptions possibly taken:
 \end{comment}
 When the proof of the runtime check holds true, the optimized version of the code is continuing execution at that point.
 Otherwise the execution jumps to the unoptimized version of the affected section.
-\draftnote{
-    \begin{itemize}
-        \item Keine konservative Abschätzung
-        \item Optimistische Abschätzung
-            \begin{itemize}
-                \item Annahme: Abhängigkeit existiert nicht
-                \item Beweis zur Laufzeit (Laufzeitchecks)
-                \item Test oft durch Kontradiktion => Z.T immer zurückspringen und keine Generierung von Code
-                \item Falls nicht beweisbar, zurückspringen in unoptimierten Code
-            \end{itemize}
-    \end{itemize}
-}
