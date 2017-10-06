@@ -19,9 +19,10 @@ The canonicalization is done by compiling the source code using clang with the o
 Afterwards the library of Polly and its additional options can be loaded by the \opt.
 \begin{figure}[!ht]
     \caption[The pipeline of Polly]{The pipeline of Polly \cite{PollyPresentation}.
-    The figure shows the part of the pipeline of \llvm where Polly comes into effect.}
+    The figure shows the part of the pipeline of \llvm where Polly comes into effect.
+    \tikzlegend}
     \centering
-    \begin{tikzlegend}
+    \begin{tikzpicture}
         \coordinate(clang);
         \node(opt)[llvmIrNode, right=of clang]{\ac{LLVM} Optimizer};
         \node(polly)[llvmIrNode, below=of opt]{\ac{LLVM} Polly};
@@ -32,7 +33,7 @@ Afterwards the library of Polly and its additional options can be loaded by the 
         \path[llvmIrPath] (opt) to (generator);
         \path[llvmIrPath] (polly) edge[loop below] ();
         \path[llvmIrPath] (opt) edge[loop above] node[auto]{Pass} ();
-    \end{tikzlegend}
+    \end{tikzpicture}
 \end{figure}
 Polly operates on regions (\autoref{subsec:definitionRegion}) of the \cfg which are called \scops (\autoref{subsec:definitionScop}).
 \subsection{Definition region}\label{subsec:definitionRegion}

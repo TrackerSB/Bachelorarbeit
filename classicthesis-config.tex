@@ -333,37 +333,7 @@
     nonLlvmIrPath/.style = {defaultPath, color=nonLlvmIrColor}
 }
 
-%Another idea for a lenged
-\newcommand{\legend}[0]{
-    \begin{table}[H]
-        \myfloatalign
-        \begin{tabularx}{\textwidth}{CX}
-            \begin{tikzpicture}
-                \coordinate(left);
-                \coordinate[right=of left] (right);
-                \path[llvmIrPath] (left) to (right);
-            \end{tikzpicture} & Passing LLVM-IR\\
-            \begin{tikzpicture}
-                \node[llvmIrNode] {Node};
-            \end{tikzpicture} & Node using LLVM-IR\\
-            \begin{tikzpicture}
-                \coordinate(left);
-                \coordinate[right=of left] (right);
-                \path[nonLlvmIrPath] (left) to (right);
-            \end{tikzpicture} & Passing non-LLVM-IR\\
-            \begin{tikzpicture}
-                \node[nonLlvmIrNode] {Node};
-            \end{tikzpicture} & Node not using LLVM-IR\\
-        \end{tabularx}
-    \end{table}
-}
-
-\newenvironment{tikzlegend}[0]{
-    \begin{tikzpicture}
-}{
-    \end{tikzpicture}\\
-    %\legend %FIXME Legend increasing table number
-}
+\newcommand{\tikzlegend}{\xspace(The green nodes and arrows are working with/based on LLVM-IR)\xspace}
 
 %Has to be loaded after graphicx
 \usepackage[svgpath=svg/,clean]{svg}
