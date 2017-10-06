@@ -48,8 +48,8 @@ Such passes can be invoked explicitly by appending the appropriate options to th
 It is also possible to add further custom options by loading (multiple) libraries using the flag \texttt{-load}.
 When calling the \opt the option \texttt{-S} may also be specified for generating a human readable textfile similar to clang in \autoref{subsec:compilerfrontend}.
 \subsection{LLVM Linker}
-The \linker is an optional step which is taken if \draftnote{When?}.
-The \linker links the optimized \llvmir files into a single \llvmir file and applies further optimizations.
+The \linker is an optional step which is not necessary when operating only on a single \llvmir file.
+But when operating on multiple files the \linker links the optimized \llvmir files into a single \llvmir file and applies further optimizations at link time.
 \subsection{LLVM Code Generator}
 When all desired passes are performed the \generator translates \llvmir into target assembler.
 \subsection{Basic Blocks}
