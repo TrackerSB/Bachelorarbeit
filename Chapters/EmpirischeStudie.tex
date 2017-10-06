@@ -41,7 +41,7 @@ Then the speedup \(S\in\mathbb{Q}\) is defined as:
 \[S := \frac{N}{(1-R)*N+R}\]
 \subsection{Reasons for SCoPs being invalid}
 These are the critieria implemented by Polly for rejecting a parent of a \scop being also a \scop.
-Some of these criteria are referencing to a \LLVM specific value called \undefv.\cite{llvmUndef}
+Some of these criteria are referencing to a \llvm specific value called \undefv.\cite{llvmUndef}
 \begin{itemize}
     \item Parent is toplevel (\autoref{lst:parentIsToplevel})\\
         This is simply when the parent of a \scop is the toplevel region.
