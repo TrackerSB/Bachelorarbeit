@@ -1,0 +1,7 @@
+\begin{longtable}{Xccc}
+    \tableheadline{project} & \tableheadline{t\_scop} & \tableheadline{t\_total} & \tableheadline{dyncov}\\\toprule
+    \csvreader[head to column names]{csv/report_ratiosScops.csv}{}
+    {\csvcoli&\csvcolii&\csvcoliii&\csvcoliv\\}
+    \\\bottomrule
+    \caption{The complete list of measured SCoP execution times}
+\end{longtable}
