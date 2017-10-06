@@ -156,10 +156,11 @@ This is done by using on the one hand integrated benchmarks brough by the tested
 \(H_1\): The main reason for rejecting a \scop should be that its parent already is a toplevel region because also all \scops classified as unprofitable by Polly are processed.
 So a lot of very small functions may be processed.
 Whenever such a function has a \scop it is likely that its parent is already a toplevel region.\\
-\(H_2\): The coverage \(DynCov_s\) is expected to be about 60\%.
+\(H_2\): The coverage \(DynCov_s\) is expected to be about 60\%, on average.
 Even if there are a lot of \scops which are processed the big \scops and the -- according to the execution time -- big \scops may not be able to be optimized.\\
-\(H_3\): It is expected that \(DynCov_p \gg DynCov_s\).
-This may be a result of the fact that \(DynCov_p\) ignores whether the reasons of parents being rejected as \scop can be eliminated.
+\(H_3\): It is expected that \(DynCov_p \gg DynCov_s\), on average.
+This may be a result of the fact that \(DynCov_p\) ignores whether the reasons of parents being rejected as \scop can be eliminated.\\
+\(R_1\): Can the main reasons for rejection a \scop be eliminated?
 
 \section{Subject Programs}
 The intention is to measure programs which are well known and often used by the community to get a more realistic picture.
