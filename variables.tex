@@ -1,0 +1,12 @@
+\newcommand{\var}[2][0]{
+    \ifthenelse{\equal{#1}{0}}{
+        \expandafter\def\csname#2\endcsname{\textbf{\color{red}#2}\xspace}
+    }{
+        \expandafter\def\csname#2\endcsname{#1\xspace}
+    }
+}
+
+%Not working?
+%\var[60][\hTwoAbout] %Expected value of Dyncov_s in H_2 (in percent)
+
+\newcommand{\hTwoAbout}{60\%}
