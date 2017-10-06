@@ -7,7 +7,6 @@
 \usepackage{makecell}
 \usepackage{longtable}
 \usepackage{ltxtable}
-\usepackage[svgpath=svg/,clean]{svg}
 \usepackage{wrapfig}
 \usepackage{smartdiagram}
 \usesmartdiagramlibrary{additions}
@@ -365,6 +364,9 @@
     \end{tikzpicture}\\
     %\legend %FIXME Legend increasing table number
 }
+
+%Has to be loaded after graphicx
+\usepackage[svgpath=svg/,clean]{svg}
 
 %Create pie chart
 \newcommand{\piechart}[3]{
