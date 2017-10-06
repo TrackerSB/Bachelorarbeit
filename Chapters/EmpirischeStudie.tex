@@ -221,9 +221,9 @@ The exact versions of the used software components are listed in \autoref{tab:us
 \end{table}
 
 \section{Deviations}
-The overhead of executing additional instructions for taking measurements is negligable because it takes about \draftnote{0.1 \(\mu s\)} to execute an enter and an exit \draftnote{1000000} times.\\
+The overhead of executing additional instructions for taking measurements is negligable because it takes about \draftnote{\measurementOverhead} to execute an enter and an exit \draftnote{\overheadIterations} times.\\
 For minimizing the influences of saving the data collected on run time it is only written to the database once at the very end of the executed project.\\
-Only about \draftnote{97\%} of the measured execution times can be used due to bugs in the implementation and the projects measured which could not be fixed because of time constraints.
+Only about \draftnote{\usefulRatio} of the measured execution times can be used due to bugs in the implementation and the projects measured which could not be fixed because of time constraints.
 The bug in the implementation is occuring in certain constellations of the basic blocks of a region to measure like the following one which is found in the project \draftnote{projectname}:
 \draftnote{Insert example}
 To cope with it measurements of regions which have a bigger duration than the hole execution time of the project are excluded.
