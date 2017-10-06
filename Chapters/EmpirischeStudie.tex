@@ -228,4 +228,5 @@ The bug in the implementation is occuring in certain constellations of the basic
 \draftnote{Insert example}
 To cope with it measurements of regions which have a bigger duration than the hole execution time of the project are excluded.
 Also measurements of ratios are excluded where the ratio is greater than 100\%.
-These occurr because the filtering of the obviously bad measurements is not enough to exclude all bad ones.
+These occurr because the filtering of the obviously bad measurements is not enough to exclude all bad ones.\\
+Further for minimizing the influences of the underlying OS multithreading is deactivated, the node is used exclusively the number of tasks is limited to one and the number of cpus used per task is limited to 10.
