@@ -178,7 +178,7 @@ The first experiment takes the most common reason for rejecting a parent as vali
 In the second experiment the average value of \(DynCov_s\) is calculated and checked whether it is near \hTwoAbout.\\
 The third experiment \(DynCov_p\) and \(DynCov_s\) are compared to check whether \(DynCov_p \gg DynCov_s\).
 
-\section{Experiment Setting}
+\section{Experiment Setting}\label{sec:experimentSettings}
 This study uses instrumentation to retrieve precise timing informations instead of using frameworks like OProfile \cite{oprofile} or GProf \cite{gprof}.
 The measurement is realized using the \papi library \cite{papi}.\\
 To take these measurement the following steps are performed:\\
@@ -216,7 +216,12 @@ The exact versions of the used software components are listed in \autoref{tab:us
         polli      & \draftnote{git}\\
         \bottomrule
     \end{tabularx}
-    \caption[Software used for measurements]{Software used for measurements. (Versions in parenthesis represent short git hashes)}
+    \caption[Software used for measurements]{
+        This table lists the software used for the measurements.
+        The components llvm, clang, polly and polli belong to the compiler infrastructure \llvm itself.
+        benchbuild is a program for quiet easily applying a certain \enquote{experiment} (see \autoref{sec:experimentSettings}) on a selection of programs and distributing and running them on a SLURM \cite{slurm} cluster.
+        (Versions in parenthesis represent short git hashes)
+    }
     \label{tab:usedSoftware}
 \end{table}
 

@@ -14,13 +14,18 @@ In future releases Polly is going to be integrated directly into \llvm instead.
 \section{The pipeline of Polly}
 Polly is embeded in pipeline of \llvm.
 More precisly it is called by the \opt (\autoref{subsec:optimizer}).
+When Polly is called by the \opt it detects the \scops within the information got, applies its own passes, generates new \llvmir and transfers it back.
 But before being able to use Polly the \llvmir has to be canonicalized.
 The canonicalization is done by compiling the source code using clang with the options \texttt{-O3} and \texttt{-polly-canonicalize}.
 Afterwards the library of Polly and its additional options can be loaded by the \opt.
 \begin{figure}[!ht]
-    \caption[The pipeline of Polly]{The pipeline of Polly \cite{PollyPresentation}.
-    The figure shows the part of the pipeline of \llvm where Polly comes into effect.
-    \tikzlegend}
+    \caption[The pipeline of Polly]{
+        The pipeline of Polly \cite{PollyPresentation}.
+        This figure shows the part of the pipeline of \llvm where Polly comes into effect.
+        In this detail the communication between Polly and the \opt is visible.
+        When Polly gets some peace of information it detects the \scops applies its own passes, generates \llvmir and transfers it back to the \opt.
+        A complete pipeline of \llvm is shown in \autoref{fig:llvmPipeline}.\tikzlegend
+    }
     \centering
     \begin{tikzpicture}
         \coordinate(clang);
@@ -52,7 +57,10 @@ In \cite[chapter 9.7.1, p.~672]{Drachenbuch} a region is defined as:
 In \autoref{fig:exampleRegion} the regions of \autoref{lst:matmulcpp} are shown.
 \begin{figure}[!h]
     \centering
-    \caption{The regiontree of \autoref{lst:matmulcpp}}
+    \caption[The regiontree of \autoref{lst:matmulcpp}]{
+        This is the regiontree of \autoref{lst:matmulcpp}.
+        It is basically a \cfg where groups of basic blocks which build a region (see \autoref{subsec:definitionRegion}) are colored to visualize their togetherness.
+    }
     \label{fig:exampleRegion}
     \includegraphics[width=\textwidth]{gfx/matmulRegions.png}
 \end{figure}
@@ -117,7 +125,11 @@ This means a \scop usually has maximum size if its parent is the toplevel region
 The visualization of the \scops of \autoref{lst:matmulcpp} is shown in \autoref{fig:exampleScop}.
 \begin{figure}[!h]
     \centering
-    \caption{The SCoPtree of \texttt{-O3} compiled \autoref{lst:matmulcpp}}
+    \caption[The SCoPtree of \texttt{-O3} compiled \autoref{lst:matmulcpp}]{
+        This is the SCoPtree of \texttt{-O3} compiled \autoref{lst:matmulcpp}.
+        It contains the \texttt{-O3} optimized \cfg where the most inner region is a \scop and all surrounding regions are annotated with the reason why they were rejected being a valid \scop.
+        In this case the two found \scops are assumed to be unprofitable when getting optimized by Polly.
+    }
     \label{fig:exampleScop}
     \includegraphics[height=\textheight]{gfx/matmulScops.png}
 \end{figure}
