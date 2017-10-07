@@ -1,7 +1,6 @@
 \begin{longtable}{Xccc}
     \tableheadline{project} & \tableheadline{t\_parent} & \tableheadline{t\_total} & \tableheadline{dyncov}\\\toprule
-    \csvreader[head to column names]{csv/report_ratiosMaxRegions.csv}{}%
-    {\csvcoli&\csvcolii&\csvcoliii&\csvcoliv\\}%
+    \csvreader[head to column names]{csv/report_ratiosMaxRegions.csv}{}{\csvcoli&\csvcolii&\csvcoliii&\csvcoliv\\}
     \\\bottomrule
     \caption[The complete list of measured parents execution times]{The complete list of measured parents execution times. This also includes the SCoPs whose parents are toplevel regions}
 \end{longtable}
