@@ -132,7 +132,7 @@ So a lot of very small functions may be processed.
 Whenever such a function has a \scop it is likely that its parent is already a toplevel region.\\
 \(H_2\): The coverage \dyncovs is expected to be about \hTwoAbout, on average.
 Even if there are a lot of \scops which are processed the big \scops and the -- according to the execution time -- big \scops may not be able to be optimized.\\
-\(H_3\): It is expected that \(\dyncovp \gg \dyncovs\), on average.
+\(H_3\): It is expected that \dyncovp \(\gg\) \dyncovs, on average.
 This may be a result of the fact that \dyncovp ignores whether the reasons of parents being rejected as \scop can be eliminated.\\
 \(R_1\): Can the main reasons for rejection a \scop be eliminated?
 
@@ -150,7 +150,7 @@ These will be annotated like \enquote{\(program_{lnt}\)}.
 Based on the experiment variables (see \autoref{tab:experimentVariables}) three experiments are performed to validate the hypotheses.\\
 The first experiment takes the most common reason for rejecting a parent as valid \scop and checks whether it is \enquote{parent is toplevel region}.\\
 In the second experiment the average value of \dyncovs is calculated and checked whether it is near \hTwoAbout.\\
-The third experiment \dyncovp and \dyncovs are compared to check whether \(\dyncovp \gg \dyncovs\).
+The third experiment \dyncovp and \dyncovs are compared to check whether \dyncovp \(\gg\) \dyncovs.
 
 \section{Experiment Setting}\label{sec:experimentSettings}
 This study uses instrumentation to retrieve precise timing informations instead of using frameworks like OProfile \cite{oprofile} or GProf \cite{gprof}.

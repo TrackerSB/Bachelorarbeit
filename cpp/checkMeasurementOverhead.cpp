@@ -23,10 +23,10 @@ int main(int argc, char **argv) {
 
         int duration = duration_cast<microseconds>(exit - entry).count();
         overhead += duration;
-        cout << "Round " << r << ": " << duration << " μs" << endl;
+        cout << "Round " << r << ": " << duration << " us" << endl;
     }
 
-    cout << "Mean: " << (overhead / ROUNDS) << " μs" << endl;
+    cout << "Mean: " << (overhead / ROUNDS) << " us" << endl;
 
     return 0;
 }
