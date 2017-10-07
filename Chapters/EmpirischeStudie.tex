@@ -106,7 +106,7 @@ The experment variables are listed in \autoref{tab:experimentVariables}.\\
 The classification \(C\) describes two types of regions handled within the study.
 The one is \enquote{\scop} like explained in \autoref{subsec:definitionScop}.
 The other is \enquote{parent} which is the next bigger region surrounding a \scop.\\
-The variables \(DynCov_s\) and \(DynCov_p\) are depending on \(TI\) because the selection of tests to run influences the the regions executed and how often they are executed.
+The variables \dyncovs and \dyncovp are depending on \(TI\) because the selection of tests to run influences the the regions executed and how often they are executed.
 So \(TI\) has to be controlled.
 This is done by using on the one hand integrated benchmarks brough by the tested programs and on the other hand using benchmarks which are accepted by the community like SPEC2006. (see \autoref{tab:subjectPrograms})
 \begin{table}[H]
@@ -116,8 +116,8 @@ This is done by using on the one hand integrated benchmarks brough by the tested
         Classification                  & \(C\)                 & Indep.               & Nominal                    & \makecell{\{Parent,\\\scop\}}                 & Text\\
         Test inputs                     & \(TI\)                & Con.                 & Nominal                    & \makecell{see\\\autoref{tab:subjectPrograms}} & Text\\
         \midrule
-        Ratio of \scops                 & \(DynCov_s\)          & Dep.                 & Ratio                      & \%                                            & \([0; 1[ \in \mathbb{Q}\)\\
-        Ratio of parents                & \(DynCov_p\)          & Dep.                 & Ratio                      & \%                                            & \([0; 1[ \in \mathbb{Q}\)\\
+        Ratio of \scops                 & \dyncovs              & Dep.                 & Ratio                      & \%                                            & \([0; 1[ \in \mathbb{Q}\)\\
+        Ratio of parents                & \dyncovp              & Dep.                 & Ratio                      & \%                                            & \([0; 1[ \in \mathbb{Q}\)\\
         %Theoretical speedup of \scops  & \(S_s\)               & Dep.                 & Ratio                      & \%                                            & \(\mathbb{Q}\)\\
         %Theoretical speedup of parents & \(S_p\)               & Dep.                 & Ratio                      & \%                                            & \(\mathbb{Q}\)\\
         \bottomrule
@@ -130,10 +130,10 @@ This is done by using on the one hand integrated benchmarks brough by the tested
 \(H_1\): The main reason for rejecting a \scop should be that its parent already is a toplevel region because also all \scops classified as unprofitable by Polly are processed.
 So a lot of very small functions may be processed.
 Whenever such a function has a \scop it is likely that its parent is already a toplevel region.\\
-\(H_2\): The coverage \(DynCov_s\) is expected to be about \hTwoAbout, on average.
+\(H_2\): The coverage \dyncovs is expected to be about \hTwoAbout, on average.
 Even if there are a lot of \scops which are processed the big \scops and the -- according to the execution time -- big \scops may not be able to be optimized.\\
-\(H_3\): It is expected that \(DynCov_p \gg DynCov_s\), on average.
-This may be a result of the fact that \(DynCov_p\) ignores whether the reasons of parents being rejected as \scop can be eliminated.\\
+\(H_3\): It is expected that \(\dyncovp \gg \dyncovs\), on average.
+This may be a result of the fact that \dyncovp ignores whether the reasons of parents being rejected as \scop can be eliminated.\\
 \(R_1\): Can the main reasons for rejection a \scop be eliminated?
 
 \section{Subject Programs}
@@ -149,8 +149,8 @@ These will be annotated like \enquote{\(program_{lnt}\)}.
 \section{Design}
 Based on the experiment variables (see \autoref{tab:experimentVariables}) three experiments are performed to validate the hypotheses.\\
 The first experiment takes the most common reason for rejecting a parent as valid \scop and checks whether it is \enquote{parent is toplevel region}.\\
-In the second experiment the average value of \(DynCov_s\) is calculated and checked whether it is near \hTwoAbout.\\
-The third experiment \(DynCov_p\) and \(DynCov_s\) are compared to check whether \(DynCov_p \gg DynCov_s\).
+In the second experiment the average value of \dyncovs is calculated and checked whether it is near \hTwoAbout.\\
+The third experiment \dyncovp and \dyncovs are compared to check whether \(\dyncovp \gg \dyncovs\).
 
 \section{Experiment Setting}\label{sec:experimentSettings}
 This study uses instrumentation to retrieve precise timing informations instead of using frameworks like OProfile \cite{oprofile} or GProf \cite{gprof}.
