@@ -63,4 +63,4 @@ dev.off()
 svg(filename = "../svg/pieInvalidReasons.svg")
 pieInvalidReasons
 dev.off()
-write.csv2(x = statsMatrix, file = "../csv/statsMatrix.csv")
+write.csv(x = statsMatrix, file = "../csv/statsMatrix.csv", quote = FALSE)
