@@ -8,78 +8,32 @@
     }
     \includesvg[width=\textwidth]{compDyncovScopParent}
 \end{figure}
-The measurements taken are listed in \autoref{tab:ratiosAndSpeedups}.
-\begin{table}[!h]
-    \resizebox{!}{\textwidth}{
-        \begin{minipage}{\textwidth}
-            \myfloatalign
-            \begin{tabularx}{\textwidth}{Xcccc} \toprule
-        \tableheadline{Project} & \tableheadline{\(R_s\)} & \tableheadline{\(R_p\)} & \tableheadline{\(S_s\)} & \tableheadline{\(S_p\)}\\\midrule
-                \textbf{Benchmarks}\\
-                MultiSourceApplications & X & X & X & X\\
-                MultiSourceBenchmarks & X & X & X & X\\
-                SingleSourceBenchmarks & X & X & X & X\\
-                SPEC2006 & X & X & X & X\\
-                Povray & X & X & X & X\\
-                \midrule
-                \textbf{Compression}\\
-                7z & X & X & X & X\\
-                bzip2 & X & X & X & X\\
-                gzip & X & X & X & X\\
-                xz & X & X & X & X\\
-                \midrule
-                \textbf{Database}\\
-                Leveldb & X & X & X & X\\
-                SQLite3 & X & X & X & X\\
-                \midrule
-                \textbf{Encryption}\\
-                ccrypt & X & X & X & X\\
-                libressl & X & X & X & X\\
-                \midrule
-                \textbf{Multimedia}\\
-                ffmpeg & X & X & X & X\\
-                povRAY & X & X & X & X\\
-                x264 & X & X & X & X\\
-                \midrule
-                \textbf{Scientific}\\
-                LAMMPS & X & X & X & X\\
-                LAPACK & X & X & X & X\\
-                LINPACK & X & X & X & X\\
-                \midrule
-                \textbf{Simulation}\\
-                crafty & X & X & X & X\\
-                lulesh & X & X & X & X\\
-                lulesh-omp & X & X & X & X\\
-
-                \midrule
-                \textbf{Verification}\\
-                minisat & X & X & X & X\\
-                \midrule
-                \textbf{Other}\\
-                js & X & X & X & X\\
-                openblas & X & X & X & X\\
-                Rasdaman & X & X & X & X\\
-                \bottomrule
-            \end{tabularx}
-            \caption[Measured ratios and speedups]{
-                Measured ratios and speedups.
-                This table lists the ratio of the \scops -- this means the parts which can be optimized by Polly -- according to the execution time of the tests of the project.
-                \draftnote{A \enquote{X} indicates that no data is available either because the run time tests of the project or the measured project itself is broken.}
-            }
-            \label{tab:ratiosAndSpeedups}
-        \end{minipage}
+\begin{comment}
+    \caption[Measured ratios and speedups]{
+        Measured ratios and speedups.
+        This table lists the ratio of the \scops -- this means the parts which can be optimized by Polly -- according to the execution time of the tests of the project.
+        \draftnote{A \enquote{X} indicates that no data is available either because the run time tests of the project or the measured project itself is broken.}
     }
-\end{table}
+\end{comment}
 \subsection{Reasons for rejecting parents}
 \autoref{fig:rejectReasonsGrouped} indicates that the most common reason for parents of \scops being rejected is that it is already the toplevel region.
-\piechart{
-      46.6/Chrome,
-      24.6/Internet Explorer,
-      20.4/Firefox,
-      5.1/Safari,
-      1.3/Opera,
-      2.0/Other
-}{Reasons for parents being rejected}{fig:rejectReasonsGrouped}
+\begin{figure}[h]
+    \caption[Reasons for rejecting SCoPs]{
+        Here the most common reasons for rejecting are listed.
+        The larger the tile the more often it appears as reason for rejecting a parent as \scop.
+        But a large reason does not automatically imply that it has also a big impact on the run time.
+    }
+    \includesvg[width=\textwidth]{pieInvalidReasons}
+    \label{fig:rejectReasonsGrouped}
+\end{figure}
+%\piechart{
+%      46.6/Chrome,
+%      24.6/Internet Explorer,
+%      20.4/Firefox,
+%      5.1/Safari,
+%      1.3/Opera,
+%      2.0/Other
+%}{Reasons for parents being rejected}{fig:rejectReasonsGrouped}
 But looking at the low coverage of the \scops these parents have to be toplevel regions of quiet small functions.\\
 Another common reason for rejection is that loop bounds can not be computed at compile time.
 This happens \eg when the boundaries of a loop are depending on a non-const variable like a parameter.
