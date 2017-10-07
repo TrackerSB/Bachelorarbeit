@@ -171,14 +171,9 @@ Within this new node an insruction is placed starting the measurement of the exe
 This instruction has the same for regions unique id and remembers the system date at the point where it was called.
 The same way every outgoing edges in the \cfg of this region are also split introducing a further new node in which an instruction is placed for stopping the measurement having the same id.
 When it is called the current system time is requested again and the difference to the starting call is caluculated providing the duration of the measured region.\\
-The specifications of the machine used for measurement are listed in \autoref{tab:specifications}.
-\begin{code}
-    \captionsetup{type=table}
-    \inputminted{text}{gfx/chimairaLscpu.log}
-    \caption{Specifications of machine used for measurement}
-    \label{tab:specifications}
-\end{code}
-The exact versions of the used software components are listed in \autoref{tab:usedSoftware}.
+The exact versions of the used software components are listed in \autoref{tab:usedSoftware}.\\
+All measurements are executed on an Intel Xeon E5-2650 v2 machine (2 Sockets with each 8 phyisical cores each 2.6GHz) with 128GB RAM.
+The precise specifications are listed in \autoref{tab:lscpu} and \autoref{tab:meminfo}.
 \begin{table}[!h]
     \myfloatalign
     \begin{tabularx}{.5\textwidth}{Xc}

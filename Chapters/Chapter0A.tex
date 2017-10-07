@@ -90,6 +90,26 @@ These peaces of code illustrate simple situations where \scops are invalid.
     \label{lst:assumedUnprofitable}
 \end{code}
 
+\section{Specifications of machine used for measurements}
+\begin{code}
+    \captionsetup{type=table}
+    \inputminted{text}{gfx/ZeusLscpu.log}
+    \caption[Specifications of the CPUs used for measurement]{
+        Specifications of the CPUs used for measurement.
+        More precisely it is simply the output of \texttt{lscpu}.
+    }
+    \label{tab:lscpu}
+\end{code}
+\begin{code}
+    \captionsetup{type=table}
+    \inputminted{text}{gfx/ZeusMeminfo.log}
+    \caption[Specifications of the memory of the machine used for measurement]{
+        Specifications of the memory of the machine used for measurement.
+        More precisely this is the output of \texttt{cat /proc/meminfo}.
+    }
+    \label{tab:meminfo}
+\end{code}
+
 \section{Data Tables}
 Here is the hole data listed collected throuout the entire study.
 \LTXtable{\textwidth}{tables/ratiosScops.tex}
