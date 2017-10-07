@@ -188,7 +188,7 @@ The precise specifications are listed in \autoref{tab:lscpu} and \autoref{tab:me
     \caption[Software used for measurements]{
         This table lists the software used for the measurements.
         The components llvm, clang, polly and polli belong to the compiler infrastructure \llvm itself.
-        benchbuild is a program for quiet easily applying a certain \enquote{experiment} (see \autoref{sec:experimentSettings}) on a selection of programs and distributing and running them on a SLURM \cite{slurm} cluster.
+        benchbuild is a program for applying a certain \enquote{experiment} (see \autoref{sec:experimentSettings}) on a selection of programs, distributing them on a SLURM \cite{slurm} cluster and run them.
         (Versions in parenthesis represent short git hashes)
     }
     \label{tab:usedSoftware}
@@ -198,7 +198,7 @@ The precise specifications are listed in \autoref{tab:lscpu} and \autoref{tab:me
 The overhead of executing additional instructions for taking measurements is negligable because it takes about \measurementOverhead to execute an enter and an exit \overheadIterations times averaged over \overheadRounds rounds.
 The program used for taking this attached in \autoref{lst:checkOverhead}.\\
 For minimizing the influences of saving the data collected on run time it is only written to the database once at the very end of the executed project.\\
-Only about \draftnote{\usefulRatio} of the measured execution times can be used due to bugs in the implementation and the projects measured which could not be fixed because of time constraints.
+Only about \usefulRatio of the measured execution times can be used due to bugs in the implementation and the projects measured which could not be fixed because of time constraints.
 The bug in the implementation is occuring in certain constellations of the basic blocks of a region to measure like the following one which is found in the project \draftnote{projectname}:
 \draftnote{Insert example}
 To cope with it measurements of regions which have a bigger duration than the hole execution time of the project are excluded.
