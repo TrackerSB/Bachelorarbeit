@@ -46,6 +46,17 @@ Such a loop can be found in lammps (\autoref{lst:couldNotCompute}).
 The third big block of parents is rejected because they contain call instructions like the calls to \texttt{rand(...)} in \autoref{lst:matmulcpp}.
 These can not be optimized due to not being able to guarantee the absence of side effects.\\
 \draftnote{In \autoref{tab:rejectionReasons} the complete data can be found.}
+\subsection{Statistical Evaluation}
+\begin{table}[!h]
+    \myfloatalign
+    \begin{tabularx}{.5\textwidth}{lc}
+        \tableheadline{SCoPs} & \tableheadline{MaxRegions}\\\toprule
+        \csvreader[head to column names]{csv/statsMatrix.csv}{}{\csvcoli&\csvcolii\\}
+        \\\bottomrule
+    \end{tabularx}
+    \caption{Statistical data}
+\end{table}
+
 \section{Hypothesis Testing}
 \(H_1\): Observing the given programs and test sets (\autoref{tab:subjectPrograms}) the most common reason for rejecting parents of \scop to be valid as well is truly that the parent already is the toplevel region.\\
 \(H_2\): The ratio both \(R_s\) and \(R_p\) are rather low although \(R_p\) is significally higher than \(R_s\).
