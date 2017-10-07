@@ -31,15 +31,17 @@ report_ratiosParents <- rbind(plyr::rename(report_ratiosMaxRegions, c("t_parent"
 
 #Compare distribution of Dyncov of SCoPs and parents
 compDyncovScopParent <- ggplot(report_ratiosParents, aes(factor(is_parent), dyncov)) +
-  geom_violin(aes(fill=factor(is_parent)), draw_quantiles = c(0.25, 0.5, 0.75)) +
+  geom_violin(aes(x = reorder(is_parent, is_parent!="scop"), fill=factor(is_parent)), draw_quantiles = c(0.25, 0.5, 0.75)) +
   labs(y = 'DynCov'[p]~'/DynCov'[s]) +
   theme(legend.position = "None", axis.title.x = element_blank()) +
-  scale_y_continuous(label=function(x){return(paste("", x, "%"))})+
+  scale_y_continuous(label=function(x){return(paste("", x, "%"))}) +
   defaultSettings
 
 #Plot invalidReasons
-pieInvalidReasons <- ggplot(report_invalidReasons, aes(x="", y=occurrence, fill=invalid_reason)) +
-  geom_bar(width=1, stat="identity")+coord_polar("y", start=0) +
+pieInvalidReasons <- ggplot(report_invalidReasons, aes(x = "", y = occurrence, fill=invalid_reason)) +
+  geom_bar(width=1, stat = "identity", position = "fill") +
+  coord_polar("y", start = 0) +
+  scale_y_continuous(label=function(x){return(paste("", 100*x, "%"))}) +
   theme(legend.title=element_blank(), legend.position = "bottom", axis.title = element_blank()) +
   guides(legend = guide_legend(ncol=2)) +
   defaultSettings
