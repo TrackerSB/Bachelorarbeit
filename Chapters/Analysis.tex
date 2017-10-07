@@ -1,23 +1,37 @@
 \chapter{Analysis}
+All results of the measurements are listed in \autoref{sec:dataTables}.
+The complete set of all data is available at \drafnote{Is it going to?}.
+
 \section{Descriptive Statistics}
 \subsection{Coverages}
+In \autoref{fig:coverages} the distribution of \dyncovs (left) and \dyncovp (right) over the projects is shown.
+There are three lines marking where 25\%, 50\% and 75\% of the projects are located.
 \begin{figure}[!h]
-    \caption[Comparison of the distribution of \(DynCov_s\) and \(DynCov_p\)]{
-        Here the distribution of \(DynCov_s\) and \(DynCov_p\) are visualized.
+    \caption[Comparison of the distribution of \dyncovs and \dyncovp]{
+        Here the distribution of \dyncovs and \dyncovp are visualized.
         The broader the plot is the more often the value appeared over the projects.
     }
     \includesvg[width=\textwidth]{compDyncovScopParent}
+    \label{fig:coverages}
 \end{figure}
-\begin{comment}
-    \caption[Measured ratios and speedups]{
-        Measured ratios and speedups.
-        This table lists the ratio of the \scops -- this means the parts which can be optimized by Polly -- according to the execution time of the tests of the project.
-        \draftnote{A \enquote{X} indicates that no data is available either because the run time tests of the project or the measured project itself is broken.}
+Looking at \autoref{fig:coverages} the coverage of the lower 25\% of the project did not change visibly even when extending the \scops to the size of their parents if any.
+Although the lower half and the upper quarter of the project show increasments of the coverage.\\
+\autoref{tab:statsMatrix} shows the mean (\(\mu\)), the standard deviation (s) and the variance (\(s^2\)) of either \dyncovp and \dyncovs and the difference between (\(\Delta\)) them (in \%).
+\begin{table}[!h]
+    \myfloatalign
+    \begin{tabularx}{.5\textwidth}{lc}
+        \tableheadline{SCoPs} & \tableheadline{MaxRegions}\\\toprule
+        \csvreader[head to column names]{csv/statsMatrix.csv}{}{\csvcoli&\csvcolii\\}
+        \\\bottomrule
+    \end{tabularx}
+    \caption[Statistical evaluations of \dyncovp and \dyncovs]{
+        This table contains the mean (\(\mu\)), standard deviation (s), the variance (\(s^2\)) of either \dyncovp and \dyncovs and the difference between (\(\Delta\)) them (in \%).
     }
-\end{comment}
+    \label{tab:statsMatrix}
+\end{table}
 \subsection{Reasons for rejecting parents}
 \autoref{fig:rejectReasonsGrouped} indicates that the most common reason for parents of \scops being rejected is that it is already the toplevel region.
-\begin{figure}[h]
+\begin{figure}[!h]
     \caption[Reasons for rejecting SCoPs]{
         Here the most common reasons for rejecting are listed.
         The larger the tile the more often it appears as reason for rejecting a parent as \scop.
@@ -46,16 +60,6 @@ Such a loop can be found in lammps (\autoref{lst:couldNotCompute}).
 The third big block of parents is rejected because they contain call instructions like the calls to \texttt{rand(...)} in \autoref{lst:matmulcpp}.
 These can not be optimized due to not being able to guarantee the absence of side effects.\\
 \draftnote{In \autoref{tab:rejectionReasons} the complete data can be found.}
-\subsection{Statistical Evaluation}
-\begin{table}[!h]
-    \myfloatalign
-    \begin{tabularx}{.5\textwidth}{lc}
-        \tableheadline{SCoPs} & \tableheadline{MaxRegions}\\\toprule
-        \csvreader[head to column names]{csv/statsMatrix.csv}{}{\csvcoli&\csvcolii\\}
-        \\\bottomrule
-    \end{tabularx}
-    \caption{Statistical data}
-\end{table}
 
 \section{Hypothesis Testing}
 \(H_1\): Observing the given programs and test sets (\autoref{tab:subjectPrograms}) the most common reason for rejecting parents of \scop to be valid as well is truly that the parent already is the toplevel region.\\
