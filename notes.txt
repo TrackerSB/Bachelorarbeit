@@ -106,3 +106,10 @@ ggplot2
 R gallery
 
 legende in (Fließtext UND) Caption
+
+
+investigation empty "invalid_reason":
+lammps:
+./src/Obj_serial/profileScops.log:[2017-10-07 12:55:20.781] [profileScopsDetection] [info] for.body => for.inc is invalid because of: 
+./src/Obj_serial/profileScops.log:[2017-10-07 12:55:20.781] [profileScopsDetection] [info] if.end62 => for.inc is invalid because of: 
+./src/Obj_serial/profileScops.log:[2017-10-07 12:55:20.788] [profileScopsDetection] [info] for.body79 => for.inc131 is invalid because of: Call instruction:   %call99 = call i32 %37(%"class.LAMMPS_NS::Compute"* %35), !dbg !945
