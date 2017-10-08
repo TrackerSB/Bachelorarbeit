@@ -79,6 +79,11 @@ pValues <- matrix(data = c(swtDyncovScopsP, swtDyncovMaxRegionsP, ttestDyncovSco
 rownames(pValues) <- c("T-Test", "Mann-Whitney-U-Test")
 colnames(pValues) <- c("SCoPs", "MaxRegions")
 
+#speedups
+numProcessors <- 8
+speedupScops <- numProcessors / ((1 - meanScops/100) * numProcessors + meanScops/100)
+speedupMaxRegions <- numProcessors / ((1 - meanMaxRegions/100) * numProcessors + meanMaxRegions/100)
+
 #If the script reaches to this point export all plots and data
 svg(filename = "../svg/compDyncovScopParent.svg")
 compDyncovScopParent

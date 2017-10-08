@@ -112,18 +112,19 @@ The one is \enquote{\scop} like explained in \autoref{subsec:definitionScop}.
 The other is \enquote{parent} which is the next bigger region surrounding a \scop.\\
 The variables \dyncovs and \dyncovp are depending on \(TI\) because the selection of tests to run influences the the regions executed and how often they are executed.
 So \(TI\) has to be controlled.
-This is done by using on the one hand integrated benchmarks brough by the tested programs and on the other hand using benchmarks which are accepted by the community like SPEC2006. (see \autoref{tab:subjectPrograms})
+This is done by using on the one hand integrated benchmarks brough by the tested programs and on the other hand using benchmarks which are accepted by the community like SPEC2006. (see \autoref{tab:subjectPrograms})\\
+Also the speedups \(S_s\) and \(S_p\) are dependent because they are calculated out of \dyncovs and \dyncovp.
 \begin{table}[H]
     \myfloatalign
     \begin{tabularx}{\textwidth}{Xccccc} \toprule
-        \tableheadline{Name}            & \tableheadline{Abbr.} & \tableheadline{Type} & \tableheadline{Scale Type} & \tableheadline{Unit}                          & \tableheadline{Range} \\ \midrule
-        Classification                  & \(C\)                 & Indep.               & Nominal                    & \makecell{\{Parent,\\\scop\}}                 & Text\\
-        Test inputs                     & \(TI\)                & Con.                 & Nominal                    & \makecell{see\\\autoref{tab:subjectPrograms}} & Text\\
+        \tableheadline{Name}              & \tableheadline{Abbr.} & \tableheadline{Type} & \tableheadline{Scale Type} & \tableheadline{Unit}                          & \tableheadline{Range} \\ \midrule
+        Classification                    & \(C\)                 & Indep.               & Nominal                    & \makecell{\{Parent,\\\scop\}}                 & Text\\
+        Test inputs                       & \(TI\)                & Con.                 & Nominal                    & \makecell{see\\\autoref{tab:subjectPrograms}} & Text\\
         \midrule
-        Ratio of \scops                 & \dyncovs              & Dep.                 & Ratio                      & \%                                            & \([0; 1[ \in \mathbb{Q}\)\\
-        Ratio of MaxRegions             & \dyncovp              & Dep.                 & Ratio                      & \%                                            & \([0; 1[ \in \mathbb{Q}\)\\
-        %Theoretical speedup of \scops  & \(S_s\)               & Dep.                 & Ratio                      & \%                                            & \(\mathbb{Q}\)\\
-        %Theoretical speedup of parents & \(S_p\)               & Dep.                 & Ratio                      & \%                                            & \(\mathbb{Q}\)\\
+        Coverage of \scops                & \dyncovs              & Dep.                 & Ratio                      & \%                                            & \([0; 1[ \in \mathbb{Q}\)\\
+        Coverage of MaxRegions            & \dyncovp              & Dep.                 & Ratio                      & \%                                            & \([0; 1[ \in \mathbb{Q}\)\\
+        Theoretical speedup of \scops     & \(S_s\)               & Dep.                 & Ratio                      & \%                                            & \([0; 1[ \in \mathbb{Q}\)\\
+        Theoretical speedup of MaxRegions & \(S_p\)               & Dep.                 & Ratio                      & \%                                            & \([0; 1[ \in \mathbb{Q}\)\\
         \bottomrule
     \end{tabularx}
     \caption[Experiment Variables]{Experiment Variables (Dep.=Dependant; Indep.=Independant; Con.=Controlled). The term \enquote{MaxRegions} contains all \scops classified as parent and the \scops which have only a parent which is a toplevel region.}
