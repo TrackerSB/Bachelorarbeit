@@ -76,7 +76,7 @@ utestDyncovP <- wilcox.test(x = report_ratiosMaxRegions$dyncov, y = report_ratio
 
 pValues <- matrix(data = c(swtDyncovScopsP, swtDyncovMaxRegionsP, ttestDyncovScopsP, ttestDyncovMaxRegionsP),
                   nrow = 2, ncol = 2, byrow = TRUE)
-rownames(pValues) <- c("Shapiro-Wilk-Test", "Mann-Whitney-U-Test")
+rownames(pValues) <- c("T-Test", "Mann-Whitney-U-Test")
 colnames(pValues) <- c("SCoPs", "MaxRegions")
 
 #If the script reaches to this point export all plots and data
