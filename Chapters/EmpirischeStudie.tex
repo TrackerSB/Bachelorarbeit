@@ -1,18 +1,18 @@
 \chapter{Experiment Setup And Execution}
 \section{Goals}
-As already mentioned this study is investigating the ratio of the part which already can be automatically optimized by Polly, the impact of various reasons for these parts not beeing even larger and the impact the ratio if these reasons could be eliminated.
+As already mentioned this study is investigating the coverage of the part which already can be automatically optimized by Polly, the impact of various reasons for these parts not beeing even larger and the impact the coverage if these reasons could be eliminated.
 
 \section{Measurement Methology}
 For measuring, analysis and evaluation of the results the following definitions are introduced.
-\subsection{Definition ratios}
+\subsection{Definition Coverage}
 Let \(T_i\in\mathbb{N}\) be the execution time of all instructions within all \scops of a project and \(T\in\mathbb{N}\) the overall exeuction time of that project.
-Then the ratio of paralizable regions \(R\in\mathbb{Q}\) is defined as:
-\[R := \frac{T_i}{T}\]
+Then the coverage of paralizable regions \(R\in\mathbb{Q}\) is defined as:
+\[DynCov := \frac{T_i}{T}\]
 
 \subsection[Amdahl's Law]{Amdahl's Law \cite{AmdahlsLaw}}
-Let \(N\in\mathbb{N}\) be the number of processors and \(R\in\mathbb{Q}\) be the ratio of paralizable regions.
+Let \(N\in\mathbb{N}\) be the number of processors and \(DynCov\in\mathbb{Q}\) be the coverage of paralizable regions.
 Then the speedup \(S\in\mathbb{Q}\) is defined as:
-\[S := \frac{N}{(1-R)*N+R}\]
+\[S := \frac{N}{(1-DynCov)*N+DynCov}\]
 \subsection{Reasons for SCoPs being invalid}
 These are the critieria implemented by Polly for rejecting a parent of a \scop being also a \scop.
 Some of these criteria are referencing to a \llvm specific value called \undefv.\cite{llvmUndef}
@@ -207,6 +207,6 @@ Only about \usefulRatio of the measured execution times can be used due to bugs 
 The bug in the implementation is occuring in certain constellations of the basic blocks of a region to measure like the following one which is found in the project \draftnote{projectname}:
 \draftnote{Insert example}
 To cope with it measurements of regions which have a bigger duration than the hole execution time of the project are excluded.
-Also measurements of ratios are excluded where the ratio is greater than 100\%.
+Also measurements of coverages are excluded where the coverage is greater than 100\%.
 These occurr because the filtering of the obviously bad measurements is not enough to exclude all bad ones.\\
 Further for minimizing the influences of the underlying OS multithreading is deactivated, the node is used exclusively the number of tasks is limited to one and the number of cpus used per task is limited to 10.
