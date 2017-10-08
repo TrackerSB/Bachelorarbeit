@@ -203,9 +203,6 @@ The precise specifications are listed in \autoref{tab:lscpu} and \autoref{tab:me
 \end{table}
 
 \section{Deviations}
-The overhead of executing additional instructions for taking measurements is negligable because it takes about \measurementOverhead to execute an enter and an exit \overheadIterations times averaged over \overheadRounds rounds.
-The program used for taking this attached in \autoref{lst:checkOverhead}.\\
-For minimizing the influences of saving the data collected on run time it is only written to the database once at the very end of the executed project.\\
 Only about \usefulRatio of the measured execution times can be used due to bugs in the implementation and the projects measured which could not be fixed because of time constraints.
 The bug in the implementation is occuring in certain constellations of the basic blocks of a region to measure like the following one which is found in the project \draftnote{projectname}:
 \draftnote{Insert example}
