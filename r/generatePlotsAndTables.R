@@ -14,26 +14,34 @@ defaultSettings <- scale_fill_manual(values=defaultColorSequence)
 #Load and filter data
 report_ratiosMaxRegions <- read_csv("../csv/report_ratiosMaxRegions.csv")
 report_ratiosMaxRegions <- report_ratiosMaxRegions[report_ratiosMaxRegions$dyncov <= 100,]
+report_ratiosMaxRegions$project <- paste(report_ratiosMaxRegions$project,
+                                         apply(report_ratiosMaxRegions, 1,
+                                               function(row) if(endsWith(row["project"], ".simple")) "_lnt" else ""),
+                                         sep = "")
+write.csv(x = report_ratiosMaxRegions, file = "../csv/report_ratiosMaxRegions.csv", quote = FALSE, row.names = FALSE)
 
 report_ratiosScops <- read_csv("../csv/report_ratiosScops.csv")
 report_ratiosScops <- report_ratiosScops[report_ratiosScops$dyncov <= 100,]
+report_ratiosScops$project <- paste(report_ratiosScops$project,
+                                    apply(report_ratiosScops, 1,
+                                          function(row) if(endsWith(row["project"], ".simple")) "_{lnt}" else ""),
+                                    sep = "")
+write.csv(x = report_ratiosScops, file = "../csv/report_ratiosScops.csv", quote = FALSE, row.names = FALSE)
 
 report_invalidReasons <- read_csv("../csv/report_invalidReasons.csv")
 
 #Create combination of tables
-report_ratiosMaxRegions$is_parent <- 'max_region'
-report_ratiosScops$is_parent <- 'scop'
-report_ratiosParents <- rbind(plyr::rename(report_ratiosMaxRegions, c("t_parent"="t_region")), plyr::rename(report_ratiosScops, c("t_scop"="t_region")))
-
-
-#Example histogram
-#ggplot(report_ratiosScops, aes(x=dyncov)) + geom_histogram(binwidth = 0.5)
+report_ratiosMaxRegions$is_parent <- 'MaxRegions'
+report_ratiosScops$is_parent <- 'SCoPs'
+report_ratiosBoth <- rbind(plyr::rename(report_ratiosMaxRegions, c("t_parent"="t_region")),
+                           plyr::rename(report_ratiosScops, c("t_scop"="t_region")))
 
 #Compare distribution of Dyncov of SCoPs and parents
-compDyncovScopParent <- ggplot(report_ratiosParents, aes(factor(is_parent), dyncov)) +
-  geom_violin(aes(x = reorder(is_parent, is_parent!="scop"), fill=factor(is_parent)), draw_quantiles = c(0.25, 0.5, 0.75)) +
+compDyncovScopBoth <- ggplot(report_ratiosBoth, aes(factor(is_parent), dyncov)) +
+  geom_violin(aes(x = reorder(is_parent, is_parent!="SCoPs"), fill=factor(is_parent)),
+              draw_quantiles = c(0.25, 0.5, 0.75)) +
   labs(y = 'DynCov'[p]~'/DynCov'[s]) +
-  theme(legend.position = "None", axis.title.x = element_blank()) +
+  theme(legend.position = "None", axis.title = element_blank()) +
   scale_y_continuous(label=function(x){return(paste("", x, "%"))}) +
   defaultSettings
 
@@ -76,7 +84,7 @@ utestDyncovP <- wilcox.test(x = report_ratiosMaxRegions$dyncov, y = report_ratio
 
 pValues <- matrix(data = c(swtDyncovScopsP, swtDyncovMaxRegionsP, ttestDyncovScopsP, ttestDyncovMaxRegionsP),
                   nrow = 2, ncol = 2, byrow = TRUE)
-rownames(pValues) <- c("T-Test", "Mann-Whitney-U-Test")
+rownames(pValues) <- c("Shapiro-Wilk-Test", "T-Test")
 colnames(pValues) <- c("SCoPs", "MaxRegions")
 
 #speedups
@@ -86,7 +94,7 @@ speedupMaxRegions <- numProcessors / ((1 - meanMaxRegions/100) * numProcessors +
 
 #If the script reaches to this point export all plots and data
 svg(filename = "../svg/compDyncovScopParent.svg")
-compDyncovScopParent
+compDyncovScopBoth
 dev.off()
 svg(filename = "../svg/pieInvalidReasons.svg")
 pieInvalidReasons

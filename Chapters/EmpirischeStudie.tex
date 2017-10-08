@@ -1,12 +1,12 @@
 \chapter{Experiment Setup And Execution}
 \section{Goals}
-As already mentioned this study is investigating the coverage of the part which already can be automatically optimized by Polly, the impact of various reasons for these parts not beeing even larger and the impact the coverage if these reasons could be eliminated.
+As already mentioned this study is investigating the coverage of the parts which already can be automatically optimized by Polly, the various reasons for these parts not beeing even larger and the impact to the coverage and the speedup if these reasons could be eliminated.
 
 \section{Measurement Methology}
 For measuring, analysis and evaluation of the results the following definitions are introduced.
 \subsection{Definition Coverage}
 Let \(T_i\in\mathbb{N}\) be the execution time of all instructions within all \scops of a project and \(T\in\mathbb{N}\) the overall exeuction time of that project.
-Then the coverage of paralizable regions \(R\in\mathbb{Q}\) is defined as:
+Then the coverage of paralizable regions \(DynCov\in\mathbb{Q}\) is defined as:
 \[DynCov := \frac{T_i}{T}\]
 
 \subsection[Amdahl's Law]{Amdahl's Law \cite{AmdahlsLaw}}
@@ -68,7 +68,7 @@ Some of these criteria are referencing to a \llvm specific value called \undefv.
         As already mentioned in this study also these unprofitable regions are discussed.
     \item Polly does not return a reason\\
         When requesting the reason for a region not being a \scop Polly may return an empty string.
-        This occurrs when the Log object used internally has errors or when it does not exist at all.
+        This occurrs if the Log object used internally has errors or if it does not exist at all.
 \end{itemize}
 
 \begin{comment}
@@ -110,9 +110,9 @@ The experment variables are listed in \autoref{tab:experimentVariables}.\\
 The classification \(C\) describes two types of regions handled within the study.
 The one is \enquote{\scop} like explained in \autoref{subsec:definitionScop}.
 The other is \enquote{parent} which is the next bigger region surrounding a \scop.\\
-The variables \dyncovs and \dyncovp are depending on \(TI\) because the selection of tests to run influences the the regions executed and how often they are executed.
+The variables \dyncovs and \dyncovp are depending on \(TI\) because the selection of tests to run influences the regions executed and how often they are executed.
 So \(TI\) has to be controlled.
-This is done by using on the one hand integrated benchmarks brough by the tested programs and on the other hand using benchmarks which are accepted by the community like SPEC2006. (see \autoref{tab:subjectPrograms})\\
+This is done by using on the one hand integrated benchmarks brought by the tested programs and on the other hand using benchmarks which are accepted by the community like SPEC2006. (see \autoref{tab:subjectPrograms})\\
 Also the speedups \(S_s\) and \(S_p\) are dependent because they are calculated out of \dyncovs and \dyncovp.
 \begin{table}[H]
     \myfloatalign
@@ -127,18 +127,21 @@ Also the speedups \(S_s\) and \(S_p\) are dependent because they are calculated 
         Theoretical speedup of MaxRegions & \(S_p\)               & Dep.                 & Ratio                      & \%                                            & \([0; 1[ \in \mathbb{Q}\)\\
         \bottomrule
     \end{tabularx}
-    \caption[Experiment Variables]{Experiment Variables (Dep.=Dependant; Indep.=Independant; Con.=Controlled). The term \enquote{MaxRegions} contains all \scops classified as parent and the \scops which have only a parent which is a toplevel region.}
+    \caption[Experiment Variables]{
+        Experiment variables (Dep.=Dependant; Indep.=Independant; Con.=Controlled).
+        The term \enquote{MaxRegions} contains all regions classified as parent and the \scops which have only a parent which is a toplevel region.
+    }
     \label{tab:experimentVariables}
 \end{table}
-Besides the experiment Variables also the term \enquote{MaxRegions} has to be introduced.
-MaxRegions contain all regions classified as parent and the \scops which have only a parent which is a toplevel regions.
+Besides the experiment variables also the term \enquote{MaxRegions} has to be introduced.
+MaxRegions contains all regions classified as parent and the \scops which have only a parent which is a toplevel regions.
 
 \section{Hypotheses}
 \(H_1\): The main reason for rejecting a \scop should be that its parent already is a toplevel region because also all \scops classified as unprofitable by Polly are processed.
 So a lot of very small functions may be processed.
 Whenever such a function has a \scop it is likely that its parent is already a toplevel region.\\
 \(H_2\): The coverage \dyncovs is expected to be about \hTwoAbout, on average.
-Even if there are a lot of \scops which are processed the big \scops and the -- according to the execution time -- big \scops may not be able to be optimized.\\
+Even if there are a lot of \scops which are processed the -- according to the execution time -- big \scops may not be able to be optimized, on average.\\
 \(H_3\): It is expected that \dyncovp \(\gg\) \dyncovs, on average.
 This may be a result of the fact that \dyncovp ignores whether the reasons of parents being rejected as \scop can be eliminated.\\
 \draftnote{
@@ -152,7 +155,7 @@ The selection of programs (\autoref{tab:subjectPrograms}) is limited due the lis
 
 \section{Tasks}
 To create a setup which targets as much as possible real world scenarios integrated benchmarks of programs or SPEC2006 were used.
-Further the \lnt provides a hole ranges of benchmarks of various programs.
+Further the \lnt provides a hole range of benchmarks of various programs.
 These will be annotated like \enquote{\(program_{lnt}\)}.
 
 \section{Design}
@@ -162,27 +165,29 @@ In the second experiment the average value of \dyncovs is calculated and checked
 The third experiment \dyncovp and \dyncovs are compared to check whether \dyncovp \(\gg\) \dyncovs.
 
 \section{Experiment Setting}\label{sec:experimentSettings}
-This study uses instrumentation to retrieve precise timing informations instead of using frameworks like OProfile \cite{oprofile} or GProf \cite{gprof}.
-The measurement is realized using the \papi library \cite{papi}.\\
-To take these measurement the following steps are performed:\\
-The first step is creating a new so called experiment for benchbuild\footnote{Benchbuild is a tool for automating the process of downloading, building, applying an experiment at compile time and executing a project on a SLURM Cluster.}.
-This experiment is calling the actual pass of Polly for instrumenting a project by specifying the appropriate clang options using \texttt{-Xclang}, collects the generated data and persists it.\\
-The pass itself is a FunctionPass.
-Thus it is processing every function of the program
-In this case the pass is called twice.
-Once for instrumenting the actual \scops within, which also includes that ones classified by Polly as \enquote{unprofitable}, and once for instrumenting their parents.
-Even the \enquote{unprofitable} \scops are included because they may get profitable to optimize when they are extended to the size of their parents.
-To include these \scops the option \texttt{-polly-process-unprofitable} has to be specified using the \texttt{-mllvm} option of clang.
-While doing so the informations about why these parents were rejected as \scops are collected.\\
-The instrumentation is designed to work for any region (\autoref{subsec:definitionRegion}).
-For a given region every incoming edge in the \cfg (\autoref{subsec:cfg}) is bendt to a new node splitting the edges and pointing to the entry of the region.
-Within this new node an insruction is placed starting the measurement of the execution time.
-This instruction has the same for regions unique id and remembers the system date at the point where it was called.
-The same way every outgoing edges in the \cfg of this region are also split introducing a further new node in which an instruction is placed for stopping the measurement having the same id.
-When it is called the current system time is requested again and the difference to the starting call is caluculated providing the duration of the measured region.\\
-The exact versions of the used software components are listed in \autoref{tab:usedSoftware}.\\
-All measurements are executed on an Intel Xeon E5-2650 v2 machine (2 Sockets with each 8 phyisical cores each 2.6GHz) with 128GB RAM.
-The precise specifications are listed in \autoref{tab:lscpu} and \autoref{tab:meminfo}.
+\begin{sloppypar}
+    This study uses instrumentation to retrieve precise timing informations instead of using frameworks like OProfile \cite{oprofile} or GProf \cite{gprof}.
+    The measurement is realized using the \papi library \cite{papi}.\\
+    To take these measurement the following steps are performed:\\
+    The first step is creating a new so called experiment for benchbuild\footnote{Benchbuild is a tool for automating the process of downloading, building, applying an experiment at compile time and executing a project on a SLURM \cite{slurm} Cluster.}.
+    This experiment is calling the actual pass of Polly for instrumenting a project by specifying the appropriate clang options using \texttt{-Xclang}, collects the generated data and persists it.\\
+    The pass itself is a FunctionPass.
+    Thus it is processing every function of the program.
+    In this case the pass is called twice.
+    Once for instrumenting the actual \scops within, which also includes that ones classified by Polly as \enquote{unprofitable}, and once for instrumenting their parents.
+    Even the \enquote{unprofitable} \scops are included because they may get profitable to optimize when they are extended to the size of their parents.
+    To include these \scops the option \texttt{-polly-process-unprofitable} has to be specified using the \texttt{-mllvm} option of clang.
+    While doing so the informations about why these parents were rejected as \scops are collected.\\
+    The instrumentation is designed to work for any region (\autoref{subsec:definitionRegion}).
+    For a given region every incoming edge in the \cfg (\autoref{subsec:cfg}) is bendt to a new node splitting the edges and pointing to the entry of the region.
+    Within this new node an insruction is placed starting the measurement of the execution time.
+    This instruction has the same for regions unique id and remembers the system time at the point where it was called.
+    The same way every outgoing edges in the \cfg of this region is also split introducing a further new node in which an instruction is placed for stopping the measurement having the same id.
+    When it is called the current system time is requested again and the difference to the starting call is caluculated providing the duration of the measured region.\\
+    The exact versions of the used software components are listed in \autoref{tab:usedSoftware}.\\
+    All measurements are executed on an Intel Xeon E5-2650 v2 machine (2 Sockets with each 8 phyisical cores each 2.6GHz) with 128GB RAM.
+    The precise specifications are listed in \autoref{tab:lscpu} and \autoref{tab:meminfo}.
+\end{sloppypar}
 \begin{table}[!h]
     \myfloatalign
     \begin{tabularx}{.5\textwidth}{Xc}
@@ -210,4 +215,4 @@ The bug in the implementation is occuring in certain constellations of the basic
 To cope with it measurements of regions which have a bigger duration than the hole execution time of the project are excluded.
 Also measurements of coverages are excluded where the coverage is greater than 100\%.
 These occurr because the filtering of the obviously bad measurements is not enough to exclude all bad ones.\\
-Further for minimizing the influences of the underlying OS multithreading is deactivated, the node is used exclusively the number of tasks is limited to one and the number of cpus used per task is limited to 10.
+Further for minimizing the influences of the underlying OS multithreading is deactivated, the node is used exclusively the number of tasks is limited to one and the number of CPUs used per task is limited to 10.

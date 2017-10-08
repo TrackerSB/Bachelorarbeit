@@ -4,11 +4,11 @@ This chapter is dealing with the overserved results.
 \section{Results}
 Looking at \autoref{fig:coverages} it is visible that the projects of the lowest quantile do not change concerning the coverage of the regions automatically optimizable by Polly.
 So about 25\% of the programs would not have any profits when extending all of their \scops the next surrounding region.
-When investigating the upper two parts of the plots shows that there are at least some projects which would have benefits if they were extended.
-That the projects in the lowest quantile remain almost with the same coverage and the projects of the upper two quantiles slightly move up is also becomming manifest in looking at the variance and the standard deviation in \autoref{tab:statsMatrix}.\\
+Investigating the upper two parts of the plots shows that there are at least some projects which would have benefits if they were extended.
+That the projects in the lowest quantile remain almost with the same coverage and the projects of the upper two quantiles slightly move up is also becomming manifest in looking at the increasment of the variance and the standard deviation in \autoref{tab:statsMatrix}.\\
 Nevertheless there are some regions classified as unprofitable which would have great impacts to the coverage.
 \autoref{lst:fatParent} shows a region within the project \draftnote{project} which is really tiny but its possibly optimizable parent is multiple times bigger.
-The parent was rejected because of \drafnote{why}.\\
+The parent was rejected because of \draftnote{why}.\\
 \begin{code}
     \caption{A region of XXX}
     \inputminted{c++}{cpp/fatParent.cpp}
@@ -24,7 +24,7 @@ Also the part stating that Polly did not return a reason for rejection is curren
 \section{Threads to Validity}
 \subsection{Construct Validity}
 The overhead of executing additional instructions for taking measurements is investigated and graded as negligable because it takes about \measurementOverhead to execute an enter and an exit call \overheadIterations times averaged over \overheadRounds rounds.
-Although when parents of \scops which are measured are also measured the entry and exit call of the inner measurement causes a slight increase duration of the outer measurement.
+Also when parents of \scops which are measured are also measured the entry and exit call of the inner measurement causes a slight increase of the duration of the outer measurement.
 This is also negligable due to the same reason.
 The program used for checking this is attached in \autoref{lst:checkOverhead}.\\
 For minimizing the influences of saving the data collected on run time it is only written to the database once at the very end of the executed project.\\

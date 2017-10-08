@@ -52,7 +52,7 @@ The \linker is an optional step which is not necessary when operating only on a 
 But when operating on multiple files the \linker links the optimized \llvmir files into a single \llvmir file and applies further optimizations at link time.
 \subsection{LLVM Code Generator}
 When all desired passes are performed the \generator translates \llvmir into target assembler.
-\subsection{Basic Blocks}
+\subsection{Basic Blocks}\label{subsec:basicBlock}
 The underlying structure the pipeline is working on are basic blocks.
 According to \cite[chapter 8.4, p.~525]{Drachenbuch} basic blocks
 \begin{comment}
@@ -87,19 +87,19 @@ The \cfg is a representation of the connections between basic blocks called cont
 \begin{figure}[!h]
     \caption[The CFG of \autoref{lst:matmulcpp}]{
         This figure contains the \cfg of \autoref{lst:matmulcpp}.
-        It visualizes the connections of the basic blocks (see \autoref{subsec:cfg}).
+        It visualizes the connections of the basic blocks (see \autoref{subsec:basicBlock}).
         Every loop of the five within \autoref{lst:matmulcpp} consists out of four basic block which are typically called \texttt{for.condX}, \texttt{for.bodyX}, \texttt{for.incX} and \texttt{for.endX} where \texttt{X} is a placeholder for an optional number.
         When using a release build of \llvm these names are stripped and replaced by simple numbers.\draftnote{More detail about each block?}
     }
     \label{fig:exampleCfg}
     \includegraphics[width=\textwidth]{gfx/matmulCfg.png}
 \end{figure}
-Therefore the \cfg is very important to the pipeline as it is needed by many analysis passes and by optimization passes to determine whether certain optimizations can be applied and which way.
+Therefore the \cfg is very important to the pipeline as it is needed by many analysis and optimization passes to determine whether certain optimizations can be applied and in which way.
 The current \cfg of a \llvmir file can be generated at any point of the pipeline.
 It also can be visualized (like \autoref{fig:exampleCfg}) by passing one of the options \texttt{-view-cfg} or \texttt{-view-cfg-only} to the \opt.
 \begin{enumerate}
     \item Translate the C++ sourcecode of \autoref{lst:matmulcpp} into \llvmir (\autoref{lst:matmulll})\\
         \texttt{clang++ -S -emit-llvm matmul.cpp -o matmul.ll}
     \item Generate the \cfg\\
-        \texttt{opt -view-cfg matmul.ll}
+        \texttt{opt -view-cfg-only matmul.ll}
 \end{enumerate}

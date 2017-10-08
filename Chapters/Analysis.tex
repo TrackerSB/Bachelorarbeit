@@ -8,7 +8,7 @@ The plots also contain marks for 25\% quantiles.
 The higher these lines the more projects have a higher coverage observing the regions automatically optimizable by Polly.
 \begin{figure}[!h]
     \caption[Distribution density of \dyncovs and \dyncovp]{
-        Distrubution density of \dyncovs and \dyncovp as violin plots.
+        Distrubution density of \dyncovs (left) and \dyncovp (right) as violin plots.
         Each plot is divided in four quantiles with same size.
     }
     \includesvg[width=\textwidth]{compDyncovScopParent}
@@ -40,6 +40,7 @@ The variance and the standard deviation of \dyncovp are higher than of \dyncovs.
         Here the most common reasons for rejecting are listed.
         The larger the tile the more often it appears as reason for rejecting a parent as \scop.
         But a large reason does not automatically imply that it has also a big impact on the run time.
+        (In this figure BB is an abbreviation for basic block)
     }
     \includesvg[width=\textwidth]{pieInvalidReasons}
     \label{fig:rejectReasonsGrouped}
@@ -48,7 +49,7 @@ The concrete values can be found in \autoref{tab:rejectionReasons}.
 
 \section{Hypothesis Testing}
 To check the significance of the collected data first the independence of the two datasets \scops and MaxRegions has to be stated.
-Further a Shapiro-Wilk-Test \cite{shapiroWilkTest} reveals that neither of these datasets is distributed normally.
+Further a Shapiro-Wilk-Test \cite{shapiroWilkTest} reveals that neither of these datasets is distributed normally (\(p \ll 0.05\)).
 All p values are listed in \autoref{tab:pValues}.\\
 \begin{table}[!h]
     \myfloatalign
@@ -57,7 +58,7 @@ All p values are listed in \autoref{tab:pValues}.\\
         \csvreader[head to column names]{csv/pValues.csv}{}{\csvcoli&\csvcolii&\csvcoliii\\}
         \\\bottomrule
     \end{tabularx}
-    \caption[P values of tests]{This table contains all p values neccessary to be caculated for ensuring the correctness of the hyptheses.}
+    \caption[P values of statistical tests]{This table contains all p values neccessary to be caculated for ensuring the correctness of the evaluation of the hyptheses.}
     \label{tab:pValues}
 \end{table}
 \(H_1\): Observing the given programs and test sets (\autoref{tab:subjectPrograms}) the most common reason for rejecting parents of \scops to be valid as well is truly that the parent already is the toplevel region.\\
