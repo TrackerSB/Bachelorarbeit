@@ -3,34 +3,37 @@ All results of the measurements are listed in \autoref{sec:dataTables}.
 The complete set of all data is available at \draftnote{Is it going to?}.
 
 \section{Descriptive Statistics}
-\subsection{Coverages}
-In \autoref{fig:coverages} the distribution of \dyncovs (left) and \dyncovp (right) over the projects is shown.
-There are three lines marking where 25\%, 50\% and 75\% of the projects are located.
+In \autoref{fig:coverages} the distribution density of \dyncovs (left) and \dyncovp (right) over the projects is shown.
+The plots also contain marks for 25\% quantiles.
+The higher these lines the higher is the coverage of \scops.
 \begin{figure}[!h]
-    \caption[Comparison of the distribution of \dyncovs and \dyncovp]{
-        Here the distribution of \dyncovs and \dyncovp are visualized.
-        The broader the plot is the more often the value appeared over the projects.
+    \caption[Distribution density of \dyncovs and \dyncovp]{
+        Distrubution density of \dyncovs and \dyncovp as violin plots.
+        Each plot is divided in four quantiles with same size.
     }
     \includesvg[width=\textwidth]{compDyncovScopParent}
     \label{fig:coverages}
 \end{figure}
-Looking at \autoref{fig:coverages} the coverage of the lower 25\% of the project did not change visibly even when extending the \scops to the size of their parents if any.
-Although the lower half and the upper quarter of the project show increasments of the coverage.\\
-\autoref{tab:statsMatrix} shows the mean (\(\mu\)), the standard deviation (s) and the variance (\(s^2\)) of either \dyncovp and \dyncovs and the difference between (\(\Delta\)) them (in \%).
+In both plots the lowest quantile is the broadest one and has almost the same size.
+Also in both plots the quantile between 25\% and 50\% is the thinnest one.
+When looking at the left plot the quantile between 50\% and 75\% is broader than the upper one.
+In the right plot it is the other way round.\\
+\autoref{tab:statsMatrix} shows the mean (\(\mu\)), the standard deviation (s) and the variance (\(s^2\)) of either \dyncovp and \dyncovs and how much \dyncovp is bigger than \dyncovs (\(\Delta\)) in \%.
 \begin{table}[!h]
     \myfloatalign
-    \begin{tabularx}{.5\textwidth}{lc}
-        \tableheadline{SCoPs} & \tableheadline{MaxRegions}\\\toprule
-        \csvreader[head to column names]{csv/statsMatrix.csv}{}{\csvcoli&\csvcolii\\}
+    \begin{tabularx}{\textwidth}{lCCC}
+        \tableheadline{} & \tableheadline{SCoPs} & \tableheadline{\(\Delta\)} & \tableheadline{MaxRegions}\\\toprule
+        \csvreader[head to column names]{csv/statsMatrix.csv}{}{$\csvcoli&\csvcolii&\csvcoliii&\csvcoliv$\\}
         \\\bottomrule
     \end{tabularx}
     \caption[Statistical evaluations of \dyncovp and \dyncovs]{
-        This table contains the mean (\(\mu\)), standard deviation (s), the variance (\(s^2\)) of either \dyncovp and \dyncovs and the difference between (\(\Delta\)) them (in \%).
+        This table contains the mean (\(\mu\)), standard deviation (s), the variance (\(s^2\)) of either \dyncovp and \dyncovs and how much \dyncovp is bigger than \dyncovs (\(\Delta\)) in \%.
     }
     \label{tab:statsMatrix}
 \end{table}
-\subsection{Reasons for rejecting parents}
-\autoref{fig:rejectReasonsGrouped} indicates that the most common reason for parents of \scops being rejected is that it is already the toplevel region.
+The mean value is almost the same either looking at the \scops or the MaxRegions.
+The variance and the standard deviation of \dyncovp are higher than of \dyncovs.\\
+\autoref{fig:rejectReasonsGrouped} indicates that the most common reason for parents of \scops being rejected are that it is already the toplevel region, the loop bound could not be computed and calls to functions with (possible) side effects.
 \begin{figure}[!h]
     \caption[Reasons for rejecting SCoPs]{
         Here the most common reasons for rejecting are listed.
@@ -40,29 +43,25 @@ Although the lower half and the upper quarter of the project show increasments o
     \includesvg[width=\textwidth]{pieInvalidReasons}
     \label{fig:rejectReasonsGrouped}
 \end{figure}
-%\piechart{
-%      46.6/Chrome,
-%      24.6/Internet Explorer,
-%      20.4/Firefox,
-%      5.1/Safari,
-%      1.3/Opera,
-%      2.0/Other
-%}{Reasons for parents being rejected}{fig:rejectReasonsGrouped}
-But looking at the low coverage of the \scops these parents have to be toplevel regions of quiet small functions.\\
-Another common reason for rejection is that loop bounds can not be computed at compile time.
-This happens \eg when the boundaries of a loop are depending on a non-const variable like a parameter.
-Such a loop can be found in lammps (\autoref{lst:couldNotCompute}).
-\begin{code}
-    \caption{An example for 'loop bound could not be computed'}
-    \inputminted{c}{c/nonAffineLoopBoundCouldNotCompute.c}
-    \label{lst:couldNotCompute}
-\end{code}
-The third big block of parents is rejected because they contain call instructions like the calls to \texttt{rand(...)} in \autoref{lst:matmulcpp}.
-These can not be optimized due to not being able to guarantee the absence of side effects.\\
-\draftnote{In \autoref{tab:rejectionReasons} the complete data can be found.}
+The concrete values can be found in \autoref{tab:rejectionReasons}.
 
 \section{Hypothesis Testing}
-\(H_1\): Observing the given programs and test sets (\autoref{tab:subjectPrograms}) the most common reason for rejecting parents of \scop to be valid as well is truly that the parent already is the toplevel region.\\
-\(H_2\): The ratio both \(R_s\) and \(R_p\) are rather low although \(R_p\) is significally higher than \(R_s\).
-The reason for it is that there are many regions classified by Polly as \enquote{unprofitable} which have parents far bigger than them self.\\
-\(H_3\): \draftnote{As result the speedups \(S_s\) and \(S_p\) are not as high as expected even considering that \(S_p\) is higher than \(S_s\).}\\
+To check the significance of the collected data first the independence of the two datasets \scops and MaxRegions has to be stated.
+Further a Shapiro-Wilk-Test \cite{shapiroWilkTest} reveals that neither of these datasets is distributed normally.
+All p values are listed in \autoref{tab:pValues}.\\
+\begin{table}[!h]
+    \myfloatalign
+    \begin{tabularx}{\textwidth}{Xcc}
+        \tableheadline{Test} & \tableheadline{SCoPs} & \tableheadline{MaxRegions}\\\toprule
+        \csvreader[head to column names]{csv/pValues.csv}{}{\csvcoli&\csvcolii&\csvcoliii\\}
+        \\\bottomrule
+    \end{tabularx}
+    \caption[P values of tests]{This table contains all p values neccessary to be caculated for ensuring the correctness of the hyptheses.}
+    \label{tab:pValues}
+\end{table}
+\(H_1\): Observing the given programs and test sets (\autoref{tab:subjectPrograms}) the most common reason for rejecting parents of \scops to be valid as well is truly that the parent already is the toplevel region.\\
+\(H_2\): The mean of \dyncovs is \draftnote{significally?} lower than \hTwoAbout.
+Even \dyncovp is as well\drafnote{?}.\\
+\(H_3\): A Mann-Whitney-U-Test \cite{utest} reveals that \dyncovp is not significally higher than \dyncovs (p value: \utestPValue).\\
+\(R_1\): All parents rejected for being a toplevel region can only eliminated by integrating them into a larger context -- this means inlining.\\
+The regions rejected because Polly is not able to determine loop bounds may be eliminated at least partially when including run time information using \jit compilation.

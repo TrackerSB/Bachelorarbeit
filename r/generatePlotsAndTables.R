@@ -47,16 +47,37 @@ pieInvalidReasons <- ggplot(report_invalidReasons, aes(x = "", y = occurrence, f
   defaultSettings
 
 #Create table with means, variance, standard deviation, ...
-means <- c(mean(report_ratiosScops$dyncov), mean(report_ratiosMaxRegions$dyncov))
-vars <- c(var(report_ratiosScops$dyncov), var(report_ratiosMaxRegions$dyncov))
-sds <- c(sd(report_ratiosScops$dyncov), sd(report_ratiosMaxRegions$dyncov))
-statsMatrix <- matrix(data=c(means, vars, sds), nrow = 3, ncol = 2, byrow = TRUE)
-rownames(statsMatrix) <- c("Mean", "Var", "StdVar")
-colnames(statsMatrix) <- c("SCoPs", "MaxRegions")
+meanScops <- mean(report_ratiosScops$dyncov)
+meanMaxRegions <- mean(report_ratiosMaxRegions$dyncov)
+meanDelta <- (meanMaxRegions - meanScops) / meanScops * 100
+means <- c(meanScops, meanDelta, meanMaxRegions)
+sdScops <- sd(report_ratiosScops$dyncov)
+sdMaxRegions <- sd(report_ratiosMaxRegions$dyncov)
+sdDelta <- (sdMaxRegions - sdScops) / sdScops * 100
+sds <- c(sdScops, sdDelta, sdMaxRegions)
+varScops <- var(report_ratiosScops$dyncov)
+varMaxRegions <- var(report_ratiosMaxRegions$dyncov)
+varDelta <- (varMaxRegions - varScops) / varScops *100
+vars <- c(varScops, varDelta, varMaxRegions)
+statsMatrix <- matrix(data=c(means, sds, vars), nrow = 3, ncol = 3, byrow = TRUE)
+rownames(statsMatrix) <- c("µ", "s", "s²")
+colnames(statsMatrix) <- c("SCoPs", "Δ", "MaxRegions")
 
-#ttest p values
+#shapiro-wilk-test p values
+swtDyncovScopsP <- shapiro.test(report_ratiosScops$dyncov)$p.value
+swtDyncovMaxRegionsP <- shapiro.test(report_ratiosMaxRegions$dyncov)$p.value
+
+#ttest p values (normal distribution needed)
 ttestDyncovScopsP <- t.test(report_ratiosScops$dyncov)$p.value
 ttestDyncovMaxRegionsP <- t.test(report_ratiosMaxRegions$dyncov)$p.value
+
+#Mann-Whitney-U test
+utestDyncovP <- wilcox.test(x = report_ratiosMaxRegions$dyncov, y = report_ratiosScops$dyncov)$p.value
+
+pValues <- matrix(data = c(swtDyncovScopsP, swtDyncovMaxRegionsP, ttestDyncovScopsP, ttestDyncovMaxRegionsP),
+                  nrow = 2, ncol = 2, byrow = TRUE)
+rownames(pValues) <- c("Shapiro-Wilk-Test", "Mann-Whitney-U-Test")
+colnames(pValues) <- c("SCoPs", "MaxRegions")
 
 #If the script reaches to this point export all plots and data
 svg(filename = "../svg/compDyncovScopParent.svg")
@@ -65,4 +86,5 @@ dev.off()
 svg(filename = "../svg/pieInvalidReasons.svg")
 pieInvalidReasons
 dev.off()
-write.csv(x = statsMatrix, file = "../csv/statsMatrix.csv", quote = FALSE)
+write.csv(x = statsMatrix, file = "../csv/statsMatrix.csv", quote = TRUE)
+write.csv(x = pValues, file = "../csv/pValues.csv", quote = FALSE)

@@ -65,6 +65,10 @@ Some of these criteria are referencing to a \llvm specific value called \undefv.
         \draftnote{TODO}
     \item Assumed to be unprofitable (\autoref{lst:assumedUnprofitable})\\
         When the region is very small or it is not likely that an optimization improves the exection it is left out.
+        As already mentioned in this study also these unprofitable regions are discussed.
+    \item Polly does not return a reason\\
+        When requesting the reason for a region not being a \scop Polly may return an empty string.
+        This occurrs when the Log object used internally has errors or when it does not exist at all.
 \end{itemize}
 
 \begin{comment}
@@ -117,14 +121,16 @@ This is done by using on the one hand integrated benchmarks brough by the tested
         Test inputs                     & \(TI\)                & Con.                 & Nominal                    & \makecell{see\\\autoref{tab:subjectPrograms}} & Text\\
         \midrule
         Ratio of \scops                 & \dyncovs              & Dep.                 & Ratio                      & \%                                            & \([0; 1[ \in \mathbb{Q}\)\\
-        Ratio of parents                & \dyncovp              & Dep.                 & Ratio                      & \%                                            & \([0; 1[ \in \mathbb{Q}\)\\
+        Ratio of MaxRegions             & \dyncovp              & Dep.                 & Ratio                      & \%                                            & \([0; 1[ \in \mathbb{Q}\)\\
         %Theoretical speedup of \scops  & \(S_s\)               & Dep.                 & Ratio                      & \%                                            & \(\mathbb{Q}\)\\
         %Theoretical speedup of parents & \(S_p\)               & Dep.                 & Ratio                      & \%                                            & \(\mathbb{Q}\)\\
         \bottomrule
     \end{tabularx}
-    \caption[Experiment Variables]{Experiment Variables (Dep.=Dependant; Indep.=Independant; Con.=Controlled)}
+    \caption[Experiment Variables]{Experiment Variables (Dep.=Dependant; Indep.=Independant; Con.=Controlled). The term \enquote{MaxRegions} contains all \scops classified as parent and the \scops which have only a parent which is a toplevel region.}
     \label{tab:experimentVariables}
 \end{table}
+Besides the experiment Variables also the term \enquote{MaxRegions} has to be introduced.
+MaxRegions contain all regions classified as parent and the \scops which have only a parent which is a toplevel regions.
 
 \section{Hypotheses}
 \(H_1\): The main reason for rejecting a \scop should be that its parent already is a toplevel region because also all \scops classified as unprofitable by Polly are processed.
