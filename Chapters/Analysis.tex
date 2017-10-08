@@ -23,7 +23,7 @@ In the right plot it is the other way round.\\
     \myfloatalign
     \begin{tabularx}{\textwidth}{lCCC}
         \tableheadline{} & \tableheadline{SCoPs} & \tableheadline{\(\Delta\)} & \tableheadline{MaxRegions}\\\toprule
-        \csvreader[head to column names]{csv/statsMatrix.csv}{}{$\csvcoli&\csvcolii&\csvcoliii&\csvcoliv$\\}
+        \csvreader[head to column names]{csv/statsMatrix.csv}{}{\csvcoli&\csvcolii&\csvcoliii&\csvcoliv\\}
         \\\bottomrule
     \end{tabularx}
     \caption[Statistical evaluations of \dyncovp and \dyncovs]{
