@@ -1,4 +1,16 @@
 \chapter{Discussion}
+This chapter is dealing with the overserved results.
+
 \section{Results}
+Looking at \autoref{fig:coverages} it is visible that the projects of the lowest quantile do not change concerning the coverage of the regions automatically optimizable by Polly.
+So about 25\% of the programs would not have any profits when extending all of their \scops the next surrounding region.
+When investigating the upper two parts of the plots shows that there are at least some projects which would have benefits if they were extended.
+That the projects in the lowest quantile remain almost with the same coverage and the projects of the upper two quantiles slightly move up is also becomming manifest in looking at the variance and the standard deviation in \autoref{tab:statsMatrix}.\\
+But not all of the \scops can be simply extended.
+\Eg the regions rejected because they are toplevel regions can not be extended until they are put into a larger context -- this means inlining.
+The next big part of regions rejected because of uncomputable loop bounds may get valid if their loop bounds can be computed \eg by performing \jit compilation.
+Reasons for rejecting like \enquote{Non affine access function}, \enquote{Non affine branch in BB} and \enquote{Non affine loop bound} (where the loop bound could be computed) can only be eliminated if they are transformed to an affine linear version.
+But this is not possible in general. \draftnote{Really?}
+Also the part stating that Polly did not return a reason for rejection is currently not likely to be optimizable because the exact reason for rejection is not known.
 
 \section{Threads to Validity}
