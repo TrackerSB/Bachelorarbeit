@@ -113,3 +113,10 @@ lammps:
 ./src/Obj_serial/profileScops.log:[2017-10-07 12:55:20.781] [profileScopsDetection] [info] for.body => for.inc is invalid because of: 
 ./src/Obj_serial/profileScops.log:[2017-10-07 12:55:20.781] [profileScopsDetection] [info] if.end62 => for.inc is invalid because of: 
 ./src/Obj_serial/profileScops.log:[2017-10-07 12:55:20.788] [profileScopsDetection] [info] for.body79 => for.inc131 is invalid because of: Call instruction:   %call99 = call i32 %37(%"class.LAMMPS_NS::Compute"* %35), !dbg !945
+
+fatParent investigations:
+849	103187	4191445829166362491	blocksort.c::mainSort::1::Parent	1
+849	10	17925619855267937692	blocksort.c::mainSort::1::SCoP	1
+
+848	40012	4191445829166362491	blocksort.c::mainSort::1::Parent	1
+848	3	17925619855267937692	blocksort.c::mainSort::1::SCoP	1
