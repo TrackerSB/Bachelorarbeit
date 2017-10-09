@@ -64,7 +64,7 @@ pieInvalidReasons <- ggplot(report_invalidReasons,
   scale_y_continuous(label=function(x){return(paste("", 100*x, "%"))}) +
   theme(legend.title=element_blank(),
         legend.position = "bottom", axis.title = element_blank()) +
-  guides(legend = guide_legend(ncol=2)) +
+  guides(fill=guide_legend(ncol=2)) +
   defaultSettings
 
 #Create table with means, variance, standard deviation, ...
