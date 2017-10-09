@@ -3,7 +3,6 @@
 %*******************************************************
 % If problems with the headers: get headings in appendix etc. right
 %\markboth{\spacedlowsmallcaps{Appendix}}{\spacedlowsmallcaps{Appendix}}
-\begin{landscape}
 \chapter{Appendix}
 This chapter contains mainly lots of the source code and complete tables of data referenced within the study.
 The main purpose is for getting an even more detailed impression of the used or generated files and for being able accurate reproducing the results of the study.
@@ -14,17 +13,17 @@ The main purpose is for getting an even more detailed impression of the used or 
 The following listings contain the (generated) code of the example matrix multiplication which is often used throughout the background chapters.
 \begin{code}
     \caption{LLVM-IR of \autoref{lst:matmulcpp}}
-    \inputminted{LLVM}{ll/matmul.ll}
+    \inputminted[fontsize=\tiny]{LLVM}{ll/matmul.ll}
     \label{lst:matmulll}
 \end{code}
 \begin{code}
     \caption{LLVM-IR (O3 optimized) of \autoref{lst:matmulcpp}}
-    \inputminted{LLVM}{ll/matmulO3.ll}
+    \inputminted[fontsize=\tiny]{LLVM}{ll/matmulO3.ll}
     \label{lst:matmulllO3}
 \end{code}
 \begin{code}
     \caption{LLVM-IR of \autoref{lst:matmulcpp} prepared for Polly}
-    \inputminted{LLVM}{ll/matmul.preopt.ll}
+    \inputminted[fontsize=\tiny]{LLVM}{ll/matmul.preopt.ll}
     \label{lst:matmulpreoptll}
 \end{code}
 \begin{code}
@@ -34,10 +33,9 @@ The following listings contain the (generated) code of the example matrix multip
 \end{code}
 \begin{code}
     \caption[Script for plots and statistic]{This R script contains all commands for filtering the data, generating the plots, calculating statistical values and p values and annotating the projects of \lnt.}
-    \inputminted{R}{r/generatePlotsAndTables.R}
+    \inputminted[fontsize=\tiny]{R}{r/generatePlotsAndTables.R}
     \label{lst:rscript}
 \end{code}
-\end{landscape}
 
 \subsection{Examples for invalid SCoPs}
 These peaces of code illustrate simple situations where \scops are invalid.
@@ -117,10 +115,10 @@ These peaces of code illustrate simple situations where \scops are invalid.
     \label{tab:meminfo}
 \end{code}
 
-\begin{landscape}
 \section{Data Tables}\label{sec:dataTables}
 Here is the hole data listed collected throughout the entire study.
-\LTXtable{\textheight}{tables/ratiosScops.tex}
-\LTXtable{\textheight}{tables/ratiosMaxRegions.tex}
-\LTXtable{\textheight}{tables/invalidReasons.tex}
-\end{landscape}
+\begin{tiny}
+    \LTXtable{\textwidth}{tables/ratiosScops.tex}
+    \LTXtable{\textwidth}{tables/ratiosMaxRegions.tex}
+\end{tiny}
+\LTXtable{\textwidth}{tables/invalidReasons.tex}
