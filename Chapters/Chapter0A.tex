@@ -3,6 +3,7 @@
 %*******************************************************
 % If problems with the headers: get headings in appendix etc. right
 %\markboth{\spacedlowsmallcaps{Appendix}}{\spacedlowsmallcaps{Appendix}}
+\begin{landscape}
 \chapter{Appendix}
 This chapter contains mainly lots of the source code and complete tables of data referenced within the study.
 The main purpose is for getting an even more detailed impression of the used or generated files and for being able accurate reproducing the results of the study.
@@ -31,6 +32,12 @@ The following listings contain the (generated) code of the example matrix multip
     \inputminted{c++}{cpp/checkMeasurementOverhead.cpp}
     \label{lst:checkOverhead}
 \end{code}
+\begin{code}
+    \caption[Script for plots and statistic]{This R script contains all commands for filtering the data, generating the plots, calculating statistical values and p values and annotating the projects of \lnt.}
+    \inputminted{R}{r/generatePlotsAndTables.R}
+    \label{lst:rscript}
+\end{code}
+\end{landscape}
 
 \subsection{Examples for invalid SCoPs}
 These peaces of code illustrate simple situations where \scops are invalid.
@@ -110,11 +117,13 @@ These peaces of code illustrate simple situations where \scops are invalid.
     \label{tab:meminfo}
 \end{code}
 
+\begin{landscape}
 \section{Data Tables}\label{sec:dataTables}
 Here is the hole data listed collected throuout the entire study.
-\LTXtable{\textwidth}{tables/ratiosScops.tex}
-\LTXtable{\textwidth}{tables/ratiosMaxRegions.tex}
-\LTXtable{\textwidth}{tables/invalidReasons.tex}
+\LTXtable{\textheight}{tables/ratiosScops.tex}
+\LTXtable{\textheight}{tables/ratiosMaxRegions.tex}
+\LTXtable{\textheight}{tables/invalidReasons.tex}
+\end{landscape}
 
 \begin{comment}
     \section{Appendix Section Test}

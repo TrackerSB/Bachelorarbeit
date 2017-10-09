@@ -1,7 +1,8 @@
 \chapter{Conclusions and Future Work}
 The first point to mention is that the coverage of the regions automatically optimizable by Polly is not as large as it should be to increase the speedup of programs even more.\\
 The next point concerns the limits of polyhedral compilation in real world scenarios.
-Due to the fact that the main reasons for rejection -- also including regions classified as unprofitable by Polly -- can not be solved or at least not simply further speedup is also limited using current approaches.\\
+Due to the fact that the main reasons for rejection -- also including regions classified as unprofitable by Polly -- can not be solved or at least not simply.
+Accordingly speedup is also limited using current approaches.\\
 So the next steps could include investigating the impact of certain rejection reasons to the execution time and methods to solve some of these.
 Solving could include \jit compilation for solving problems with undefined values, inlining for extending the possible sizes of \scops or non-affine approaches for handling problems arrising from non-affinity.
 Further the expansion of \scops could be extended by looking at the parents of the parents and whether these are rejected because of the same reasons.
