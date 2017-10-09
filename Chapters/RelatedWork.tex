@@ -1,13 +1,13 @@
 \chapter{Related Work}
-There are also other studies investigating other aspects of Polly, the polyhedral or alternative technologies. \draftnote{?}
+There are also other studies investigating other aspects of Polly, the polyhedral or alternative technologies.
 
 \section{Alternative Studies}
 Andreas Simbürger et. al. \cite{PolyhedralEmpiricalStudy} investigated the potential of polyhedral compilation in an empirical study.
 He also compares the coverages of dynamic and static analysis and concludes that the polyhedral model \enquote{is a well-studied and promising approach to automatic program optimization} \cite{PolyhedralEmpiricalStudy}.
 But also mentions \enquote{that the current practical implementations of the polyhedral model do not achieve practically relevant execution coverages, when applied to real-world programs at compile time} \cite{PolyhedralEmpiricalStudy}.\\
-\draftnote{But in contrast to this study it is neither taking care about the reasons for rejecting parents of \scops nor does it investigate the potential of extending them.}
+In contrast to this study it is neither taking care about the reasons for rejecting parents of \scops nor does it investigate the potential of extending them.
 
-\section{Alternative Extensions}
+\section[Alternative Extensions]{Alternative Extensions \cite{PolyhedralEmpiricalStudy}}
 \draftnote{What are alternative "extensions"?}
 Following is copy\&pasted from \cite{PolyhedralEmpiricalStudy}.
 \begin{quotation}
@@ -24,5 +24,15 @@ Second, cylindrical algebraic decomposition can be used to provide support for i
 However, both approaches suffer from significant performance penalties during code synthesis as well as in the generated code itself.
 \end{quotation}
 
-\section{Alternative Technologies}
-\draftnote{Do i need that? At least I already described Graphite.}
+\section[Alternative Technologies]{Alternative Technologies \cite{PolyhedralEmpiricalStudy}}
+The \llvm is not the only framework that can handle polyhedral model.\\
+There are other systems which extract \scops directly from the source code.
+The first one was LooPo \cite{loopo}.
+A current system is PoCC \cite{pocc} which implements a full compiler tool chain for applying automatically optimizations based on the polyhedral model.
+It supports two tools for transformations.
+This one is PLuTo \cite{pluto} and the other is LaTSeE \cite{latsee}.
+In \cite{PolyhedralEmpiricalStudy} both are discribed as follows:
+\begin{quotation}
+    The PLuTo scheduling algorithm implements a transformation that optimizes data locality on shared-memory systems.
+    Rather than generating the optimal solution, LeTSeE tries to converge on it iteratively by exploring the legal transformation space.
+\end{quotation}
