@@ -4,22 +4,22 @@ There are also other studies investigating other aspects of Polly, the polyhedra
 \section{Alternative Studies}
 Andreas Simbürger et. al. \cite{PolyhedralEmpiricalStudy} investigated the potential of polyhedral compilation in an empirical study.
 He also compares the coverages of dynamic and static analysis and concludes that the polyhedral model \enquote{is a well-studied and promising approach to automatic program optimization} \cite{PolyhedralEmpiricalStudy}.
-But also mentions \enquote{that the current practical implementations of the polyhedral model do not archieve practically relevant execution coverages, when applied to real-world programs at compile time} \cite{PolyhedralEmpiricalStudy}.\\
-\draftnote{But in contrast to this study it is neither taking care about the reasons for rejecting parents of \scops nor does it investigate the potentail of extending them.}
+But also mentions \enquote{that the current practical implementations of the polyhedral model do not achieve practically relevant execution coverages, when applied to real-world programs at compile time} \cite{PolyhedralEmpiricalStudy}.\\
+\draftnote{But in contrast to this study it is neither taking care about the reasons for rejecting parents of \scops nor does it investigate the potential of extending them.}
 
 \section{Alternative Extensions}
 \draftnote{What are alternative "extensions"?}
 Following is copy\&pasted from \cite{PolyhedralEmpiricalStudy}.
 \begin{quotation}
 The following extensions focus on transcending affine linearity at compile time.\\
-Benabderrahmane et al. model arbitrary, non-recursive, control flow within a SCoP at compile time, converting control dependences to data dependences if necessary.
+Benabderrahmane et al. model arbitrary, non-recursive, control flow within a SCoP at compile time, converting control dependencies to data dependence's if necessary.
 The same approach can be used to deal with \texttt{while} loops in SCoPs.
 A \texttt{while} loop is transformed to an unbounded \texttt{for} loop, and an exit conditional is introduced in the body in form of awrite access.
 Every existing statement depends on this exit conditional, thus terminating the loop execution if the condition is violated.
 These capabilities come at the cost of a loss of precision of the whole analysis.
 In particular,the dependence introduced to the exit conditional forces the scheduler to generate a sequential schedule.
 In contrast to stretching the modeling capabilities by giving up precision, there are a few extensions to the polyhedron model that cope with non-linearity by using new algebraic methods, without giving up precision.
-First, it is possible to deal with multiplicative parameters throughout modeling, transformation and code generation at compile time by using real quantifierelimination.
+First, it is possible to deal with multiplicative parameters throughout modeling, transformation and code generation at compile time by using real quantifier elimination.
 Second, cylindrical algebraic decomposition can be used to provide support for input programs that feature more complicated non-linearity, such as polynomials in the index variables.
 However, both approaches suffer from significant performance penalties during code synthesis as well as in the generated code itself.
 \end{quotation}

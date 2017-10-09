@@ -1,25 +1,25 @@
 \chapter{Experiment Setup And Execution}
 \section{Goals}
-As already mentioned this study is investigating the coverage of the parts which already can be automatically optimized by Polly, the various reasons for these parts not beeing even larger and the impact to the coverage and the speedup if these reasons could be eliminated.
+As already mentioned this study is investigating the coverage of the parts which already can be automatically optimized by Polly, the various reasons for these parts not being even larger and the impact to the coverage and the speedup if these reasons could be eliminated.
 
 \section{Measurement Methology}
 For measuring, analysis and evaluation of the results the following definitions are introduced.
 \subsection{Definition Coverage}
-Let \(T_i\in\mathbb{N}\) be the execution time of all instructions within all \scops of a project and \(T\in\mathbb{N}\) the overall exeuction time of that project.
-Then the coverage of paralizable regions \(DynCov\in\mathbb{Q}\) is defined as:
+Let \(T_i\in\mathbb{N}\) be the execution time of all instructions within all \scops of a project and \(T\in\mathbb{N}\) the overall execution time of that project.
+Then the coverage of parallelizable regions \(DynCov\in\mathbb{Q}\) is defined as:
 \[DynCov := \frac{T_i}{T}\]
 
 \subsection[Amdahl's Law]{Amdahl's Law \cite{AmdahlsLaw}}
-Let \(N\in\mathbb{N}\) be the number of processors and \(DynCov\in\mathbb{Q}\) be the coverage of paralizable regions.
+Let \(N\in\mathbb{N}\) be the number of processors and \(DynCov\in\mathbb{Q}\) be the coverage of parallelizable regions.
 Then the speedup \(S\in\mathbb{Q}\) is defined as:
 \[S := \frac{N}{(1-DynCov)*N+DynCov}\]
 \subsection{Reasons for SCoPs being invalid}
-These are the critieria implemented by Polly for rejecting a parent of a \scop being also a \scop.
+These are the criteria implemented by Polly for rejecting a parent of a \scop being also a \scop.
 Some of these criteria are referencing to a \llvm specific value called \undefv.\cite{llvmUndef}
 \begin{itemize}
-    \item Parent is toplevel (\autoref{lst:parentIsToplevel})\\
-        This is simply when the parent of a \scop is the toplevel region.
-        Per default a toplevel region can not be a \scop in Polly.
+    \item Parent is top level (\autoref{lst:parentIsToplevel})\\
+        This is simply when the parent of a \scop is the top level region.
+        Per default a top level region can not be a \scop in Polly.
     \item Unsupported terminator instruction\\
         This is occurring when a flow breaking instruction like \texttt{return}, \texttt{throw} or \texttt{goto} is called within a loop.
     \item Unreachable in exit block (\autoref{lst:unreachableExitBlock})\\
@@ -27,7 +27,7 @@ Some of these criteria are referencing to a \llvm specific value called \undefv.
     \item Irreducible loops (\autoref{lst:irreducibleLoops})\\
         \Eg a loop is interfering with another loop using labels.
         So that loop can not be changed in general.
-    \item Undefinded branch condition\\
+    \item Undefined branch condition\\
         It is occurring whenever within a branch condition the value \undefv is appearing.
     \item Non-integer branch condition\\
         \draftnote{This appears when a call instruction is used in the branch condition.}
@@ -37,7 +37,7 @@ Some of these criteria are referencing to a \llvm specific value called \undefv.
         This is raised when a non-affine expression like a call instruction is used.
     \item No base pointer\\
         \draftnote{TODO}
-    \item Undefinded base pointer\\
+    \item Undefined base pointer\\
         \draftnote{It is raised when a pointer holds the value \undefv.}
     \item Variant base pointer (\autoref{lst:variantBasePointer})\\
         \draftnote{TODO}
@@ -48,7 +48,7 @@ Some of these criteria are referencing to a \llvm specific value called \undefv.
     \item Uncomputable loop bounds (\autoref{lst:uncomputeableLoopBounds})\\
         It is occurring when the loop bounds could not be computed \eg when the loop bounds are depending on an input parameter.
     \item Loop without exit (\autoref{lst:loopWithoutExit})\\
-        This occurrs when a loop is infinite but can not be thrown away because there are cases when the execution terminates.
+        This occurs when a loop is infinite but can not be thrown away because there are cases when the execution terminates.
     \item Function call with side effects (\autoref{lst:functionCallSideEffects})\\
         This is raised when a function is called which is not guaranteed to have no side effects.
     \item Complicated access semantics (volatile or atomic)\\
@@ -64,11 +64,11 @@ Some of these criteria are referencing to a \llvm specific value called \undefv.
     \item Contains entry block\\
         \draftnote{TODO}
     \item Assumed to be unprofitable (\autoref{lst:assumedUnprofitable})\\
-        When the region is very small or it is not likely that an optimization improves the exection it is left out.
+        When the region is very small or it is not likely that an optimization improves the execution it is left out.
         As already mentioned in this study also these unprofitable regions are discussed.
     \item Polly does not return a reason\\
         When requesting the reason for a region not being a \scop Polly may return an empty string.
-        This occurrs if the Log object used internally has errors or if it does not exist at all.
+        This occurs if the Log object used internally has errors or if it does not exist at all.
 \end{itemize}
 
 \begin{comment}
@@ -106,7 +106,7 @@ SCOP_STAT(LastOther, "")
 \end{comment}
 
 \section{Experiment Variables}
-The experment variables are listed in \autoref{tab:experimentVariables}.\\
+The experiment variables are listed in \autoref{tab:experimentVariables}.\\
 The classification \(C\) describes two types of regions handled within the study.
 The one is \enquote{\scop} like explained in \autoref{subsec:definitionScop}.
 The other is \enquote{parent} which is the next bigger region surrounding a \scop.\\
@@ -128,18 +128,18 @@ Also the speedups \(S_s\) and \(S_p\) are dependent because they are calculated 
         \bottomrule
     \end{tabularx}
     \caption[Experiment Variables]{
-        Experiment variables (Dep.=Dependant; Indep.=Independant; Con.=Controlled).
-        The term \enquote{MaxRegions} contains all regions classified as parent and the \scops which have only a parent which is a toplevel region.
+        Experiment variables (Dep.=Dependent; Indep.=Independent; Con.=Controlled).
+        The term \enquote{MaxRegions} contains all regions classified as parent and the \scops which have only a parent which is a top level region.
     }
     \label{tab:experimentVariables}
 \end{table}
 Besides the experiment variables also the term \enquote{MaxRegions} has to be introduced.
-MaxRegions contains all regions classified as parent and the \scops which have only a parent which is a toplevel regions.
+MaxRegions contains all regions classified as parent and the \scops which have only a parent which is a top level regions.
 
 \section{Hypotheses}
-\(H_1\): The main reason for rejecting a \scop should be that its parent already is a toplevel region because also all \scops classified as unprofitable by Polly are processed.
+\(H_1\): The main reason for rejecting a \scop should be that its parent already is a top level region because also all \scops classified as unprofitable by Polly are processed.
 So a lot of very small functions may be processed.
-Whenever such a function has a \scop it is likely that its parent is already a toplevel region.\\
+Whenever such a function has a \scop it is likely that its parent is already a top level region.\\
 \(H_2\): The coverage \dyncovs is expected to be about \hTwoAbout, on average.
 Even if there are a lot of \scops which are processed the -- according to the execution time -- big \scops may not be able to be optimized, on average.\\
 \(H_3\): It is expected that \dyncovp \(\gg\) \dyncovs, on average.
@@ -160,13 +160,13 @@ These will be annotated like \enquote{\(program_{lnt}\)}.
 
 \section{Design}
 Based on the experiment variables (see \autoref{tab:experimentVariables}) three experiments are performed to validate the hypotheses.\\
-The first experiment takes the most common reason for rejecting a parent as valid \scop and checks whether it is \enquote{parent is toplevel region}.\\
+The first experiment takes the most common reason for rejecting a parent as valid \scop and checks whether it is \enquote{parent is top level region}.\\
 In the second experiment the average value of \dyncovs is calculated and checked whether it is near \hTwoAbout.\\
 The third experiment \dyncovp and \dyncovs are compared to check whether \dyncovp \(\gg\) \dyncovs.
 
 \section{Experiment Setting}\label{sec:experimentSettings}
 \begin{sloppypar}
-    This study uses instrumentation to retrieve precise timing informations instead of using frameworks like OProfile \cite{oprofile} or GProf \cite{gprof}.
+    This study uses instrumentation to retrieve precise timing information instead of using frameworks like OProfile \cite{oprofile} or GProf \cite{gprof}.
     The measurement is realized using the \papi library \cite{papi}.\\
     To take these measurement the following steps are performed:\\
     The first step is creating a new so called experiment for benchbuild\footnote{Benchbuild is a tool for automating the process of downloading, building, applying an experiment at compile time and executing a project on a SLURM \cite{slurm} Cluster.}.
@@ -177,15 +177,15 @@ The third experiment \dyncovp and \dyncovs are compared to check whether \dyncov
     Once for instrumenting the actual \scops within, which also includes that ones classified by Polly as \enquote{unprofitable}, and once for instrumenting their parents.
     Even the \enquote{unprofitable} \scops are included because they may get profitable to optimize when they are extended to the size of their parents.
     To include these \scops the option \texttt{-polly-process-unprofitable} has to be specified using the \texttt{-mllvm} option of clang.
-    While doing so the informations about why these parents were rejected as \scops are collected.\\
+    While doing so the information about why these parents were rejected as \scops are collected.\\
     The instrumentation is designed to work for any region (\autoref{subsec:definitionRegion}).
-    For a given region every incoming edge in the \cfg (\autoref{subsec:cfg}) is bendt to a new node splitting the edges and pointing to the entry of the region.
-    Within this new node an insruction is placed starting the measurement of the execution time.
+    For a given region every incoming edge in the \cfg (\autoref{subsec:cfg}) is bent to a new node splitting the edges and pointing to the entry of the region.
+    Within this new node an instruction is placed starting the measurement of the execution time.
     This instruction has the same for regions unique id and remembers the system time at the point where it was called.
     The same way every outgoing edges in the \cfg of this region is also split introducing a further new node in which an instruction is placed for stopping the measurement having the same id.
-    When it is called the current system time is requested again and the difference to the starting call is caluculated providing the duration of the measured region.\\
+    When it is called the current system time is requested again and the difference to the starting call is calculated providing the duration of the measured region.\\
     The exact versions of the used software components are listed in \autoref{tab:usedSoftware}.\\
-    All measurements are executed on an Intel Xeon E5-2650 v2 machine (2 Sockets with each 8 phyisical cores each 2.6GHz) with 128GB RAM.
+    All measurements are executed on an Intel Xeon E5-2650 v2 machine (2 Sockets with each 8 physical cores each 2.6GHz) with 128GB RAM.
     The precise specifications are listed in \autoref{tab:lscpu} and \autoref{tab:meminfo}.
 \end{sloppypar}
 \begin{table}[!h]
@@ -193,7 +193,7 @@ The third experiment \dyncovp and \dyncovs are compared to check whether \dyncov
     \begin{tabularx}{.5\textwidth}{Xc}
         \tableheadline{Name} & \tableheadline{Version}\\ \toprule
         benchbuild           & \draftnote{git}\\
-        llvm                 & (04facbb8)\\
+        LLVM                 & (04facbb8)\\
         clang                & (89be37b)\\
         polly                & (0fd4fea)\\
         polli                & \draftnote{git}\\
@@ -201,7 +201,7 @@ The third experiment \dyncovp and \dyncovs are compared to check whether \dyncov
     \end{tabularx}
     \caption[Software used for measurements]{
         This table lists the software used for the measurements.
-        The components llvm, clang, polly and polli belong to the compiler infrastructure \llvm itself.
+        The components LLVM, clang, polly and polli belong to the compiler infrastructure \llvm itself.
         benchbuild is a program for applying a certain \enquote{experiment} (see \autoref{sec:experimentSettings}) on a selection of programs, distributing them on a SLURM \cite{slurm} cluster and run them.
         (Versions in parenthesis represent short git hashes)
     }
@@ -210,9 +210,9 @@ The third experiment \dyncovp and \dyncovs are compared to check whether \dyncov
 
 \section{Deviations}\label{sec:deviations}
 Only about \usefulRatio of the measured execution times can be used due to bugs in the implementation and the projects measured which could not be fixed because of time constraints.
-The bug in the implementation is occuring in certain constellations of the basic blocks of a region to measure like the following one which is found in the project \draftnote{projectname}:
+The bug in the implementation is occurring in certain constellations of the basic blocks of a region to measure like the following one which is found in the project \draftnote{projectname}:
 \draftnote{Insert example}
 To cope with it measurements of regions which have a bigger duration than the hole execution time of the project are excluded.
 Also measurements of coverages are excluded where the coverage is greater than 100\%.
-These occurr because the filtering of the obviously bad measurements is not enough to exclude all bad ones.\\
+These occur because the filtering of the obviously bad measurements is not enough to exclude all bad ones.\\
 Further for minimizing the influences of the underlying OS multithreading is deactivated, the node is used exclusively the number of tasks is limited to one and the number of CPUs used per task is limited to 10.

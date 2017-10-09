@@ -1,19 +1,19 @@
 \chapter{Polly}
-One of the numerous subprojects of the \llvm is Polly\footnote{The name \enquote{Polly} is a combination of \enquote{Polyhedral} and \enquote{\llvm}. \cite{PollyGrosser}} which provides plenty of options for automatic optimizations based on the polyhedral model operating on \llvmir.
+One of the numerous sub projects of the \llvm is Polly\footnote{The name \enquote{Polly} is a combination of \enquote{Polyhedral} and \enquote{\llvm}. \cite{PollyGrosser}} which provides plenty of options for automatic optimizations based on the polyhedral model operating on \llvmir.
 
 \section{History}
 Polly is an implementation of a loop optimizer based on the polyhedral model.\\
-Before Polly there already existed an earlier implementation accessible using gcc.
-The component for gcc was called Graphite \cite{gccGraphite} and included the \pcp \cite{grosserGraphite, grosserGraphiteDesign} which is an independant interface between the \ir of gcc called GIMPLE\footnote{The name \enquote{GIMPLE} is a result of \enquote{gcc} and \enquote{Simple II}, on which GIMPLE is based. \cite{GenericGimple}} and the internal \ir \gpoly.
+Before Polly there already existed an earlier implementation accessible using GCC.
+The component for GCC was called Graphite \cite{gccGraphite} and included the \pcp \cite{grosserGraphite, grosserGraphiteDesign} which is an independent interface between the \ir of GCC called GIMPLE\footnote{The name \enquote{GIMPLE} is a result of \enquote{GCC} and \enquote{Simple II}, on which GIMPLE is based. \cite{GenericGimple}} and the internal \ir \gpoly.
 The problem with it was, that GIMPLE is not made for being human readable.
-As consequence to ease developing and to avoid plenty of bugs the implementation was transfered to be used with \llvm, whose \ir is more human readable.
+As consequence to ease developing and to avoid plenty of bugs the implementation was transferred to be used with \llvm, whose \ir is more human readable.
 Another advantage arises due to the fact, that \llvm is not bound to C or C++.
 Currently Polly has to be loaded serving as a \llvm plugin.
 In future releases Polly is going to be integrated directly into \llvm instead.
 
 \section{The pipeline of Polly}
-Polly is embeded in pipeline of \llvm.
-More precisly it is called by the \opt (\autoref{subsec:optimizer}).
+Polly is embedded in pipeline of \llvm.
+More precisely it is called by the \opt (\autoref{subsec:optimizer}).
 When Polly is called by the \opt it detects the \scops within the information got, applies its own passes, generates new \llvmir and transfers it back.
 But before being able to use Polly the \llvmir has to be canonicalized.
 The canonicalization is done by compiling the source code using clang with the options \texttt{-O3} and \texttt{-polly-canonicalize}.
@@ -57,8 +57,8 @@ In \cite[chapter 9.7.1, p.~672]{Drachenbuch} a region is defined as:
 In \autoref{fig:exampleRegion} the regions of \autoref{lst:matmulcpp} are shown.
 \begin{figure}[!h]
     \centering
-    \caption[The regiontree of \autoref{lst:matmulcpp}]{
-        This is the regiontree of \autoref{lst:matmulcpp}.
+    \caption[The region tree of \autoref{lst:matmulcpp}]{
+        This is the region tree of \autoref{lst:matmulcpp}.
         It is basically a \cfg where groups of basic blocks which build a region (see \autoref{subsec:definitionRegion}) are colored to visualize their togetherness.
     }
     \label{fig:exampleRegion}
@@ -69,9 +69,9 @@ In \autoref{fig:exampleRegion} the regions of \autoref{lst:matmulcpp} are shown.
     For visualizing the regions of \autoref{lst:matmulcpp} a dot file is generated using the option \texttt{-view-regions-only}:
 \end{sloppypar}
 \begin{enumerate}
-    \item Translate the C++ sourcecode of \autoref{lst:matmulcpp} into \llvmir (\autoref{lst:matmulll})\\
+    \item Translate the C++ source code of \autoref{lst:matmulcpp} into \llvmir (\autoref{lst:matmulll})\\
         \texttt{clang++ -S -emit-llvm matmul.cpp -o matmul.ll}
-    \item Generate the regiontree\\
+    \item Generate the region tree\\
         \texttt{opt -view-regions-only matmul.ll}
 \end{enumerate}
 \subsection{Definition SCoP}\label{subsec:definitionScop}
@@ -120,8 +120,8 @@ In \autoref{fig:exampleRegion} the regions of \autoref{lst:matmulcpp} are shown.
 A \scop is a specific region with further restrictions for being representable by the polyhedral model.\\
 For being a valid \scop such a region has to have \enquote{static control flow}.
 This includes that the region is a single entry single exit region, the loops within have to have only affine linear bounds, \eg the limits only depend on structure parameters\footnote{Structure parameter are integer variables whose values remain unchanged inside a \scop.}, numerical constants and iteration variables of enclosing loops \cite{GanserIterativeSchedule}. %\cite{ScopDetection.cpp}
-Further toplevel regions are excluded per default from being a \scop not because of conceptional constraints but because Polly needs a safe space to put code for maintenance.
-This means a \scop usually has maximum size if its parent is the toplevel region.\\
+Further top level regions are excluded per default from being a \scop not because of conceptional constraints but because Polly needs a safe space to put code for maintenance.
+This means a \scop usually has maximum size if its parent is the top level region.\\
 The visualization of the \scops of \autoref{lst:matmulcpp} is shown in \autoref{fig:exampleScop}.
 \begin{figure}[!h]
     \centering
@@ -136,7 +136,7 @@ The visualization of the \scops of \autoref{lst:matmulcpp} is shown in \autoref{
 The dot file is generated by the option \texttt{-view-scops-only}:
 \begin{sloppypar}
     \begin{enumerate}
-        \item Translate the C++ sourcecode of \autoref{lst:matmulcpp} into \llvmir (\autoref{lst:matmulllO3})\\
+        \item Translate the C++ source code of \autoref{lst:matmulcpp} into \llvmir (\autoref{lst:matmulllO3})\\
             \texttt{clang++ -S -emit-llvm \textbf{-O3} matmul.cpp -o matmulO3.ll}
         \item Prepare the \llvmir for Polly (\autoref{lst:matmulpreoptll})\\
             \texttt{opt -S -load LLVMPolly.so -polly-canonicalize matmulO3.ll > matmul.preopt.ll}
@@ -149,14 +149,14 @@ The dot file is generated by the option \texttt{-view-scops-only}:
     In this case the option \texttt{-polly-process-unprofitable} has to be added to force Polly processing them because Polly classifies them as unprofitable.
 \end{sloppypar}
 
-\section{SCoPDetection}
-To detect these \scops Polly searches in the first step for candidates using a top-down approach traversing the regiontree for canonical regions.
+\section{SCoP Detection}
+To detect these \scops Polly searches in the first step for candidates using a top-down approach traversing the region tree for canonical regions.
 In the second step emanating from the candidates these are expanded until a \draftnote{marimal} region is found.
-Afterwards \draftnote{in the modelling phase?} for every found candidate an optimized version of code is generated, which is surrounded by runtime checks for determing optimistically the provability of the correctness of the taken assumptions.
+Afterwards \draftnote{in the modeling phase?} for every found candidate an optimized version of code is generated, which is surrounded by run time checks for determining optimistically the provability of the correctness of the taken assumptions.
 \begin{comment}
     Following shows a list of assumptions possibly taken:
     \begin{description}
-        \item[Aliasing] Overlapping of the memory of variables \eg poiner onto some element of an array.
+        \item[Aliasing] Overlapping of the memory of variables \eg pointer onto some element of an array.
         \item[Inbounds] \draftnote{LLVM verwendet nur Pointer, keine Arrays. Eindimensionale Arrays rekonstruiert auf mehrdimensionale. => Abweichung Länge?}
         \item[Wrapping] Over- or underflow of short, integer,...
         \item[unsigned] \Eg overflow when using an unsigned integer as signed integer.
@@ -184,5 +184,5 @@ Afterwards \draftnote{in the modelling phase?} for every found candidate an opti
     STATISTIC(AssumptionsDelinearization,
               "Number of delinearization assumptions taken.");
 \end{comment}
-When the proof of the runtime check holds true, the optimized version of the code is continuing execution at that point.
+When the proof of the run time check holds true, the optimized version of the code is continuing execution at that point.
 Otherwise the execution jumps to the unoptimized version of the affected section.

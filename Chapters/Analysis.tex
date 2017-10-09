@@ -8,7 +8,7 @@ The plots also contain marks for 25\% quantiles.
 The higher these lines the more projects have a higher coverage observing the regions automatically optimizable by Polly.
 \begin{figure}[!h]
     \caption[Distribution density of \dyncovs and \dyncovp]{
-        Distrubution density of \dyncovs (left) and \dyncovp (right) as violin plots.
+        Distribution density of \dyncovs (left) and \dyncovp (right) as violin plots.
         Each plot is divided in four quantiles with same size.
     }
     \includesvg[width=\textwidth]{compDyncovScopParent}
@@ -34,7 +34,7 @@ As a result the speedup \(S_p=\speedupMaxRegions\) is only slightly higher than 
 \end{table}
 The mean value is almost the same either looking at the \scops or the MaxRegions.
 The variance and the standard deviation of \dyncovp are higher than of \dyncovs.\\
-\autoref{fig:rejectReasonsGrouped} indicates that the most common reason for parents of \scops being rejected are that it is already the toplevel region, the loop bound could not be computed and calls to functions with (possible) side effects.
+\autoref{fig:rejectReasonsGrouped} indicates that the most common reason for parents of \scops being rejected are that it is already the top level region, the loop bound could not be computed and calls to functions with (possible) side effects.
 \begin{figure}[!h]
     \caption[Reasons for rejecting SCoPs]{
         Here the most common reasons for rejecting are listed.
@@ -48,8 +48,8 @@ The variance and the standard deviation of \dyncovp are higher than of \dyncovs.
 The concrete values can be found in \autoref{tab:rejectionReasons}.
 
 \section{Hypothesis Testing}
-To check the significance of the collected data first the independence of the two datasets \scops and MaxRegions has to be stated.
-Further a Shapiro-Wilk-Test \cite{shapiroWilkTest} reveals that neither of these datasets is distributed normally (\(p \ll 0.05\)).
+To check the significance of the collected data first the independence of the two data sets \scops and MaxRegions has to be stated.
+Further a Shapiro-Wilk-Test \cite{shapiroWilkTest} reveals that neither of these data sets is distributed normally (\(p \ll 0.05\)).
 All p values are listed in \autoref{tab:pValues}.\\
 \begin{table}[!h]
     \myfloatalign
@@ -58,14 +58,14 @@ All p values are listed in \autoref{tab:pValues}.\\
         \csvreader[head to column names]{csv/pValues.csv}{}{\csvcoli&\csvcolii&\csvcoliii\\}
         \\\bottomrule
     \end{tabularx}
-    \caption[P values of statistical tests]{This table contains all p values neccessary to be caculated for ensuring the correctness of the evaluation of the hyptheses.}
+    \caption[P values of statistical tests]{This table contains all p values necessary to be calculated for ensuring the correctness of the evaluation of the hypotheses.}
     \label{tab:pValues}
 \end{table}
-\(H_1\): Observing the given programs and test sets (\autoref{tab:subjectPrograms}) the most common reason for rejecting parents of \scops to be valid as well is truly that the parent already is the toplevel region.\\
-\(H_2\): The mean of \dyncovs is \draftnote{significally?} lower than \hTwoAbout.
+\(H_1\): Observing the given programs and test sets (\autoref{tab:subjectPrograms}) the most common reason for rejecting parents of \scops to be valid as well is truly that the parent already is the top level region.\\
+\(H_2\): The mean of \dyncovs is \draftnote{significantly?} lower than \hTwoAbout.
 Even \dyncovp is as well\draftnote{?}.\\
-\(H_3\): A Mann-Whitney-U-Test \cite{utest} reveals that \dyncovp is not significally higher than \dyncovs (p value: \utestPValue).\\
+\(H_3\): A Mann-Whitney-U-Test \cite{utest} reveals that \dyncovp is not significantly higher than \dyncovs (p value: \utestPValue).\\
 \draftnote{
-    \(R_1\): All parents rejected for being a toplevel region can only eliminated by integrating them into a larger context -- this means inlining.\\
+    \(R_1\): All parents rejected for being a top level region can only eliminated by integrating them into a larger context -- this means inlining.\\
     The regions rejected because Polly is not able to determine loop bounds may be eliminated at least partially when including run time information using \jit compilation.
 }
