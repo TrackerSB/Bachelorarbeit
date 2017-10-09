@@ -33,3 +33,6 @@ _minted-ClassicThesis/
 #includesvg
 svg/*.pdf
 svg/*.pdf_tex
+
+#aspell
+*.bak
