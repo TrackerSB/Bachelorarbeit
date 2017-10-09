@@ -5,5 +5,6 @@ Due to the fact that the main reasons for rejection -- also including regions cl
 Accordingly speedup is also limited using current approaches.\\
 So the next steps could include investigating the impact of certain rejection reasons to the execution time and methods to solve some of these.
 Solving could include \jit compilation for solving problems with undefined values, inlining for extending the possible sizes of \scops or non-affine approaches for handling problems arising from non-affinity.
-Further the expansion of \scops could be extended by looking at the parents of the parents and whether these are rejected because of the same reasons.
-So solving a certain rejection reason of a parent could also solve the rejection reason of its parents recursively.
+When thinking about how to solve reasons for rejection a region being a valid \scop also research should be done for finding out whether there are multiple reasons for rejecting a region.
+Further other \scops having the same (grant) parent would have to be checked whether they have different reasons for not being extended.\\
+It may also be investigated how the coverage increases if allowing Polly the classify top level regions as valid \scops.\\
