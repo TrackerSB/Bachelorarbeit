@@ -1,0 +1,508 @@
+digraph "Region Graph for 'mainSort' function" {
+	label="Region Graph for 'mainSort' function";
+
+	Node0x5638af3115c0 [shape=record,label="{entry:\l  %runningOrder = alloca [256 x i32], align 16\l  %bigDone = alloca [256 x i8], align 16\l  %copyStart = alloca [256 x i32], align 16\l  %copyEnd = alloca [256 x i32], align 16\l  call void @enter_region(i64 -2001227132368542011, i8* getelementptr inbounds\l... ([31 x i8], [31 x i8]* @19, i32 0, i32 0))\l  %0 = bitcast [256 x i32]* %runningOrder to i8*\l  call void @llvm.lifetime.start.p0i8(i64 1024, i8* %0) #4\l  %1 = getelementptr inbounds [256 x i8], [256 x i8]* %bigDone, i64 0, i64 0\l  call void @llvm.lifetime.start.p0i8(i64 256, i8* %1) #4\l  %2 = bitcast [256 x i32]* %copyStart to i8*\l  call void @llvm.lifetime.start.p0i8(i64 1024, i8* %2) #4\l  %3 = bitcast [256 x i32]* %copyEnd to i8*\l  call void @llvm.lifetime.start.p0i8(i64 1024, i8* %3) #4\l  %cmp = icmp sgt i32 %verb, 3\l  br i1 %cmp, label %if.then, label %if.end\l}"];
+	Node0x5638af3115c0 -> Node0x5638af311650;
+	Node0x5638af3115c0 -> Node0x5638af3116b0;
+	Node0x5638af311650 [shape=record,label="{if.then:                                          \l  %4 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !2\l  %5 = tail call i64 @fwrite(i8* getelementptr inbounds ([34 x i8], [34 x i8]*\l... @.str.6, i64 0, i64 0), i64 33, i64 1, %struct._IO_FILE* %4) #5\l  br label %if.end\l}"];
+	Node0x5638af311650 -> Node0x5638af3116b0;
+	Node0x5638af3116b0 [shape=record,label="{if.end:                                           \l  br label %for.body\l}"];
+	Node0x5638af3116b0 -> Node0x5638af311710;
+	Node0x5638af311710 [shape=record,label="{for.body:                                         \l  %indvars.iv621 = phi i64 [ 65536, %if.end ], [ %indvars.iv.next622,\l... %for.body ]\l  %arrayidx = getelementptr inbounds i32, i32* %ftab, i64 %indvars.iv621\l  store i32 0, i32* %arrayidx, align 4, !tbaa !6\l  %indvars.iv.next622 = add nsw i64 %indvars.iv621, -1\l  %cmp1 = icmp ugt i64 %indvars.iv621, 0\l  br i1 %cmp1, label %for.body, label %for.end.profile.exit.split\l}"];
+	Node0x5638af311710 -> Node0x5638af311710[constraint=false];
+	Node0x5638af311710 -> Node0x5638af3117b0;
+	Node0x5638af3117b0 [shape=record,label="{for.end.profile.exit.split:                       \l  call void @exit_region(i64 -2001227132368542011)\l  %6 = load i8, i8* %block, align 1, !tbaa !8\l  %conv = zext i8 %6 to i32\l  %shl = shl nuw nsw i32 %conv, 8\l  %sub = add nsw i32 %nblock, -1\l  %cmp4561 = icmp sgt i32 %nblock, 3\l  br i1 %cmp4561, label %for.body6.lr.ph, label %for.end60\l}"];
+	Node0x5638af3117b0 -> Node0x5638af311620;
+	Node0x5638af3117b0 -> Node0x5638af311b10;
+	Node0x5638af311620 [shape=record,label="{for.body6.lr.ph:                                  \l  %7 = sext i32 %sub to i64\l  %8 = sub i32 0, %nblock\l  %9 = icmp sgt i32 %8, -7\l  %smax620 = select i1 %9, i32 %8, i32 -7\l  %10 = add i32 %nblock, %smax620\l  %11 = add i32 %10, 3\l  %12 = lshr i32 %11, 2\l  %13 = zext i32 %12 to i64\l  %14 = shl i64 %13, 2\l  br label %for.body6\l}"];
+	Node0x5638af311620 -> Node0x5638af311b70;
+	Node0x5638af311b70 [shape=record,label="{for.body6:                                        \l  %indvars.iv612 = phi i64 [ %7, %for.body6.lr.ph ], [ %indvars.iv.next613,\l... %for.body6 ]\l  %j.0562 = phi i32 [ %shl, %for.body6.lr.ph ], [ %or54, %for.body6 ]\l  %arrayidx8 = getelementptr inbounds i16, i16* %quadrant, i64 %indvars.iv612\l  store i16 0, i16* %arrayidx8, align 2, !tbaa !9\l  %shr = ashr i32 %j.0562, 8\l  %arrayidx10 = getelementptr inbounds i8, i8* %block, i64 %indvars.iv612\l  %15 = load i8, i8* %arrayidx10, align 1, !tbaa !8\l  %conv12 = zext i8 %15 to i32\l  %shl13 = shl nuw nsw i32 %conv12, 8\l  %or = or i32 %shl13, %shr\l  %idxprom14 = sext i32 %or to i64\l  %arrayidx15 = getelementptr inbounds i32, i32* %ftab, i64 %idxprom14\l  %16 = load i32, i32* %arrayidx15, align 4, !tbaa !6\l  %inc = add i32 %16, 1\l  store i32 %inc, i32* %arrayidx15, align 4, !tbaa !6\l  %17 = add nsw i64 %indvars.iv612, -1\l  %arrayidx18 = getelementptr inbounds i16, i16* %quadrant, i64 %17\l  store i16 0, i16* %arrayidx18, align 2, !tbaa !9\l  %shr19 = ashr i32 %or, 8\l  %arrayidx22 = getelementptr inbounds i8, i8* %block, i64 %17\l  %18 = load i8, i8* %arrayidx22, align 1, !tbaa !8\l  %conv24 = zext i8 %18 to i32\l  %shl25 = shl nuw nsw i32 %conv24, 8\l  %or26 = or i32 %shl25, %shr19\l  %idxprom27 = sext i32 %or26 to i64\l  %arrayidx28 = getelementptr inbounds i32, i32* %ftab, i64 %idxprom27\l  %19 = load i32, i32* %arrayidx28, align 4, !tbaa !6\l  %inc29 = add i32 %19, 1\l  store i32 %inc29, i32* %arrayidx28, align 4, !tbaa !6\l  %20 = add nsw i64 %indvars.iv612, -2\l  %arrayidx32 = getelementptr inbounds i16, i16* %quadrant, i64 %20\l  store i16 0, i16* %arrayidx32, align 2, !tbaa !9\l  %shr33 = ashr i32 %or26, 8\l  %arrayidx36 = getelementptr inbounds i8, i8* %block, i64 %20\l  %21 = load i8, i8* %arrayidx36, align 1, !tbaa !8\l  %conv38 = zext i8 %21 to i32\l  %shl39 = shl nuw nsw i32 %conv38, 8\l  %or40 = or i32 %shl39, %shr33\l  %idxprom41 = sext i32 %or40 to i64\l  %arrayidx42 = getelementptr inbounds i32, i32* %ftab, i64 %idxprom41\l  %22 = load i32, i32* %arrayidx42, align 4, !tbaa !6\l  %inc43 = add i32 %22, 1\l  store i32 %inc43, i32* %arrayidx42, align 4, !tbaa !6\l  %23 = add nsw i64 %indvars.iv612, -3\l  %arrayidx46 = getelementptr inbounds i16, i16* %quadrant, i64 %23\l  store i16 0, i16* %arrayidx46, align 2, !tbaa !9\l  %shr47 = ashr i32 %or40, 8\l  %arrayidx50 = getelementptr inbounds i8, i8* %block, i64 %23\l  %24 = load i8, i8* %arrayidx50, align 1, !tbaa !8\l  %conv52 = zext i8 %24 to i32\l  %shl53 = shl nuw nsw i32 %conv52, 8\l  %or54 = or i32 %shl53, %shr47\l  %idxprom55 = sext i32 %or54 to i64\l  %arrayidx56 = getelementptr inbounds i32, i32* %ftab, i64 %idxprom55\l  %25 = load i32, i32* %arrayidx56, align 4, !tbaa !6\l  %inc57 = add i32 %25, 1\l  store i32 %inc57, i32* %arrayidx56, align 4, !tbaa !6\l  %indvars.iv.next613 = add nsw i64 %indvars.iv612, -4\l  %cmp4 = icmp sgt i64 %indvars.iv612, 6\l  br i1 %cmp4, label %for.body6, label %for.cond3.for.end60_crit_edge\l}"];
+	Node0x5638af311b70 -> Node0x5638af311b70[constraint=false];
+	Node0x5638af311b70 -> Node0x5638af311850;
+	Node0x5638af311850 [shape=record,label="{for.cond3.for.end60_crit_edge:                    \l  %26 = add i64 %7, -4\l  %27 = sub i64 %26, %14\l  %28 = trunc i64 %27 to i32\l  br label %for.end60\l}"];
+	Node0x5638af311850 -> Node0x5638af311b10;
+	Node0x5638af311b10 [shape=record,label="{for.end60:                                        \l  %j.0.lcssa = phi i32 [ %or54, %for.cond3.for.end60_crit_edge ], [ %shl,\l... %for.end.profile.exit.split ]\l  %i.1.lcssa = phi i32 [ %28, %for.cond3.for.end60_crit_edge ], [ %sub,\l... %for.end.profile.exit.split ]\l  %cmp62558 = icmp sgt i32 %i.1.lcssa, -1\l  br i1 %cmp62558, label %for.body64.lr.ph, label %for.end79\l}"];
+	Node0x5638af311b10 -> Node0x5638af311b90;
+	Node0x5638af311b10 -> Node0x5638af3118f0;
+	Node0x5638af311b90 [shape=record,label="{for.body64.lr.ph:                                 \l  %29 = sext i32 %i.1.lcssa to i64\l  br label %for.body64\l}"];
+	Node0x5638af311b90 -> Node0x5638af311910;
+	Node0x5638af311910 [shape=record,label="{for.body64:                                       \l  %indvars.iv610 = phi i64 [ %29, %for.body64.lr.ph ], [ %indvars.iv.next611,\l... %for.body64 ]\l  %j.1559 = phi i32 [ %j.0.lcssa, %for.body64.lr.ph ], [ %or73, %for.body64 ]\l  %arrayidx66 = getelementptr inbounds i16, i16* %quadrant, i64 %indvars.iv610\l  store i16 0, i16* %arrayidx66, align 2, !tbaa !9\l  %shr67 = ashr i32 %j.1559, 8\l  %arrayidx69 = getelementptr inbounds i8, i8* %block, i64 %indvars.iv610\l  %30 = load i8, i8* %arrayidx69, align 1, !tbaa !8\l  %conv71 = zext i8 %30 to i32\l  %shl72 = shl nuw nsw i32 %conv71, 8\l  %or73 = or i32 %shl72, %shr67\l  %idxprom74 = sext i32 %or73 to i64\l  %arrayidx75 = getelementptr inbounds i32, i32* %ftab, i64 %idxprom74\l  %31 = load i32, i32* %arrayidx75, align 4, !tbaa !6\l  %inc76 = add i32 %31, 1\l  store i32 %inc76, i32* %arrayidx75, align 4, !tbaa !6\l  %indvars.iv.next611 = add nsw i64 %indvars.iv610, -1\l  %cmp62 = icmp sgt i64 %indvars.iv610, 0\l  br i1 %cmp62, label %for.body64, label %for.end79\l}"];
+	Node0x5638af311910 -> Node0x5638af311910[constraint=false];
+	Node0x5638af311910 -> Node0x5638af3118f0;
+	Node0x5638af3118f0 [shape=record,label="{for.end79:                                        \l  %32 = sext i32 %nblock to i64\l  call void @enter_region(i64 -8930736930056529936, i8* getelementptr inbounds\l... ([31 x i8], [31 x i8]* @20, i32 0, i32 0))\l  br label %for.body83\l}"];
+	Node0x5638af3118f0 -> Node0x5638af311a00;
+	Node0x5638af311a00 [shape=record,label="{for.body83:                                       \l  %indvars.iv605 = phi i64 [ %indvars.iv.next606, %for.body83 ], [ 0,\l... %for.end79 ]\l  %arrayidx85 = getelementptr inbounds i8, i8* %block, i64 %indvars.iv605\l  %33 = load i8, i8* %arrayidx85, align 1, !tbaa !8\l  %34 = add nsw i64 %indvars.iv605, %32\l  %arrayidx87 = getelementptr inbounds i8, i8* %block, i64 %34\l  store i8 %33, i8* %arrayidx87, align 1, !tbaa !8\l  %arrayidx90 = getelementptr inbounds i16, i16* %quadrant, i64 %34\l  store i16 0, i16* %arrayidx90, align 2, !tbaa !9\l  %indvars.iv.next606 = add nuw nsw i64 %indvars.iv605, 1\l  %exitcond609 = icmp ne i64 %indvars.iv.next606, 34\l  br i1 %exitcond609, label %for.body83, label %for.end93\l}"];
+	Node0x5638af311a00 -> Node0x5638af311a00[constraint=false];
+	Node0x5638af311a00 -> Node0x5638af311a60;
+	Node0x5638af311a60 [shape=record,label="{for.end93:                                        \l  br i1 %cmp, label %if.then96, label %if.end98\l}"];
+	Node0x5638af311a60 -> Node0x5638af3128e0;
+	Node0x5638af311a60 -> Node0x5638af3127e0;
+	Node0x5638af3128e0 [shape=record,label="{if.then96:                                        \l  %35 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !2\l  %36 = tail call i64 @fwrite(i8* getelementptr inbounds ([28 x i8], [28 x\l... i8]* @.str.2, i64 0, i64 0), i64 27, i64 1, %struct._IO_FILE* %35) #5\l  br label %if.end98\l}"];
+	Node0x5638af3128e0 -> Node0x5638af3127e0;
+	Node0x5638af3127e0 [shape=record,label="{if.end98:                                         \l  br label %for.body102\l}"];
+	Node0x5638af3127e0 -> Node0x5638af3128c0;
+	Node0x5638af3128c0 [shape=record,label="{for.body102:                                      \l  %indvars.iv601 = phi i64 [ 1, %if.end98 ], [ %indvars.iv.next602,\l... %for.body102 ]\l  %37 = add nsw i64 %indvars.iv601, -1\l  %arrayidx105 = getelementptr inbounds i32, i32* %ftab, i64 %37\l  %38 = load i32, i32* %arrayidx105, align 4, !tbaa !6\l  %arrayidx107 = getelementptr inbounds i32, i32* %ftab, i64 %indvars.iv601\l  %39 = load i32, i32* %arrayidx107, align 4, !tbaa !6\l  %add108 = add i32 %39, %38\l  store i32 %add108, i32* %arrayidx107, align 4, !tbaa !6\l  %indvars.iv.next602 = add nuw nsw i64 %indvars.iv601, 1\l  %exitcond604 = icmp ne i64 %indvars.iv.next602, 65537\l  br i1 %exitcond604, label %for.body102, label %for.end111.profile.exit.split\l}"];
+	Node0x5638af3128c0 -> Node0x5638af3128c0[constraint=false];
+	Node0x5638af3128c0 -> Node0x5638af312840;
+	Node0x5638af312840 [shape=record,label="{for.end111.profile.exit.split:                    \l  call void @exit_region(i64 -8930736930056529936)\l  %40 = load i8, i8* %block, align 1, !tbaa !8\l  %conv113 = zext i8 %40 to i16\l  %shl114 = shl nuw i16 %conv113, 8\l  br i1 %cmp4561, label %for.body120.lr.ph, label %for.end189\l}"];
+	Node0x5638af312840 -> Node0x5638af3128a0;
+	Node0x5638af312840 -> Node0x5638af313d20;
+	Node0x5638af3128a0 [shape=record,label="{for.body120.lr.ph:                                \l  %41 = sext i32 %sub to i64\l  %42 = sub i32 0, %nblock\l  %43 = icmp sgt i32 %42, -7\l  %smax = select i1 %43, i32 %42, i32 -7\l  %44 = add i32 %nblock, %smax\l  %45 = add i32 %44, 3\l  %46 = lshr i32 %45, 2\l  %47 = zext i32 %46 to i64\l  %48 = shl i64 %47, 2\l  br label %for.body120\l}"];
+	Node0x5638af3128a0 -> Node0x5638af313d80;
+	Node0x5638af313d80 [shape=record,label="{for.body120:                                      \l  %indvars.iv593 = phi i64 [ %41, %for.body120.lr.ph ], [ %indvars.iv.next594,\l... %for.body120 ]\l  %s.0554 = phi i16 [ %shl114, %for.body120.lr.ph ], [ %or177, %for.body120 ]\l  %49 = lshr i16 %s.0554, 8\l  %arrayidx124 = getelementptr inbounds i8, i8* %block, i64 %indvars.iv593\l  %50 = load i8, i8* %arrayidx124, align 1, !tbaa !8\l  %conv125 = zext i8 %50 to i16\l  %shl126 = shl nuw i16 %conv125, 8\l  %or127 = or i16 %shl126, %49\l  %idxprom129 = zext i16 %or127 to i64\l  %arrayidx130 = getelementptr inbounds i32, i32* %ftab, i64 %idxprom129\l  %51 = load i32, i32* %arrayidx130, align 4, !tbaa !6\l  %sub131 = add i32 %51, -1\l  store i32 %sub131, i32* %arrayidx130, align 4, !tbaa !6\l  %idxprom134 = sext i32 %sub131 to i64\l  %arrayidx135 = getelementptr inbounds i32, i32* %ptr, i64 %idxprom134\l  %52 = trunc i64 %indvars.iv593 to i32\l  store i32 %52, i32* %arrayidx135, align 4, !tbaa !6\l  %53 = add nsw i64 %indvars.iv593, -1\l  %arrayidx140 = getelementptr inbounds i8, i8* %block, i64 %53\l  %54 = load i8, i8* %arrayidx140, align 1, !tbaa !8\l  %conv141 = zext i8 %54 to i16\l  %shl142 = shl nuw i16 %conv141, 8\l  %or143 = or i16 %shl142, %conv125\l  %idxprom145 = zext i16 %or143 to i64\l  %arrayidx146 = getelementptr inbounds i32, i32* %ftab, i64 %idxprom145\l  %55 = load i32, i32* %arrayidx146, align 4, !tbaa !6\l  %sub147 = add i32 %55, -1\l  store i32 %sub147, i32* %arrayidx146, align 4, !tbaa !6\l  %idxprom151 = sext i32 %sub147 to i64\l  %arrayidx152 = getelementptr inbounds i32, i32* %ptr, i64 %idxprom151\l  %56 = trunc i64 %53 to i32\l  store i32 %56, i32* %arrayidx152, align 4, !tbaa !6\l  %57 = add nsw i64 %indvars.iv593, -2\l  %arrayidx157 = getelementptr inbounds i8, i8* %block, i64 %57\l  %58 = load i8, i8* %arrayidx157, align 1, !tbaa !8\l  %conv158 = zext i8 %58 to i16\l  %shl159 = shl nuw i16 %conv158, 8\l  %or160 = or i16 %shl159, %conv141\l  %idxprom162 = zext i16 %or160 to i64\l  %arrayidx163 = getelementptr inbounds i32, i32* %ftab, i64 %idxprom162\l  %59 = load i32, i32* %arrayidx163, align 4, !tbaa !6\l  %sub164 = add i32 %59, -1\l  store i32 %sub164, i32* %arrayidx163, align 4, !tbaa !6\l  %idxprom168 = sext i32 %sub164 to i64\l  %arrayidx169 = getelementptr inbounds i32, i32* %ptr, i64 %idxprom168\l  %60 = trunc i64 %57 to i32\l  store i32 %60, i32* %arrayidx169, align 4, !tbaa !6\l  %61 = add nsw i64 %indvars.iv593, -3\l  %arrayidx174 = getelementptr inbounds i8, i8* %block, i64 %61\l  %62 = load i8, i8* %arrayidx174, align 1, !tbaa !8\l  %conv175 = zext i8 %62 to i16\l  %shl176 = shl nuw i16 %conv175, 8\l  %or177 = or i16 %shl176, %conv158\l  %idxprom179 = zext i16 %or177 to i64\l  %arrayidx180 = getelementptr inbounds i32, i32* %ftab, i64 %idxprom179\l  %63 = load i32, i32* %arrayidx180, align 4, !tbaa !6\l  %sub181 = add i32 %63, -1\l  store i32 %sub181, i32* %arrayidx180, align 4, !tbaa !6\l  %idxprom185 = sext i32 %sub181 to i64\l  %arrayidx186 = getelementptr inbounds i32, i32* %ptr, i64 %idxprom185\l  %64 = trunc i64 %61 to i32\l  store i32 %64, i32* %arrayidx186, align 4, !tbaa !6\l  %indvars.iv.next594 = add nsw i64 %indvars.iv593, -4\l  %cmp118 = icmp sgt i64 %indvars.iv593, 6\l  br i1 %cmp118, label %for.body120, label %for.cond117.for.end189_crit_edge\l}"];
+	Node0x5638af313d80 -> Node0x5638af313d80[constraint=false];
+	Node0x5638af313d80 -> Node0x5638af313da0;
+	Node0x5638af313da0 [shape=record,label="{for.cond117.for.end189_crit_edge:                 \l  %65 = add i64 %41, -4\l  %66 = sub i64 %65, %48\l  %67 = trunc i64 %66 to i32\l  br label %for.end189\l}"];
+	Node0x5638af313da0 -> Node0x5638af313d20;
+	Node0x5638af313d20 [shape=record,label="{for.end189:                                       \l  %i.5.lcssa = phi i32 [ %67, %for.cond117.for.end189_crit_edge ], [ %sub,\l... %for.end111.profile.exit.split ]\l  %s.0.lcssa = phi i16 [ %or177, %for.cond117.for.end189_crit_edge ], [\l... %shl114, %for.end111.profile.exit.split ]\l  %cmp191549 = icmp sgt i32 %i.5.lcssa, -1\l  br i1 %cmp191549, label %for.body193.lr.ph, label\l... %for.body215.profile.exit.split\l}"];
+	Node0x5638af313d20 -> Node0x5638af3125d0;
+	Node0x5638af313d20 -> Node0x5638af312630;
+	Node0x5638af3125d0 [shape=record,label="{for.body193.lr.ph:                                \l  %68 = sext i32 %i.5.lcssa to i64\l  br label %for.body193\l}"];
+	Node0x5638af3125d0 -> Node0x5638af3127a0;
+	Node0x5638af3127a0 [shape=record,label="{for.body193:                                      \l  %indvars.iv591 = phi i64 [ %68, %for.body193.lr.ph ], [ %indvars.iv.next592,\l... %for.body193 ]\l  %s.1551 = phi i16 [ %s.0.lcssa, %for.body193.lr.ph ], [ %or200, %for.body193\l... ]\l  %69 = lshr i16 %s.1551, 8\l  %arrayidx197 = getelementptr inbounds i8, i8* %block, i64 %indvars.iv591\l  %70 = load i8, i8* %arrayidx197, align 1, !tbaa !8\l  %conv198 = zext i8 %70 to i16\l  %shl199 = shl nuw i16 %conv198, 8\l  %or200 = or i16 %shl199, %69\l  %idxprom202 = zext i16 %or200 to i64\l  %arrayidx203 = getelementptr inbounds i32, i32* %ftab, i64 %idxprom202\l  %71 = load i32, i32* %arrayidx203, align 4, !tbaa !6\l  %sub204 = add i32 %71, -1\l  store i32 %sub204, i32* %arrayidx203, align 4, !tbaa !6\l  %idxprom207 = sext i32 %sub204 to i64\l  %arrayidx208 = getelementptr inbounds i32, i32* %ptr, i64 %idxprom207\l  %72 = trunc i64 %indvars.iv591 to i32\l  store i32 %72, i32* %arrayidx208, align 4, !tbaa !6\l  %indvars.iv.next592 = add nsw i64 %indvars.iv591, -1\l  %cmp191 = icmp sgt i64 %indvars.iv591, 0\l  br i1 %cmp191, label %for.body193, label %for.body215.profile.exit.split\l}"];
+	Node0x5638af3127a0 -> Node0x5638af3127a0[constraint=false];
+	Node0x5638af3127a0 -> Node0x5638af312630;
+	Node0x5638af312630 [shape=record,label="{for.body215.profile.exit.split:                   \l  call void @enter_region(i64 -5628740840824209877, i8* getelementptr inbounds\l... ([31 x i8], [31 x i8]* @21, i32 0, i32 0))\l  br label %for.body215\l}"];
+	Node0x5638af312630 -> Node0x5638af3127c0;
+	Node0x5638af3127c0 [shape=record,label="{for.body215:                                      \l  %indvars.iv588 = phi i64 [ %indvars.iv.next589, %for.body215 ], [ 0,\l... %for.body215.profile.exit.split ]\l  %arrayidx217 = getelementptr inbounds [256 x i8], [256 x i8]* %bigDone, i64\l... 0, i64 %indvars.iv588\l  store i8 0, i8* %arrayidx217, align 1, !tbaa !8\l  %arrayidx219 = getelementptr inbounds [256 x i32], [256 x i32]*\l... %runningOrder, i64 0, i64 %indvars.iv588\l  %73 = trunc i64 %indvars.iv588 to i32\l  store i32 %73, i32* %arrayidx219, align 4, !tbaa !6\l  %indvars.iv.next589 = add nuw nsw i64 %indvars.iv588, 1\l  %exitcond590 = icmp ne i64 %indvars.iv.next589, 256\l  br i1 %exitcond590, label %for.body215, label %do.body.profile.exit.split\l}"];
+	Node0x5638af3127c0 -> Node0x5638af3127c0[constraint=false];
+	Node0x5638af3127c0 -> Node0x5638af312710;
+	Node0x5638af312710 [shape=record,label="{do.body.profile.exit.split:                       \l  call void @exit_region(i64 -5628740840824209877)\l  br label %do.body\l}"];
+	Node0x5638af312710 -> Node0x5638af312770;
+	Node0x5638af312770 [shape=record,label="{do.body:                                          \l  %h.0 = phi i32 [ %add223, %do.body ], [ 1, %do.body.profile.exit.split ]\l  %mul = mul nsw i32 %h.0, 3\l  %add223 = add nsw i32 %mul, 1\l  %cmp224 = icmp slt i32 %mul, 256\l  br i1 %cmp224, label %do.body, label %do.end\l}"];
+	Node0x5638af312770 -> Node0x5638af312770[constraint=false];
+	Node0x5638af312770 -> Node0x5638af314350;
+	Node0x5638af314350 [shape=record,label="{do.end:                                           \l  br label %do.body226\l}"];
+	Node0x5638af314350 -> Node0x5638af314540;
+	Node0x5638af314540 [shape=record,label="{do.body226:                                       \l  %h.1 = phi i32 [ 364, %do.end ], [ %div, %do.cond273 ]\l  %div = sdiv i32 %h.1, 3\l  %cmp228546 = icmp slt i32 %h.1, 768\l  br i1 %cmp228546, label %for.body230.lr.ph, label %do.cond273\l}"];
+	Node0x5638af314540 -> Node0x5638af3143b0;
+	Node0x5638af314540 -> Node0x5638af314410;
+	Node0x5638af3143b0 [shape=record,label="{for.body230.lr.ph:                                \l  %74 = sext i32 %div to i64\l  br label %for.body230\l}"];
+	Node0x5638af3143b0 -> Node0x5638af314470;
+	Node0x5638af314470 [shape=record,label="{for.body230:                                      \l  %indvars.iv586 = phi i64 [ %74, %for.body230.lr.ph ], [ %indvars.iv.next587,\l... %zero ]\l  %arrayidx232 = getelementptr inbounds [256 x i32], [256 x i32]*\l... %runningOrder, i64 0, i64 %indvars.iv586\l  %75 = load i32, i32* %arrayidx232, align 4, !tbaa !6\l  %76 = trunc i64 %indvars.iv586 to i32\l  br label %while.cond\l}"];
+	Node0x5638af314470 -> Node0x5638af3144d0;
+	Node0x5638af3144d0 [shape=record,label="{while.cond:                                       \l  %j.2 = phi i32 [ %76, %for.body230 ], [ %sub233, %while.body ]\l  %sub233 = sub nsw i32 %j.2, %div\l  %idxprom234 = sext i32 %sub233 to i64\l  %arrayidx235 = getelementptr inbounds [256 x i32], [256 x i32]*\l... %runningOrder, i64 0, i64 %idxprom234\l  %77 = load i32, i32* %arrayidx235, align 4, !tbaa !6\l  %add236 = shl i32 %77, 8\l  %shl237 = add i32 %add236, 256\l  %idxprom238 = sext i32 %shl237 to i64\l  %arrayidx239 = getelementptr inbounds i32, i32* %ftab, i64 %idxprom238\l  %78 = load i32, i32* %arrayidx239, align 4, !tbaa !6\l  %idxprom244 = sext i32 %add236 to i64\l  %arrayidx245 = getelementptr inbounds i32, i32* %ftab, i64 %idxprom244\l  %79 = load i32, i32* %arrayidx245, align 4, !tbaa !6\l  %sub246 = sub i32 %78, %79\l  %add247 = shl i32 %75, 8\l  %shl248 = add i32 %add247, 256\l  %idxprom249 = sext i32 %shl248 to i64\l  %arrayidx250 = getelementptr inbounds i32, i32* %ftab, i64 %idxprom249\l  %80 = load i32, i32* %arrayidx250, align 4, !tbaa !6\l  %idxprom252 = sext i32 %add247 to i64\l  %arrayidx253 = getelementptr inbounds i32, i32* %ftab, i64 %idxprom252\l  %81 = load i32, i32* %arrayidx253, align 4, !tbaa !6\l  %sub254 = sub i32 %80, %81\l  %cmp255 = icmp ugt i32 %sub246, %sub254\l  br i1 %cmp255, label %while.body, label %zero\l}"];
+	Node0x5638af3144d0 -> Node0x5638af313e00;
+	Node0x5638af3144d0 -> Node0x5638af313e60;
+	Node0x5638af313e00 [shape=record,label="{while.body:                                       \l  %idxprom260 = sext i32 %j.2 to i64\l  %arrayidx261 = getelementptr inbounds [256 x i32], [256 x i32]*\l... %runningOrder, i64 0, i64 %idxprom260\l  store i32 %77, i32* %arrayidx261, align 4, !tbaa !6\l  %cmp264 = icmp slt i32 %sub233, %div\l  br i1 %cmp264, label %zero, label %while.cond\l}"];
+	Node0x5638af313e00 -> Node0x5638af313e60;
+	Node0x5638af313e00 -> Node0x5638af3144d0[constraint=false];
+	Node0x5638af313e60 [shape=record,label="{zero:                                             \l  %j.3 = phi i32 [ %sub233, %while.body ], [ %j.2, %while.cond ]\l  %idxprom268 = sext i32 %j.3 to i64\l  %arrayidx269 = getelementptr inbounds [256 x i32], [256 x i32]*\l... %runningOrder, i64 0, i64 %idxprom268\l  store i32 %75, i32* %arrayidx269, align 4, !tbaa !6\l  %indvars.iv.next587 = add nsw i64 %indvars.iv586, 1\l  %cmp228 = icmp slt i64 %indvars.iv586, 255\l  br i1 %cmp228, label %for.body230, label %do.cond273\l}"];
+	Node0x5638af313e60 -> Node0x5638af314470[constraint=false];
+	Node0x5638af313e60 -> Node0x5638af314410;
+	Node0x5638af314410 [shape=record,label="{do.cond273:                                       \l  %h.1.off = add i32 %h.1, -3\l  %82 = icmp ugt i32 %h.1.off, 2\l  br i1 %82, label %do.body226, label %for.body280.profile.exit.split\l}"];
+	Node0x5638af314410 -> Node0x5638af314540[constraint=false];
+	Node0x5638af314410 -> Node0x5638af313ec0;
+	Node0x5638af313ec0 [shape=record,label="{for.body280.profile.exit.split:                   \l  call void @enter_region(i64 4191445829166362491, i8* getelementptr inbounds\l... ([33 x i8], [33 x i8]* @10, i32 0, i32 0))\l  call void @enter_region(i64 -8449160339341905178, i8* getelementptr inbounds\l... ([33 x i8], [33 x i8]* @12, i32 0, i32 0))\l  call void @enter_region(i64 -381149938865582498, i8* getelementptr inbounds\l... ([33 x i8], [33 x i8]* @13, i32 0, i32 0))\l  br label %for.body280\l}"];
+	Node0x5638af313ec0 -> Node0x5638af313f20;
+	Node0x5638af313f20 [shape=record,label="{for.body280:                                      \l  %indvars.iv584 = phi i64 [ %indvars.iv.next585,\l... %for.inc507.profile.exit.split ], [ 0, %for.body280.profile.exit.split ]\l  %numQSorted.0545 = phi i32 [ %numQSorted.5, %for.inc507.profile.exit.split\l... ], [ 0, %for.body280.profile.exit.split ]\l  %arrayidx282 = getelementptr inbounds [256 x i32], [256 x i32]*\l... %runningOrder, i64 0, i64 %indvars.iv584\l  %83 = load i32, i32* %arrayidx282, align 4, !tbaa !6\l  %84 = zext i32 %83 to i64\l  br label %for.body286\l}"];
+	Node0x5638af313f20 -> Node0x5638af313f80;
+	Node0x5638af313f80 [shape=record,label="{for.body286:                                      \l  %indvars.iv = phi i64 [ 0, %for.body280 ], [ %indvars.iv.next, %for.inc327 ]\l  %numQSorted.1533 = phi i32 [ %numQSorted.0545, %for.body280 ], [\l... %numQSorted.5, %for.inc327 ]\l  %cmp287 = icmp eq i64 %indvars.iv, %84\l  br i1 %cmp287, label %for.inc327, label %if.then289\l}"];
+	Node0x5638af313f80 -> Node0x5638af313fe0;
+	Node0x5638af313f80 -> Node0x5638af314040;
+	Node0x5638af313fe0 [shape=record,label="{for.inc327:                                       \l  %numQSorted.5 = phi i32 [ %numQSorted.4, %if.end322 ], [ %numQSorted.1533,\l... %for.body286 ]\l  %indvars.iv.next = add nuw nsw i64 %indvars.iv, 1\l  %cmp284 = icmp ult i64 %indvars.iv, 255\l  br i1 %cmp284, label %for.body286, label %for.end329.profile.exit.split\l}"];
+	Node0x5638af313fe0 -> Node0x5638af313f80;
+	Node0x5638af313fe0 -> Node0x5638af3140a0;
+	Node0x5638af3140a0 [shape=record,label="{for.end329.profile.exit.split:                    \l  call void @enter_region(i64 6504384233162075737, i8* getelementptr inbounds\l... ([31 x i8], [31 x i8]* @17, i32 0, i32 0))\l  %idxprom330 = sext i32 %83 to i64\l  %arrayidx331 = getelementptr inbounds [256 x i8], [256 x i8]* %bigDone, i64\l... 0, i64 %idxprom330\l  %95 = load i8, i8* %arrayidx331, align 1, !tbaa !8\l  %tobool332 = icmp eq i8 %95, 0\l  br i1 %tobool332, label %if.end334, label %if.then333\l}"];
+	Node0x5638af3140a0 -> Node0x5638af314100;
+	Node0x5638af3140a0 -> Node0x5638af314160;
+	Node0x5638af314100 [shape=record,label="{if.end334:                                        \l  br label %for.body338\l}"];
+	Node0x5638af314100 -> Node0x5638af3142b0;
+	Node0x5638af3142b0 [shape=record,label="{for.body338:                                      \l  %indvars.iv569 = phi i64 [ 0, %if.end334 ], [ %indvars.iv.next570,\l... %for.body338 ]\l  %96 = shl i64 %indvars.iv569, 8\l  %97 = add nsw i64 %96, %idxprom330\l  %arrayidx342 = getelementptr inbounds i32, i32* %ftab, i64 %97\l  %98 = load i32, i32* %arrayidx342, align 4, !tbaa !6\l  %and343 = and i32 %98, -2097153\l  %arrayidx345 = getelementptr inbounds [256 x i32], [256 x i32]* %copyStart,\l... i64 0, i64 %indvars.iv569\l  store i32 %and343, i32* %arrayidx345, align 4, !tbaa !6\l  %add347 = add i32 %83, 1\l  %99 = trunc i64 %96 to i32\l  %add348 = add i32 %add347, %99\l  %idxprom349 = sext i32 %add348 to i64\l  %arrayidx350 = getelementptr inbounds i32, i32* %ftab, i64 %idxprom349\l  %100 = load i32, i32* %arrayidx350, align 4, !tbaa !6\l  %and351 = and i32 %100, -2097153\l  %sub352 = add i32 %and351, -1\l  %arrayidx354 = getelementptr inbounds [256 x i32], [256 x i32]* %copyEnd,\l... i64 0, i64 %indvars.iv569\l  store i32 %sub352, i32* %arrayidx354, align 4, !tbaa !6\l  %indvars.iv.next570 = add nuw nsw i64 %indvars.iv569, 1\l  %exitcond = icmp ne i64 %indvars.iv.next570, 256\l  br i1 %exitcond, label %for.body338, label %for.end357.profile.exit.split\l}"];
+	Node0x5638af3142b0 -> Node0x5638af3142b0[constraint=false];
+	Node0x5638af3142b0 -> Node0x5638af3141c0;
+	Node0x5638af3141c0 [shape=record,label="{for.end357.profile.exit.split:                    \l  call void @exit_region(i64 6504384233162075737)\l  %shl358 = shl i32 %83, 8\l  %idxprom359 = sext i32 %shl358 to i64\l  %arrayidx360 = getelementptr inbounds i32, i32* %ftab, i64 %idxprom359\l  %101 = load i32, i32* %arrayidx360, align 4, !tbaa !6\l  %and361 = and i32 %101, -2097153\l  %arrayidx364 = getelementptr inbounds [256 x i32], [256 x i32]* %copyStart,\l... i64 0, i64 %idxprom330\l  %102 = load i32, i32* %arrayidx364, align 4, !tbaa !6\l  %cmp365535 = icmp slt i32 %and361, %102\l  br i1 %cmp365535, label %for.body367.lr.ph, label %for.end390\l}"];
+	Node0x5638af3141c0 -> Node0x5638af314220;
+	Node0x5638af3141c0 -> Node0x5638af314280;
+	Node0x5638af314220 [shape=record,label="{for.body367.lr.ph:                                \l  %103 = sext i32 %and361 to i64\l  br label %for.body367\l}"];
+	Node0x5638af314220 -> Node0x5638af315f70;
+	Node0x5638af315f70 [shape=record,label="{for.body367:                                      \l  %indvars.iv574 = phi i64 [ %103, %for.body367.lr.ph ], [\l... %indvars.iv.next575, %for.inc388 ]\l  %arrayidx369 = getelementptr inbounds i32, i32* %ptr, i64 %indvars.iv574\l  %104 = load i32, i32* %arrayidx369, align 4, !tbaa !6\l  %sub370 = add i32 %104, -1\l  %cmp371 = icmp slt i32 %sub370, 0\l  %add374 = select i1 %cmp371, i32 %nblock, i32 0\l  %add374.sub370 = add nsw i32 %sub370, %add374\l  %idxprom376 = sext i32 %add374.sub370 to i64\l  %arrayidx377 = getelementptr inbounds i8, i8* %block, i64 %idxprom376\l  %105 = load i8, i8* %arrayidx377, align 1, !tbaa !8\l  %idxprom378 = zext i8 %105 to i64\l  %arrayidx379 = getelementptr inbounds [256 x i8], [256 x i8]* %bigDone, i64\l... 0, i64 %idxprom378\l  %106 = load i8, i8* %arrayidx379, align 1, !tbaa !8\l  %tobool380 = icmp eq i8 %106, 0\l  br i1 %tobool380, label %if.then381, label %for.inc388\l}"];
+	Node0x5638af315f70 -> Node0x5638af315fd0;
+	Node0x5638af315f70 -> Node0x5638af314ff0;
+	Node0x5638af315fd0 [shape=record,label="{if.then381:                                       \l  %arrayidx383 = getelementptr inbounds [256 x i32], [256 x i32]* %copyStart,\l... i64 0, i64 %idxprom378\l  %107 = load i32, i32* %arrayidx383, align 4, !tbaa !6\l  %inc384 = add nsw i32 %107, 1\l  store i32 %inc384, i32* %arrayidx383, align 4, !tbaa !6\l  %idxprom385 = sext i32 %107 to i64\l  %arrayidx386 = getelementptr inbounds i32, i32* %ptr, i64 %idxprom385\l  store i32 %add374.sub370, i32* %arrayidx386, align 4, !tbaa !6\l  br label %for.inc388\l}"];
+	Node0x5638af315fd0 -> Node0x5638af314ff0;
+	Node0x5638af314ff0 [shape=record,label="{for.inc388:                                       \l  %indvars.iv.next575 = add i64 %indvars.iv574, 1\l  %108 = load i32, i32* %arrayidx364, align 4, !tbaa !6\l  %109 = sext i32 %108 to i64\l  %cmp365 = icmp slt i64 %indvars.iv.next575, %109\l  br i1 %cmp365, label %for.body367, label %for.end390\l}"];
+	Node0x5638af314ff0 -> Node0x5638af315f70[constraint=false];
+	Node0x5638af314ff0 -> Node0x5638af314280;
+	Node0x5638af314280 [shape=record,label="{for.end390:                                       \l  %shl392 = add i32 %shl358, 256\l  %idxprom393 = sext i32 %shl392 to i64\l  %arrayidx394 = getelementptr inbounds i32, i32* %ftab, i64 %idxprom393\l  %110 = load i32, i32* %arrayidx394, align 4, !tbaa !6\l  %and395 = and i32 %110, -2097153\l  %j.7537 = add i32 %and395, -1\l  %arrayidx399 = getelementptr inbounds [256 x i32], [256 x i32]* %copyEnd,\l... i64 0, i64 %idxprom330\l  %111 = load i32, i32* %arrayidx399, align 4, !tbaa !6\l  %cmp400538 = icmp sgt i32 %j.7537, %111\l  br i1 %cmp400538, label %for.body402.lr.ph, label\l... %for.end425.profile.exit.split\l}"];
+	Node0x5638af314280 -> Node0x5638af315050;
+	Node0x5638af314280 -> Node0x5638af3150b0;
+	Node0x5638af315050 [shape=record,label="{for.body402.lr.ph:                                \l  br label %for.body402\l}"];
+	Node0x5638af315050 -> Node0x5638af3152a0;
+	Node0x5638af3152a0 [shape=record,label="{for.body402:                                      \l  %j.7539 = phi i32 [ %j.7537, %for.body402.lr.ph ], [ %j.7, %for.inc423 ]\l  %idxprom403 = sext i32 %j.7539 to i64\l  %arrayidx404 = getelementptr inbounds i32, i32* %ptr, i64 %idxprom403\l  %112 = load i32, i32* %arrayidx404, align 4, !tbaa !6\l  %sub405 = add i32 %112, -1\l  %cmp406 = icmp slt i32 %sub405, 0\l  %add409 = select i1 %cmp406, i32 %nblock, i32 0\l  %add409.sub405 = add nsw i32 %sub405, %add409\l  %idxprom411 = sext i32 %add409.sub405 to i64\l  %arrayidx412 = getelementptr inbounds i8, i8* %block, i64 %idxprom411\l  %113 = load i8, i8* %arrayidx412, align 1, !tbaa !8\l  %idxprom413 = zext i8 %113 to i64\l  %arrayidx414 = getelementptr inbounds [256 x i8], [256 x i8]* %bigDone, i64\l... 0, i64 %idxprom413\l  %114 = load i8, i8* %arrayidx414, align 1, !tbaa !8\l  %tobool415 = icmp eq i8 %114, 0\l  br i1 %tobool415, label %if.then416, label %for.inc423\l}"];
+	Node0x5638af3152a0 -> Node0x5638af315110;
+	Node0x5638af3152a0 -> Node0x5638af315170;
+	Node0x5638af315110 [shape=record,label="{if.then416:                                       \l  %arrayidx418 = getelementptr inbounds [256 x i32], [256 x i32]* %copyEnd,\l... i64 0, i64 %idxprom413\l  %115 = load i32, i32* %arrayidx418, align 4, !tbaa !6\l  %dec419 = add nsw i32 %115, -1\l  store i32 %dec419, i32* %arrayidx418, align 4, !tbaa !6\l  %idxprom420 = sext i32 %115 to i64\l  %arrayidx421 = getelementptr inbounds i32, i32* %ptr, i64 %idxprom420\l  store i32 %add409.sub405, i32* %arrayidx421, align 4, !tbaa !6\l  br label %for.inc423\l}"];
+	Node0x5638af315110 -> Node0x5638af315170;
+	Node0x5638af315170 [shape=record,label="{for.inc423:                                       \l  %j.7 = add i32 %j.7539, -1\l  %116 = load i32, i32* %arrayidx399, align 4, !tbaa !6\l  %cmp400 = icmp sgt i32 %j.7, %116\l  br i1 %cmp400, label %for.body402, label %for.end425.profile.exit.split\l}"];
+	Node0x5638af315170 -> Node0x5638af3152a0[constraint=false];
+	Node0x5638af315170 -> Node0x5638af3150b0;
+	Node0x5638af3150b0 [shape=record,label="{for.end425.profile.exit.split:                    \l  call void @enter_region(i64 5452467113597808717, i8* getelementptr inbounds\l... ([31 x i8], [31 x i8]* @18, i32 0, i32 0))\l  %117 = load i32, i32* %arrayidx364, align 4, !tbaa !6\l  %sub428 = add nsw i32 %117, -1\l  %118 = load i32, i32* %arrayidx399, align 4, !tbaa !6\l  %cmp431 = icmp eq i32 %sub428, %118\l  br i1 %cmp431, label %if.end443, label %lor.lhs.false\l}"];
+	Node0x5638af3150b0 -> Node0x5638af3151d0;
+	Node0x5638af3150b0 -> Node0x5638af315230;
+	Node0x5638af3151d0 [shape=record,label="{if.end443:                                        \l  br label %for.body447\l}"];
+	Node0x5638af3151d0 -> Node0x5638af315300;
+	Node0x5638af315300 [shape=record,label="{for.body447:                                      \l  %indvars.iv576 = phi i64 [ 0, %if.end443 ], [ %indvars.iv.next577,\l... %for.body447 ]\l  %119 = shl i64 %indvars.iv576, 8\l  %120 = add nsw i64 %119, %idxprom330\l  %arrayidx451 = getelementptr inbounds i32, i32* %ftab, i64 %120\l  %121 = load i32, i32* %arrayidx451, align 4, !tbaa !6\l  %or452 = or i32 %121, 2097152\l  store i32 %or452, i32* %arrayidx451, align 4, !tbaa !6\l  %indvars.iv.next577 = add nuw nsw i64 %indvars.iv576, 1\l  %exitcond580 = icmp ne i64 %indvars.iv.next577, 256\l  br i1 %exitcond580, label %for.body447, label\l... %for.end455.profile.exit.split.profile.exit.split\l}"];
+	Node0x5638af315300 -> Node0x5638af315300[constraint=false];
+	Node0x5638af315300 -> Node0x5638af315360;
+	Node0x5638af315360 [shape=record,label="{for.end455.profile.exit.split.profile.exit.split: \l  call void @exit_region(i64 5452467113597808717)\l  call void @enter_region(i64 918768461974734031, i8* getelementptr inbounds\l... ([33 x i8], [33 x i8]* @9, i32 0, i32 0))\l  store i8 1, i8* %arrayidx331, align 1, !tbaa !8\l  %cmp458 = icmp ult i64 %indvars.iv584, 255\l  br i1 %cmp458, label %if.then460, label %for.inc507.profile.exit.split\l}"];
+	Node0x5638af315360 -> Node0x5638af3153c0;
+	Node0x5638af315360 -> Node0x5638af315420;
+	Node0x5638af3153c0 [shape=record,label="{if.then460:                                       \l  %122 = load i32, i32* %arrayidx360, align 4, !tbaa !6\l  %and464 = and i32 %122, -2097153\l  %123 = load i32, i32* %arrayidx394, align 4, !tbaa !6\l  %and469 = and i32 %123, -2097153\l  %sub470 = sub i32 %and469, %and464\l  br label %while.cond471\l}"];
+	Node0x5638af3153c0 -> Node0x5638af315480;
+	Node0x5638af315480 [shape=record,label="{while.cond471:                                    \l  %shifts.0 = phi i32 [ 0, %if.then460 ], [ %inc476, %while.cond471 ]\l  %shr472 = ashr i32 %sub470, %shifts.0\l  %cmp473 = icmp sgt i32 %shr472, 65534\l  %inc476 = add nuw nsw i32 %shifts.0, 1\l  br i1 %cmp473, label %while.cond471, label %while.end477\l}"];
+	Node0x5638af315480 -> Node0x5638af315480[constraint=false];
+	Node0x5638af315480 -> Node0x5638af3154e0;
+	Node0x5638af3154e0 [shape=record,label="{while.end477:                                     \l  %cmp480542 = icmp sgt i32 %sub470, 0\l  br i1 %cmp480542, label %for.body482.lr.ph, label\l... %for.end499.profile.exit.split\l}"];
+	Node0x5638af3154e0 -> Node0x5638af315540;
+	Node0x5638af3154e0 -> Node0x5638af3155a0;
+	Node0x5638af315540 [shape=record,label="{for.body482.lr.ph:                                \l  %124 = sext i32 %sub470 to i64\l  %125 = sext i32 %and464 to i64\l  br label %for.body482\l}"];
+	Node0x5638af315540 -> Node0x5638af315600;
+	Node0x5638af315600 [shape=record,label="{for.body482:                                      \l  %indvars.iv581 = phi i64 [ %124, %for.body482.lr.ph ], [\l... %indvars.iv.next582, %for.inc497 ]\l  %indvars.iv.next582 = add nsw i64 %indvars.iv581, -1\l  %126 = add nsw i64 %indvars.iv.next582, %125\l  %arrayidx485 = getelementptr inbounds i32, i32* %ptr, i64 %126\l  %127 = load i32, i32* %arrayidx485, align 4, !tbaa !6\l  %128 = trunc i64 %indvars.iv.next582 to i32\l  %shr486 = ashr i32 %128, %shifts.0\l  %conv487 = trunc i32 %shr486 to i16\l  %idxprom488 = sext i32 %127 to i64\l  %arrayidx489 = getelementptr inbounds i16, i16* %quadrant, i64 %idxprom488\l  store i16 %conv487, i16* %arrayidx489, align 2, !tbaa !9\l  %cmp490 = icmp slt i32 %127, 34\l  br i1 %cmp490, label %if.then492, label %for.inc497\l}"];
+	Node0x5638af315600 -> Node0x5638af315660;
+	Node0x5638af315600 -> Node0x5638af3156c0;
+	Node0x5638af315660 [shape=record,label="{if.then492:                                       \l  %add493 = add nsw i32 %127, %nblock\l  %idxprom494 = sext i32 %add493 to i64\l  %arrayidx495 = getelementptr inbounds i16, i16* %quadrant, i64 %idxprom494\l  store i16 %conv487, i16* %arrayidx495, align 2, !tbaa !9\l  br label %for.inc497\l}"];
+	Node0x5638af315660 -> Node0x5638af3156c0;
+	Node0x5638af3156c0 [shape=record,label="{for.inc497:                                       \l  %cmp480 = icmp sgt i64 %indvars.iv581, 1\l  br i1 %cmp480, label %for.body482, label %for.end499.profile.exit.split\l}"];
+	Node0x5638af3156c0 -> Node0x5638af315600[constraint=false];
+	Node0x5638af3156c0 -> Node0x5638af3155a0;
+	Node0x5638af3155a0 [shape=record,label="{for.end499.profile.exit.split:                    \l  call void @enter_region(i64 -5933225413654012482, i8* getelementptr inbounds\l... ([31 x i8], [31 x i8]* @14, i32 0, i32 0))\l  %sub500 = add nsw i32 %sub470, -1\l  %shr501 = ashr i32 %sub500, %shifts.0\l  %cmp502 = icmp slt i32 %shr501, 65536\l  br i1 %cmp502, label %for.inc507.profile.exit.split.profile.exit.split,\l... label %if.then504\l}"];
+	Node0x5638af3155a0 -> Node0x5638af315720;
+	Node0x5638af3155a0 -> Node0x5638af315780;
+	Node0x5638af315720 [shape=record,label="{for.inc507.profile.exit.split.profile.exit.split: \l  call void @exit_region(i64 -5933225413654012482)\l  br label %for.inc507.profile.exit.split\l}"];
+	Node0x5638af315720 -> Node0x5638af315420;
+	Node0x5638af315420 [shape=record,label="{for.inc507.profile.exit.split:                    \l  call void @exit_region(i64 918768461974734031)\l  %indvars.iv.next585 = add nuw nsw i64 %indvars.iv584, 1\l  br i1 %cmp458, label %for.body280, label %for.end509.profile.exit.split\l}"];
+	Node0x5638af315420 -> Node0x5638af313f20[constraint=false];
+	Node0x5638af315420 -> Node0x5638af3157e0;
+	Node0x5638af3157e0 [shape=record,label="{for.end509.profile.exit.split:                    \l  call void @enter_region(i64 -521124218441613924, i8* getelementptr inbounds\l... ([31 x i8], [31 x i8]* @15, i32 0, i32 0))\l  br i1 %cmp, label %if.then512, label\l... %cleanup516.profile.exit.split.profile.exit.split\l}"];
+	Node0x5638af3157e0 -> Node0x5638af315840;
+	Node0x5638af3157e0 -> Node0x5638af3158a0;
+	Node0x5638af315840 [shape=record,label="{if.then512:                                       \l  %129 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !2\l  %sub513 = sub nsw i32 %nblock, %numQSorted.5\l  %call514 = tail call i32 (%struct._IO_FILE*, i8*, ...)\l... @fprintf(%struct._IO_FILE* %129, i8* getelementptr inbounds ([44 x i8], [44 x\l... i8]* @.str.8, i64 0, i64 0), i32 %nblock, i32 %numQSorted.5, i32 %sub513) #6\l  br label %cleanup516.profile.exit.split.profile.exit.split\l}"];
+	Node0x5638af315840 -> Node0x5638af3158a0;
+	Node0x5638af3158a0 [shape=record,label="{cleanup516.profile.exit.split.profile.exit.split: \l  call void @exit_region(i64 -521124218441613924)\l  br label %cleanup516.profile.exit.split\l}"];
+	Node0x5638af3158a0 -> Node0x5638af315900;
+	Node0x5638af315900 [shape=record,label="{cleanup516.profile.exit.split:                    \l  call void @exit_region(i64 4191445829166362491)\l  call void @exit_region(i64 -8449160339341905178)\l  call void @exit_region(i64 -381149938865582498)\l  call void @llvm.lifetime.end.p0i8(i64 1024, i8* %3) #4\l  call void @llvm.lifetime.end.p0i8(i64 1024, i8* %2) #4\l  call void @llvm.lifetime.end.p0i8(i64 256, i8* %1) #4\l  call void @llvm.lifetime.end.p0i8(i64 1024, i8* %0) #4\l  ret void\l}"];
+	Node0x5638af315780 [shape=record,label="{if.then504:                                       \l  tail call void @BZ2_bz__AssertH__fail(i32 1002) #4\l  br label %for.inc507.profile.exit.split.profile.exit.split\l}"];
+	Node0x5638af315780 -> Node0x5638af315720;
+	Node0x5638af315230 [shape=record,label="{lor.lhs.false:                                    \l  %cmp435 = icmp eq i32 %117, 0\l  br i1 %cmp435, label %land.lhs.true, label %if.then442\l}"];
+	Node0x5638af315230 -> Node0x5638af315960;
+	Node0x5638af315230 -> Node0x5638af3159c0;
+	Node0x5638af315960 [shape=record,label="{land.lhs.true:                                    \l  %cmp440 = icmp eq i32 %118, %sub\l  br i1 %cmp440, label %if.end443, label %if.then442\l}"];
+	Node0x5638af315960 -> Node0x5638af3151d0;
+	Node0x5638af315960 -> Node0x5638af3159c0;
+	Node0x5638af3159c0 [shape=record,label="{if.then442:                                       \l  tail call void @BZ2_bz__AssertH__fail(i32 1007) #4\l  br label %if.end443\l}"];
+	Node0x5638af3159c0 -> Node0x5638af3151d0;
+	Node0x5638af314160 [shape=record,label="{if.then333:                                       \l  tail call void @BZ2_bz__AssertH__fail(i32 1006) #4\l  br label %if.end334\l}"];
+	Node0x5638af314160 -> Node0x5638af314100;
+	Node0x5638af314040 [shape=record,label="{if.then289:                                       \l  %shl290 = shl i32 %83, 8\l  %85 = sext i32 %shl290 to i64\l  %86 = add nuw nsw i64 %indvars.iv, %85\l  %arrayidx293 = getelementptr inbounds i32, i32* %ftab, i64 %86\l  %87 = load i32, i32* %arrayidx293, align 4, !tbaa !6\l  %and = and i32 %87, 2097152\l  %tobool = icmp eq i32 %and, 0\l  br i1 %tobool, label %if.then294.profile.exit.split, label %if.end322\l}"];
+	Node0x5638af314040 -> Node0x5638af315a20;
+	Node0x5638af314040 -> Node0x5638af315a80;
+	Node0x5638af315a20 [shape=record,label="{if.then294.profile.exit.split:                    \l  call void @enter_region(i64 7474094978838873664, i8* getelementptr inbounds\l... ([33 x i8], [33 x i8]* @11, i32 0, i32 0))\l  %88 = load i32, i32* %arrayidx293, align 4, !tbaa !6\l  %and297 = and i32 %88, -2097153\l  %89 = add nsw i64 %86, 1\l  %arrayidx300 = getelementptr inbounds i32, i32* %ftab, i64 %89\l  %90 = load i32, i32* %arrayidx300, align 4, !tbaa !6\l  %and301 = and i32 %90, -2097153\l  %sub302 = add i32 %and301, -1\l  %cmp303 = icmp sgt i32 %sub302, %and297\l  br i1 %cmp303, label %if.then305.profile.exit.split, label %if.end320\l}"];
+	Node0x5638af315a20 -> Node0x5638af315ae0;
+	Node0x5638af315a20 -> Node0x5638af315b40;
+	Node0x5638af315ae0 [shape=record,label="{if.then305.profile.exit.split:                    \l  call void @enter_region(i64 8544432351706313239, i8* getelementptr inbounds\l... ([31 x i8], [31 x i8]* @16, i32 0, i32 0))\l  br i1 %cmp, label %if.then308, label %if.end312.profile.exit.split\l}"];
+	Node0x5638af315ae0 -> Node0x5638af315ba0;
+	Node0x5638af315ae0 -> Node0x5638af315c00;
+	Node0x5638af315ba0 [shape=record,label="{if.then308:                                       \l  %91 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !2\l  %sub309 = sub i32 1, %and297\l  %add310 = add i32 %sub309, %sub302\l  %92 = trunc i64 %indvars.iv to i32\l  %call311 = tail call i32 (%struct._IO_FILE*, i8*, ...)\l... @fprintf(%struct._IO_FILE* %91, i8* getelementptr inbounds ([48 x i8], [48 x\l... i8]* @.str.7, i64 0, i64 0), i32 %83, i32 %92, i32 %numQSorted.1533, i32\l... %add310) #6\l  br label %if.end312.profile.exit.split\l}"];
+	Node0x5638af315ba0 -> Node0x5638af315c00;
+	Node0x5638af315c00 [shape=record,label="{if.end312.profile.exit.split:                     \l  call void @exit_region(i64 8544432351706313239)\l  tail call void @mainQSort3(i32* %ptr, i8* %block, i16* %quadrant, i32\l... %nblock, i32 %and297, i32 %sub302, i32 2, i32* %budget)\l  %sub313 = add i32 %numQSorted.1533, 1\l  %add314 = sub i32 %sub313, %and297\l  %add315 = add i32 %add314, %sub302\l  %93 = load i32, i32* %budget, align 4, !tbaa !6\l  %cmp316 = icmp slt i32 %93, 0\l  br i1 %cmp316, label %cleanup.profile.exit.split, label %if.end320\l}"];
+	Node0x5638af315c00 -> Node0x5638af315c60;
+	Node0x5638af315c00 -> Node0x5638af315b40;
+	Node0x5638af315c60 [shape=record,label="{cleanup.profile.exit.split:                       \l  %numQSorted.3.ph = phi i32 [ %add315, %if.end312.profile.exit.split ], [\l... %numQSorted.2, %if.end320 ]\l  %cleanup.dest.slot.0.ph = phi i1 [ false, %if.end312.profile.exit.split ], [\l... true, %if.end320 ]\l  call void @exit_region(i64 7474094978838873664)\l  br i1 %cleanup.dest.slot.0.ph, label %if.end322, label\l... %cleanup516.profile.exit.split\l}"];
+	Node0x5638af315c60 -> Node0x5638af315a80;
+	Node0x5638af315c60 -> Node0x5638af315900;
+	Node0x5638af315a80 [shape=record,label="{if.end322:                                        \l  %numQSorted.4 = phi i32 [ %numQSorted.1533, %if.then289 ], [\l... %numQSorted.3.ph, %cleanup.profile.exit.split ]\l  %94 = load i32, i32* %arrayidx293, align 4, !tbaa !6\l  %or325 = or i32 %94, 2097152\l  store i32 %or325, i32* %arrayidx293, align 4, !tbaa !6\l  br label %for.inc327\l}"];
+	Node0x5638af315a80 -> Node0x5638af313fe0;
+	Node0x5638af315b40 [shape=record,label="{if.end320:                                        \l  %numQSorted.2 = phi i32 [ %numQSorted.1533, %if.then294.profile.exit.split\l... ], [ %add315, %if.end312.profile.exit.split ]\l  br label %cleanup.profile.exit.split\l}"];
+	Node0x5638af315b40 -> Node0x5638af315c60;
+	colorscheme = "paired12"
+        subgraph cluster_0x5638af2c1cc0 {
+          label = "";
+          style = filled;
+          color = 1
+          subgraph cluster_0x5638af312c50 {
+            label = "";
+            style = filled;
+            color = 3
+            Node0x5638af3115c0;
+            Node0x5638af311650;
+          }
+          subgraph cluster_0x5638af312bd0 {
+            label = "";
+            style = filled;
+            color = 3
+            Node0x5638af311710;
+          }
+          subgraph cluster_0x5638af312b50 {
+            label = "";
+            style = filled;
+            color = 3
+            subgraph cluster_0x5638af2c1e80 {
+              label = "";
+              style = filled;
+              color = 5
+              Node0x5638af311b70;
+            }
+            Node0x5638af3117b0;
+            Node0x5638af311620;
+            Node0x5638af311850;
+          }
+          subgraph cluster_0x5638af312ad0 {
+            label = "";
+            style = filled;
+            color = 3
+            subgraph cluster_0x5638af2c1d70 {
+              label = "";
+              style = filled;
+              color = 5
+              Node0x5638af311910;
+            }
+            Node0x5638af311b10;
+            Node0x5638af311b90;
+          }
+          subgraph cluster_0x5638af312a50 {
+            label = "";
+            style = filled;
+            color = 3
+            Node0x5638af311a00;
+          }
+          subgraph cluster_0x5638af3129d0 {
+            label = "";
+            style = filled;
+            color = 3
+            Node0x5638af311a60;
+            Node0x5638af3128e0;
+          }
+          subgraph cluster_0x5638af312950 {
+            label = "";
+            style = filled;
+            color = 3
+            Node0x5638af3128c0;
+          }
+          subgraph cluster_0x5638af2c15f0 {
+            label = "";
+            style = filled;
+            color = 3
+            subgraph cluster_0x5638af2c1df0 {
+              label = "";
+              style = filled;
+              color = 5
+              Node0x5638af313d80;
+            }
+            Node0x5638af312840;
+            Node0x5638af3128a0;
+            Node0x5638af313da0;
+          }
+          subgraph cluster_0x5638af2c1570 {
+            label = "";
+            style = filled;
+            color = 3
+            subgraph cluster_0x5638af2c2010 {
+              label = "";
+              style = filled;
+              color = 5
+              Node0x5638af3127a0;
+            }
+            Node0x5638af313d20;
+            Node0x5638af3125d0;
+          }
+          subgraph cluster_0x5638af2c14f0 {
+            label = "";
+            style = filled;
+            color = 3
+            Node0x5638af3127c0;
+          }
+          subgraph cluster_0x5638af2c1470 {
+            label = "";
+            style = filled;
+            color = 3
+            Node0x5638af312770;
+          }
+          subgraph cluster_0x5638af2c13f0 {
+            label = "";
+            style = filled;
+            color = 3
+            subgraph cluster_0x5638af2c1370 {
+              label = "";
+              style = filled;
+              color = 5
+              subgraph cluster_0x5638af2c1f80 {
+                label = "";
+                style = filled;
+                color = 7
+                subgraph cluster_0x5638af2c1f00 {
+                  label = "";
+                  style = filled;
+                  color = 9
+                  Node0x5638af3144d0;
+                  Node0x5638af313e00;
+                }
+                Node0x5638af314470;
+                Node0x5638af313e60;
+              }
+              Node0x5638af314540;
+              Node0x5638af3143b0;
+            }
+            Node0x5638af314410;
+          }
+          subgraph cluster_0x5638af2c12f0 {
+            label = "";
+            style = filled;
+            color = 3
+            subgraph cluster_0x5638af312040 {
+              label = "";
+              style = filled;
+              color = 5
+              Node0x5638af3140a0;
+              Node0x5638af314160;
+            }
+            subgraph cluster_0x5638af311fc0 {
+              label = "";
+              style = filled;
+              color = 5
+              Node0x5638af3142b0;
+            }
+            subgraph cluster_0x5638af311f40 {
+              label = "";
+              style = filled;
+              color = 5
+              subgraph cluster_0x5638af2c1910 {
+                label = "";
+                style = filled;
+                color = 7
+                subgraph cluster_0x5638af2c1890 {
+                  label = "";
+                  style = filled;
+                  color = 9
+                  Node0x5638af315f70;
+                  Node0x5638af315fd0;
+                }
+                Node0x5638af314ff0;
+              }
+              Node0x5638af3141c0;
+              Node0x5638af314220;
+            }
+            subgraph cluster_0x5638af311ec0 {
+              label = "";
+              style = filled;
+              color = 5
+              subgraph cluster_0x5638af311730 {
+                label = "";
+                style = filled;
+                color = 7
+                subgraph cluster_0x5638af2c1990 {
+                  label = "";
+                  style = filled;
+                  color = 9
+                  Node0x5638af3152a0;
+                  Node0x5638af315110;
+                }
+                Node0x5638af315170;
+              }
+              Node0x5638af314280;
+              Node0x5638af315050;
+            }
+            subgraph cluster_0x5638af311e40 {
+              label = "";
+              style = filled;
+              color = 5
+              subgraph cluster_0x5638af311dc0 {
+                label = "";
+                style = filled;
+                color = 7
+                Node0x5638af315230;
+                Node0x5638af315960;
+                Node0x5638af3159c0;
+              }
+              Node0x5638af3150b0;
+            }
+            subgraph cluster_0x5638af311d40 {
+              label = "";
+              style = filled;
+              color = 5
+              Node0x5638af315300;
+            }
+            subgraph cluster_0x5638af311cc0 {
+              label = "";
+              style = filled;
+              color = 5
+              subgraph cluster_0x5638af311bc0 {
+                label = "";
+                style = filled;
+                color = 7
+                Node0x5638af315480;
+              }
+              subgraph cluster_0x5638af2c1800 {
+                label = "";
+                style = filled;
+                color = 7
+                subgraph cluster_0x5638af2c1700 {
+                  label = "";
+                  style = filled;
+                  color = 9
+                  subgraph cluster_0x5638af2c1680 {
+                    label = "";
+                    style = filled;
+                    color = 11
+                    Node0x5638af315600;
+                    Node0x5638af315660;
+                  }
+                  Node0x5638af3156c0;
+                }
+                Node0x5638af3154e0;
+                Node0x5638af315540;
+              }
+              subgraph cluster_0x5638af2c1780 {
+                label = "";
+                style = filled;
+                color = 7
+                Node0x5638af3155a0;
+                Node0x5638af315780;
+              }
+              Node0x5638af315360;
+              Node0x5638af3153c0;
+              Node0x5638af315720;
+            }
+            subgraph cluster_0x5638af311c40 {
+              label = "";
+              style = filled;
+              color = 5
+              Node0x5638af3157e0;
+              Node0x5638af315840;
+            }
+            subgraph cluster_0x5638af2c1270 {
+              label = "";
+              style = filled;
+              color = 5
+              subgraph cluster_0x5638af3120c0 {
+                label = "";
+                style = filled;
+                color = 7
+                Node0x5638af315ae0;
+                Node0x5638af315ba0;
+              }
+              Node0x5638af315a20;
+              Node0x5638af315c00;
+              Node0x5638af315b40;
+            }
+            Node0x5638af313f20;
+            Node0x5638af313f80;
+            Node0x5638af313fe0;
+            Node0x5638af314100;
+            Node0x5638af3151d0;
+            Node0x5638af315420;
+            Node0x5638af3158a0;
+            Node0x5638af314040;
+            Node0x5638af315c60;
+            Node0x5638af315a80;
+          }
+          Node0x5638af3116b0;
+          Node0x5638af3118f0;
+          Node0x5638af3127e0;
+          Node0x5638af312630;
+          Node0x5638af312710;
+          Node0x5638af314350;
+          Node0x5638af313ec0;
+          Node0x5638af315900;
+        }
+}
