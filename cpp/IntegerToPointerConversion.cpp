@@ -1,7 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
 
-//Working?
 int main(int argc, char **argv){
     int array[42];
     __int64_t foo = rand() % 42;

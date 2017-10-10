@@ -23,48 +23,51 @@ Some of these criteria are referencing to a \llvm specific value called \undefv.
     \item Unsupported terminator instruction\\
         This is occurring when a flow breaking instruction like \texttt{return}, \texttt{throw} or \texttt{goto} is called within a loop.
     \item Unreachable in exit block (\autoref{lst:unreachableExitBlock})\\
-        This is appearing when \texttt{unreachable()} is called.\cite{llvmUnreachable}
+        This is appearing when \texttt{unreachable()} is called within an exit block \cite{llvmUnreachable}.
     \item Irreducible loops (\autoref{lst:irreducibleLoops})\\
         \Eg a loop is interfering with another loop using labels.
         So that loop can not be changed in general.
     \item Undefined branch condition\\
-        It is occurring whenever within a branch condition the value \undefv is appearing.
+        It is occurring whenever within a branch condition is based on the value \undefv.
     \item Non-integer branch condition\\
-        \draftnote{This appears when a call instruction is used in the branch condition.}
+        Appears if the branch condition is neither constant nor using a integer comparison.
     \item Undefined operands in comparison\\
-        This one appears when the value \undefv.
+        Arises when the value \undefv is used in a comparison.
     \item Non-affine branch condition\\
-        This is raised when a non-affine expression like a call instruction is used.
+        This is the case if the branch is not affine like it contains a function call.
     \item No base pointer\\
-        \draftnote{TODO}
+        Occurs if a base pointer is missing.
     \item Undefined base pointer\\
-        \draftnote{It is raised when a pointer holds the value \undefv.}
+        It is raised when a base pointer holds the value \undefv.
     \item Variant base pointer (\autoref{lst:variantBasePointer})\\
-        \draftnote{TODO}
+        Occurs when a base pointer in a region is not invariant.
     \item Non-affine memory accesses (\autoref{lst:nonAffineMemoryAccesses})\\
         This is appearing when accessing memory in a non-affine way like using \(i^2\) as access steps.
+        More precisely: Appears if the array subscript of an access is not affine.
     \item Accesses with differing sizes\\
-        \draftnote{TODO}
+        Arises if an array is accessed using data types of differing sizes.
     \item Uncomputable loop bounds (\autoref{lst:uncomputeableLoopBounds})\\
-        It is occurring when the loop bounds could not be computed \eg when the loop bounds are depending on an input parameter.
+        Appears if Polly fails to derive an affine loop bound \eg the loop bounds could not be computed because they are depending on an input parameter.
     \item Loop without exit (\autoref{lst:loopWithoutExit})\\
-        This occurs when a loop is infinite but can not be thrown away because there are cases when the execution terminates.
+        Occurs if the loop has no exit or if not all latches are part of the loop region.
     \item Function call with side effects (\autoref{lst:functionCallSideEffects})\\
-        This is raised when a function is called which is not guaranteed to have no side effects.
+        This is raised when a function is called which is not guaranteed to have no side effects or at least it is not known whether it has side effects.
     \item Complicated access semantics (volatile or atomic)\\
-        \draftnote{TODO}
+        Arises if memory is accessed which is not \enquote{simple}.
+        This means the keywords volatile is used or an atomic variable is accessed.
     \item Base address aliasing (\autoref{lst:baseAddressAliasing})\\
-        \draftnote{This happens when it can not be determined whether two pointer have the same base address.}
+        Occurs if Polly can not determine whether two pointer are accessing the same memory or -- when talking about arrays -- whether these arrays overlap.
     \item Integer to pointer conversion (\autoref{lst:integerToPointer})\\
         This occurs when a regular int is used as pointer somewhere into the memory.
     \item Stack allocations\\
         Stack allocations like using \texttt{alloca} can not be handled.
     \item Unknown instructions\\
-        \draftnote{TODO}
+        Arises if an instruction is used which is not known.
     \item Contains entry block\\
-        \draftnote{TODO}
+        Polly is yet not able to handle regions which contain the entry of a function.
     \item Assumed to be unprofitable (\autoref{lst:assumedUnprofitable})\\
         When the region is very small or it is not likely that an optimization improves the execution it is left out.
+        This means at least Polly is not able to find a profitable polyhedral optimization for the given region.
         As already mentioned in this study also these unprofitable regions are discussed.
     \item Polly does not return a reason\\
         When requesting the reason for a region not being a \scop Polly may return an empty string.
