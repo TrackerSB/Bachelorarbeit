@@ -10,18 +10,18 @@ In contrast to this study it is neither taking care about the reasons for reject
 \section[Alternative Extensions]{Alternative Extensions \cite{PolyhedralEmpiricalStudy}}\label{sec:altExt}
 \draftnote{What are alternative "extensions"?}
 Following is copy\&pasted from \cite{PolyhedralEmpiricalStudy}.
-\begin{quotation}
-The following extensions focus on transcending affine linearity at compile time.\\
-Benabderrahmane et al. model arbitrary, non-recursive, control flow within a SCoP at compile time, converting control dependencies to data dependence's if necessary.
-The same approach can be used to deal with \texttt{while} loops in SCoPs.
-A \texttt{while} loop is transformed to an unbounded \texttt{for} loop, and an exit conditional is introduced in the body in form of awrite access.
-Every existing statement depends on this exit conditional, thus terminating the loop execution if the condition is violated.
-These capabilities come at the cost of a loss of precision of the whole analysis.
-In particular,the dependence introduced to the exit conditional forces the scheduler to generate a sequential schedule.
-In contrast to stretching the modeling capabilities by giving up precision, there are a few extensions to the polyhedron model that cope with non-linearity by using new algebraic methods, without giving up precision.
-First, it is possible to deal with multiplicative parameters throughout modeling, transformation and code generation at compile time by using real quantifier elimination.
-Second, cylindrical algebraic decomposition can be used to provide support for input programs that feature more complicated non-linearity, such as polynomials in the index variables.
-However, both approaches suffer from significant performance penalties during code synthesis as well as in the generated code itself.
+\begin{quotation}\noindent
+    \enquote{The following extensions focus on transcending affine linearity at compile time.\\
+    Benabderrahmane et al. model arbitrary, non-recursive, control flow within a SCoP at compile time, converting control dependencies to data dependence's if necessary.
+    The same approach can be used to deal with \texttt{while} loops in SCoPs.
+    A \texttt{while} loop is transformed to an unbounded \texttt{for} loop, and an exit conditional is introduced in the body in form of awrite access.
+    Every existing statement depends on this exit conditional, thus terminating the loop execution if the condition is violated.
+    These capabilities come at the cost of a loss of precision of the whole analysis.
+    In particular,the dependence introduced to the exit conditional forces the scheduler to generate a sequential schedule.
+    In contrast to stretching the modeling capabilities by giving up precision, there are a few extensions to the polyhedron model that cope with non-linearity by using new algebraic methods, without giving up precision.
+    First, it is possible to deal with multiplicative parameters throughout modeling, transformation and code generation at compile time by using real quantifier elimination.
+    Second, cylindrical algebraic decomposition can be used to provide support for input programs that feature more complicated non-linearity, such as polynomials in the index variables.
+    However, both approaches suffer from significant performance penalties during code synthesis as well as in the generated code itself.}
 \end{quotation}
 
 \section[Alternative Technologies]{Alternative Technologies \cite{PolyhedralEmpiricalStudy}}
@@ -32,7 +32,7 @@ A current system is PoCC \cite{pocc} which implements a full compiler tool chain
 It supports two tools for transformations.
 This one is PLuTo \cite{pluto} and the other is LaTSeE \cite{latsee}.
 In \cite{PolyhedralEmpiricalStudy} both are discribed as follows:
-\begin{quotation}
-    The PLuTo scheduling algorithm implements a transformation that optimizes data locality on shared-memory systems.
-    Rather than generating the optimal solution, LeTSeE tries to converge on it iteratively by exploring the legal transformation space.
+\begin{quotation}\noindent
+    \enquote{The PLuTo scheduling algorithm implements a transformation that optimizes data locality on shared-memory systems.
+    Rather than generating the optimal solution, LeTSeE tries to converge on it iteratively by exploring the legal transformation space.}
 \end{quotation}
