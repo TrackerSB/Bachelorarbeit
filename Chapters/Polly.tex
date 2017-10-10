@@ -4,7 +4,7 @@ One of the numerous sub projects of the \llvm is Polly\footnote{The name \enquot
 \section{History}
 Polly is an implementation of a loop optimizer based on the polyhedral model.\\
 Before Polly there already existed an earlier implementation accessible using GCC.
-The component for GCC was called Graphite \cite{gccGraphite} and included the \pcp \cite{grosserGraphite, grosserGraphiteDesign} which is an independent interface between the \ir of GCC called GIMPLE\footnote{The name \enquote{GIMPLE} is a result of \enquote{GCC} and \enquote{Simple II}, on which GIMPLE is based. \cite{GenericGimple}} and the internal \ir \gpoly.
+The component for GCC was called Graphite \cite{gccGraphite} and included the \pcp \cite{GrosserGraphite, GrosserGraphiteDesign} which is an independent interface between the \ir of GCC called GIMPLE\footnote{The name \enquote{GIMPLE} is a result of \enquote{GCC} and \enquote{Simple II}, on which GIMPLE is based. \cite{GenericGimple}} and the internal \ir \gpoly.
 The problem with it was, that GIMPLE is not made for being human readable.
 As consequence to ease developing and to avoid plenty of bugs the implementation was transferred to be used with \llvm, whose \ir is more human readable.
 Another advantage arises due to the fact, that \llvm is not bound to C or C++.
