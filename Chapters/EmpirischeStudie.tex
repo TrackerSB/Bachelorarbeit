@@ -116,6 +116,7 @@ This is done by using on the one hand integrated benchmarks brought by the teste
 Also the speedups \(S_s\) and \(S_p\) are dependent because they are calculated out of \dyncovs and \dyncovp.
 \begin{table}[H]
     \myfloatalign
+    \small
     \begin{tabularx}{\textwidth}{Xccccc} \toprule
         \tableheadline{Name}              & \tableheadline{Abbr.} & \tableheadline{Type} & \tableheadline{Scale Type} & \tableheadline{Unit}                          & \tableheadline{Range} \\ \midrule
         Classification                    & \(C\)                 & Indep.               & Nominal                    & \makecell{\{Parent,\\\scop\}}                 & Text\\
@@ -144,9 +145,6 @@ Whenever such a function has a \scop it is likely that its parent is already a t
 Even if there are a lot of \scops which are processed the -- according to the execution time -- big \scops may not be able to be optimized, on average.\\
 \(H_3\): It is expected that \dyncovp \(\gg\) \dyncovs, on average.
 This may be a result of the fact that \dyncovp ignores whether the reasons of parents being rejected as \scop can be eliminated.\\
-\draftnote{
-    \(R_1\): Can the main reasons for rejection a \scop be eliminated?
-}
 
 \section{Subject Programs}
 The intention is to measure programs which are well known and often used by the community to get a more realistic picture.
@@ -156,7 +154,7 @@ The selection of programs (\autoref{tab:subjectPrograms}) is limited due the lis
 \section{Tasks}
 To create a setup which targets as much as possible real world scenarios integrated benchmarks of programs or SPEC2006 were used.
 Further the \lnt provides a hole range of benchmarks of various programs.
-These will be annotated like \enquote{\(program_{lnt}\)}.
+Projects not explicitly found in \autoref{tab:subjectPrograms} belong to \lnt.
 
 \section{Design}
 Based on the experiment variables (see \autoref{tab:experimentVariables}) three experiments are performed to validate the hypotheses.\\
@@ -192,11 +190,11 @@ The third experiment \dyncovp and \dyncovs are compared to check whether \dyncov
     \myfloatalign
     \begin{tabularx}{.5\textwidth}{Xc}
         \tableheadline{Name} & \tableheadline{Version}\\ \toprule
-        benchbuild           & \draftnote{git}\\
+        benchbuild           & (2bd0060)\\
         LLVM                 & (04facbb8)\\
         clang                & (89be37b)\\
         polly                & (0fd4fea)\\
-        polli                & \draftnote{git}\\
+        polli                & (697351d)\\
         \bottomrule
     \end{tabularx}
     \caption[Software used for measurements]{
@@ -210,8 +208,15 @@ The third experiment \dyncovp and \dyncovs are compared to check whether \dyncov
 
 \section{Deviations}\label{sec:deviations}
 Only about \usefulRatio of the measured execution times can be used due to bugs in the implementation and the projects measured which could not be fixed because of time constraints.
-The bug in the implementation is occurring in certain constellations of the basic blocks of a region to measure like the following one which is found in the project \draftnote{projectname}:
-\draftnote{Insert example}
+The bug in the implementation is occurring in certain constellations of the basic blocks when instrumenting a parent like the following one which is found in the project bzip2 within the file bzlib.c:
+\begin{code}
+    \caption[Example of a non working parent]{
+        This lists a method within the file bzlib.c of the project bzip2.
+        The current instrumentation is not working when instrumenting regions within this method.
+    }
+    \inputminted{c}{c/notWorkingParent.c}
+    \label{lst:notWorkingParent}
+\end{code}
 To cope with it measurements of regions which have a bigger duration than the hole execution time of the project are excluded.
 Also measurements of coverages are excluded where the coverage is greater than 100\%.
 These occur because the filtering of the obviously bad measurements is not enough to exclude all bad ones.\\

@@ -32,7 +32,7 @@ report_ratiosScops$project <-
   paste(report_ratiosScops$project,
         apply(report_ratiosScops, 1,
               function(row) if(endsWith(row["project"], ".simple")) "_{lnt}" else ""),
-                                    sep = "")
+        sep = "")
 write.csv(x = report_ratiosScops,
           file = "../csv/report_ratiosScops.csv",
           quote = FALSE, row.names = FALSE)
@@ -90,19 +90,26 @@ swtDyncovScopsP <- shapiro.test(report_ratiosScops$dyncov)$p.value
 swtDyncovMaxRegionsP <-
   shapiro.test(report_ratiosMaxRegions$dyncov)$p.value
 
-#ttest p values (normal distribution needed)
-ttestDyncovScopsP <- t.test(report_ratiosScops$dyncov)$p.value
+#ttest p values H_2 (normal distribution needed?)
+ttestDyncovScopsP <- t.test(report_ratiosScops$dyncov, mu = 60)$p.value
 ttestDyncovMaxRegionsP <-
-  t.test(report_ratiosMaxRegions$dyncov)$p.value
+  t.test(report_ratiosMaxRegions$dyncov, mu = 60)$p.value
+
+#utest pvalues H_2
+utestDyncovScopsP <-
+  wilcox.test(x = report_ratiosScops$dyncov, mu = 60)$p.value
+utestDyncovMaxRegionsP <-
+  wilcox.test(x = report_ratiosMaxRegions$dyncov, mu = 60)$p.value
 
 #Mann-Whitney-U test
 utestDyncovP <- wilcox.test(x = report_ratiosMaxRegions$dyncov,
                             y = report_ratiosScops$dyncov)$p.value
 
 pValues <- matrix(data = c(swtDyncovScopsP, swtDyncovMaxRegionsP,
-                           ttestDyncovScopsP, ttestDyncovMaxRegionsP),
-                  nrow = 2, ncol = 2, byrow = TRUE)
-rownames(pValues) <- c("Shapiro-Wilk-Test", "T-Test")
+                           ttestDyncovScopsP, ttestDyncovMaxRegionsP,
+                           utestDyncovScopsP, utestDyncovMaxRegionsP),
+                  nrow = 3, ncol = 2, byrow = TRUE)
+rownames(pValues) <- c("Shapiro-Wilk-Test", "T-Test (H_2)", "Mann-Whitney-U-Test (H_2)")
 colnames(pValues) <- c("SCoPs", "MaxRegions")
 
 #speedups

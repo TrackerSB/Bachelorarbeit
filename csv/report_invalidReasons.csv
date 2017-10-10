@@ -1,19 +1,18 @@
 invalid_reason,occurrence
 No base pointer,1
-Non affine access function,2841
-"
-",4011
+Non affine access function,2888
 Invalid instruction terminates BB: if.end,3
-Base address not invariant in current region,2531
-Non affine branch in BB,2847
-Possible aliasing,822
+Base address not invariant in current region,2478
+Polly returned no reason,3987
+Non affine branch in BB,2726
+Possible aliasing,821
 Unreachable in exit block,20
-Condition in BB neither constant nor an icmp instruction,1236
-Non affine loop bound,4422
-Find bad intToPointer pointer,85
+Condition in BB neither constant nor an icmp instruction,1372
+Non affine loop bound,5168
+Find bad intToPointer pointer,80
 Condition based on undefined value in BB,4
-Region is toplevel region.,39221
-Non-simple memory access,245
-Non affine loop bound '***COULDNOTCOMPUTE***',13041
-Call instruction,12036
-Alloca instruction,59
+Region is toplevel region.,36701
+Non-simple memory access,239
+Non affine loop bound '***COULDNOTCOMPUTE***',13345
+Call instruction,11932
+Alloca instruction,72
