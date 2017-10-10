@@ -60,7 +60,7 @@ compDyncovScopBoth <- ggplot(report_ratiosBoth, aes(factor(is_parent), dyncov)) 
 pieInvalidReasons <- ggplot(report_invalidReasons,
                             aes(x = "", y = occurrence, fill=invalid_reason)) +
   geom_bar(width=1, stat = "identity", position = "fill") +
-  coord_polar("y", start = 0) +
+  coord_polar("y", start = 0, direction = 1) +
   scale_y_continuous(label=function(x){return(paste("", 100*x, "%"))}) +
   theme(legend.title=element_blank(),
         legend.position = "bottom", axis.title = element_blank()) +
