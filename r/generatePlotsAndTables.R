@@ -103,7 +103,7 @@ utestDyncovMaxRegionsP <-
 
 #Mann-Whitney-U test
 utestDyncovP <- wilcox.test(x = report_ratiosMaxRegions$dyncov,
-                            y = report_ratiosScops$dyncov)$p.value
+                            y = report_ratiosScops$dyncov, alternative = "greater")$p.value
 
 pValues <- matrix(data = c(swtDyncovScopsP, swtDyncovMaxRegionsP,
                            ttestDyncovScopsP, ttestDyncovMaxRegionsP,

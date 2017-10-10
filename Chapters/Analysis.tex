@@ -58,12 +58,12 @@ All p values are listed in \autoref{tab:pValues}.\\
     \myfloatalign
     \begin{tabularx}{\textwidth}{Xcc}
         \tableheadline{Test} & \tableheadline{SCoPs} & \tableheadline{MaxRegions}\\\toprule
-        \csvreader[head to column names]{csv/pValues.csv}{}{\csvcoli&\csvcolii&\csvcoliii\\}
+        \csvreader[head to column names]{csv/pValues.csv}{}{\(\csvcoli\)&\csvcolii&\csvcoliii\\}
         \\\bottomrule
     \end{tabularx}
     \caption[P values of statistical tests]{This table contains all p values necessary to be calculated for ensuring the correctness of the evaluation of the hypotheses.}
     \label{tab:pValues}
 \end{table}
 \(H_1\): Observing the given programs and test sets (\autoref{tab:subjectPrograms}) the most common reason for rejecting parents of \scops to be valid as well is truly that the parent already is the top level region.\\
-\(H_2\): The mean of \dyncovs is significantly? lower than \hTwoAbout as well as the mean of \dyncovp (see \autoref{tab:pValues}).\\
+\(H_2\): The mean of \dyncovs is significantly lower than \hTwoAbout as well as the mean of \dyncovp (see \autoref{tab:pValues}).\\
 \(H_3\): A Mann-Whitney-U-Test \cite{utest} reveals that \dyncovp is not significantly higher than \dyncovs (p value: \utestPValue).\\
