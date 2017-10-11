@@ -116,9 +116,18 @@ These peaces of code illustrate simple situations where \scops are invalid.
 \end{code}
 
 \section{Data Tables}\label{sec:dataTables}
-Here is the hole data listed collected throughout the entire study.
-\begin{footnotesize}
+Here is the hole data (unfiltered) listed collected throughout the entire study.
+\begin{scriptsize}
     \LTXtable{\textwidth}{tables/ratiosScops.tex}
     \LTXtable{\textwidth}{tables/ratiosMaxRegions.tex}
-\end{footnotesize}
-\LTXtable{\textwidth}{tables/invalidReasons.tex}
+\end{scriptsize}
+\begin{table}[!h]
+    \myfloatalign
+    \begin{tabularx}{\textwidth}{Xc}
+        \tableheadline{project} & \tableheadline{occurrence}\\\toprule
+        \csvreader[head to column names]{csv/report_invalidReasons.csv}{}{\csvcoli&\csvcolii\\}
+        \\\bottomrule
+    \end{tabularx}
+    \caption[Data of reasons for rejection]{The complete list of reasons for rejecting regions as valid \scops grouped by type of the rejection reason.}
+    \label{tab:rejectionReasons}
+\end{table}
