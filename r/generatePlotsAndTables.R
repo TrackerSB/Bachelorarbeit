@@ -16,26 +16,10 @@ report_ratiosMaxRegions <-
   read_csv("../csv/report_ratiosMaxRegions.csv")
 report_ratiosMaxRegions <-
   report_ratiosMaxRegions[report_ratiosMaxRegions$dyncov <= 100,]
-report_ratiosMaxRegions$project <-
-  paste(report_ratiosMaxRegions$project,
-        apply(report_ratiosMaxRegions, 1,
-              function(row) if(endsWith(row["project"], ".simple")) "_{lnt}" else ""),
-        sep = "")
-write.csv(x = report_ratiosMaxRegions,
-          file = "../csv/report_ratiosMaxRegions.csv",
-          quote = FALSE, row.names = FALSE)
 
 report_ratiosScops <- read_csv("../csv/report_ratiosScops.csv")
 report_ratiosScops <-
   report_ratiosScops[report_ratiosScops$dyncov <= 100,]
-report_ratiosScops$project <-
-  paste(report_ratiosScops$project,
-        apply(report_ratiosScops, 1,
-              function(row) if(endsWith(row["project"], ".simple")) "_{lnt}" else ""),
-        sep = "")
-write.csv(x = report_ratiosScops,
-          file = "../csv/report_ratiosScops.csv",
-          quote = FALSE, row.names = FALSE)
 
 report_invalidReasons <- read_csv("../csv/report_invalidReasons.csv")
 
