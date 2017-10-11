@@ -41,10 +41,24 @@ compDyncovScopBoth <- ggplot(report_ratiosBoth, aes(factor(is_parent), dyncov)) 
   defaultSettings
 
 #Plot invalidReasons
+report_invalidReasons$myLevels <-
+  factor(report_invalidReasons$invalid_reason,
+         levels = c('Region is toplevel region.',
+                    'Non affine loop bound \'***COULDNOTCOMPUTE***\'',
+                    'Call instruction', 'Non affine loop bound',
+                    'Polly returned no reason', 'Non affine access function',
+                    'Non affine branch in BB',
+                    'Base address not invariant in current region',
+                    'Condition in BB neither constant nor an icmp instruction',
+                    'Possible aliasing', 'Non-simple memory access',
+                    'Find bad intToPointer pointer', 'Alloca instruction',
+                    'Unreachable in exit block',
+                    'Condition based on undefined value in BB',
+                    'Invalid instruction terminates BB: if.end','No base pointer'))
 pieInvalidReasons <- ggplot(report_invalidReasons,
-                            aes(x = "", y = occurrence, fill=invalid_reason)) +
+                            aes(x = "", y = occurrence, fill=myLevels)) +
   geom_bar(width=1, stat = "identity", position = "fill") +
-  coord_polar("y", start = 0, direction = 1) +
+  coord_polar("y", start = 0, direction = -1) +
   scale_y_continuous(label=function(x){return(paste("", 100*x, "%"))}) +
   theme(legend.title=element_blank(),
         legend.position = "bottom", axis.title = element_blank()) +
