@@ -7,7 +7,7 @@ So about 25\% of the programs would not have any profits when extending all of t
 Investigating the upper two parts of the plots shows that there are at least some projects which would have benefits if they were extended.
 That the projects in the lowest quantile remain almost with the same coverage and the projects of the upper two quantiles slightly move up is also becoming manifest in looking at the increment of the variance and the standard deviation in \autoref{tab:statsMatrix}.\\
 Nevertheless there are some regions classified as unprofitable which would have great impacts to the coverage.
-\Eg in the function send\_bits(...) within the file bits.c of the project bzip2 there is a \scop with a duration of about \(12864 \mu s\) but its parent has a duration of \(9409596 \mu s\) which is about 750 times bigger.
+\Eg in the function \texttt{send\_bits(...)} within the file bits.c of the project bzip2 there is a \scop with a duration of about \(12864 \mu s\) but its parent has a duration of \(9409596 \mu s\) which is about 750 times bigger.
 \begin{comment}
     \autoref{fig:fatParent} shows a region within the project bzip2 which is really tiny (A red arrow is pointing on that region with green background) but its parent represents the hole function.
     The parent was rejected because the parent is a toplevel region due it contains the hole function.
@@ -36,7 +36,7 @@ This is also negligible due to the same reason.
 The program used for checking this is attached in \autoref{lst:checkOverhead}.\\
 For minimizing the influences of saving the data collected on run time it is only written to the database once at the very end of the executed project.\\
 \subsection{Internal Validity}
-The measurements are rely on the quality of the input data brought by benchbuild.
+The measurements rely on the quality of the input data brought by benchbuild.
 This problem is addressed by benchbuild in relying on benchmarks which are included by the projects or benchmarks like SPEC2006 which are accepted by the community.
 This does not mean the dependence of the results to the input is vanishing.
 But it can be assumed that the test cases cover the most important and most common use cases.

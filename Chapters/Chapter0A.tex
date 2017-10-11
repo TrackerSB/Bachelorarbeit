@@ -26,17 +26,6 @@ The following listings contain the (generated) code of the example matrix multip
     \inputminted[fontsize=\tiny]{LLVM}{ll/matmul.preopt.ll}
     \label{lst:matmulpreoptll}
 \end{code}
-\begin{code}
-    \caption[Program for checking overhead]{The program used for checking the overhead of the measurement itself}
-    \inputminted{c++}{cpp/checkMeasurementOverhead.cpp}
-    \label{lst:checkOverhead}
-\end{code}
-\begin{code}
-    \caption[Script for plots and statistic]{This R script contains all commands for filtering the data, generating the plots and calculating statistical values and p values.}
-    \inputminted[fontsize=\tiny]{R}{r/generatePlotsAndTables.R}
-    \label{lst:rscript}
-\end{code}
-
 \subsection{Examples for invalid SCoPs}
 These peaces of code illustrate simple situations where \scops are invalid.
 \begin{code}
@@ -50,7 +39,7 @@ These peaces of code illustrate simple situations where \scops are invalid.
     \label{lst:unreachableExitBlock}
 \end{code}
 \begin{code}
-    \caption{Irreducible loops}
+    \caption{Irreducible regions}
     \inputminted{c++}{cpp/IrreducibleRegion.cpp}
     \label{lst:irreducibleLoops}
 \end{code}
@@ -93,6 +82,17 @@ These peaces of code illustrate simple situations where \scops are invalid.
     \caption{Assumed to be unprofitable}
     \inputminted{c++}{cpp/AssumedToBeUnprofitable.cpp}
     \label{lst:assumedUnprofitable}
+\end{code}
+\subsection{Other Code Listings}
+\begin{code}
+    \caption[Program for checking overhead]{The program used for checking the overhead of the measurement itself}
+    \inputminted{c++}{cpp/checkMeasurementOverhead.cpp}
+    \label{lst:checkOverhead}
+\end{code}
+\begin{code}
+    \caption[Script for plots and statistic]{This R script contains all commands for filtering the data, generating the plots and calculating statistical values and p values.}
+    \inputminted[fontsize=\tiny]{R}{r/generatePlotsAndTables.R}
+    \label{lst:rscript}
 \end{code}
 
 \section{Specifications of machine used for measurements}

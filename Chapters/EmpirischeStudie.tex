@@ -15,22 +15,22 @@ Then the speedup \(S\in\mathbb{Q}\) is defined as:
 \[S := \frac{N}{(1-DynCov)*N+DynCov}\]
 \subsection{Reasons for SCoPs being invalid}
 These are the criteria implemented by Polly for rejecting a parent of a \scop being also a \scop.
-Some of these criteria are referencing to a \llvm specific value called \undefv.\cite{llvmUndef}
+Some of these criteria are referencing to a \llvm specific value called \undefv \cite{llvmUndef}.
 \begin{itemize}
     \item Parent is top level (\autoref{lst:parentIsToplevel})\\
-        This is simply when the parent of a \scop is the top level region.
+        This is simply when the parent of a \scop is a top level region.
         Per default a top level region can not be a \scop in Polly.
     \item Unsupported terminator instruction\\
         This is occurring when a flow breaking instruction like \texttt{return}, \texttt{throw} or \texttt{goto} is called within a loop.
     \item Unreachable in exit block (\autoref{lst:unreachableExitBlock})\\
         This is appearing when \texttt{unreachable()} is called within an exit block \cite{llvmUnreachable}.
-    \item Irreducible loops (\autoref{lst:irreducibleLoops})\\
-        \Eg a loop is interfering with another loop using labels.
-        So that loop can not be changed in general.
+    \item Irreducible regions (\autoref{lst:irreducibleLoops})\\
+        \Eg a region is interfering with another region using labels.
+        So that the loop can not be changed in general.
     \item Undefined branch condition\\
-        It is occurring whenever within a branch condition is based on the value \undefv.
+        It is occurring whenever at least a part of a branch condition is based on the value \undefv.
     \item Non-integer branch condition\\
-        Appears if the branch condition is neither constant nor using a integer comparison.
+        Appears if the branch condition is neither constant nor using an integer comparison.
     \item Undefined operands in comparison\\
         Arises when the value \undefv is used in a comparison.
     \item Non-affine branch condition\\
@@ -62,7 +62,7 @@ Some of these criteria are referencing to a \llvm specific value called \undefv.
     \item Stack allocations\\
         Stack allocations like using \texttt{alloca} can not be handled.
     \item Unknown instructions\\
-        Arises if an instruction is used which is not known.
+        Arises if an instruction is used where Polly knows no definition.
     \item Contains entry block\\
         Polly is yet not able to handle regions which contain the entry of a function.
     \item Assumed to be unprofitable (\autoref{lst:assumedUnprofitable})\\
@@ -147,17 +147,19 @@ Whenever such a function has a \scop it is likely that its parent is already a t
 \(H_2\): The coverage \dyncovs is expected to be about \hTwoAbout, on average.
 Even if there are a lot of \scops which are processed the -- according to the execution time -- big \scops may not be able to be optimized, on average.\\
 \(H_3\): It is expected that \dyncovp \(\gg\) \dyncovs, on average.
-This may be a result of the fact that \dyncovp ignores whether the reasons of parents being rejected as \scop can be eliminated.\\
+This may be a result of the fact that \dyncovp ignores whether the reasons of parents being rejected as \scop can be eliminated or not.\\
 
 \section{Subject Programs}
 The intention is to measure programs which are well known and often used by the community to get a more realistic picture.
-The selection of programs (\autoref{tab:subjectPrograms}) is limited due the list of programs available using benchbuild.
+The selection of programs (\autoref{tab:subjectPrograms}) is limited due the list of programs available using benchbuild\footnote{Benchbuild is a tool for automating the process of downloading, building, applying an experiment at compile time and executing a project on a SLURM \cite{slurm} Cluster.}.
 \LTXtable{\textwidth}{tables/subjectPrograms.tex}
 
 \section{Tasks}
-To create a setup which targets as much as possible real world scenarios integrated benchmarks of programs or SPEC2006 were used.
-Further the \lnt provides a hole range of benchmarks of various programs.
-Projects annotated like \enquote{\(program_{lnt}\)} belong to \lnt.
+\begin{sloppypar}
+    To create a setup which targets as much as possible real world scenarios integrated benchmarks of programs or SPEC2006 are used.
+    Further the \lnt provides a hole range of benchmarks of various programs.
+    Projects annotated like \enquote{\(program_{lnt}\)} belong to \lnt.
+\end{sloppypar}
 
 \section{Design}
 Based on the experiment variables (see \autoref{tab:experimentVariables}) three experiments are performed to validate the hypotheses.\\
@@ -170,12 +172,13 @@ The third experiment \dyncovp and \dyncovs are compared to check whether \dyncov
     This study uses instrumentation to retrieve precise timing information instead of using frameworks like OProfile \cite{oprofile} or GProf \cite{gprof}.
     The measurement is realized using the \papi library \cite{papi}.\\
     To take these measurement the following steps are performed:\\
-    The first step is creating a new so called experiment for benchbuild\footnote{Benchbuild is a tool for automating the process of downloading, building, applying an experiment at compile time and executing a project on a SLURM \cite{slurm} Cluster.}.
-    This experiment is calling the actual pass of Polly for instrumenting a project by specifying the appropriate clang options using \texttt{-Xclang}, collects the generated data and persists it.\\
+    The first step is implementing a new pass for Polly for instrumenting regions.
+    Afterwards a so called experiment for benchbuild has to be created.
+    This experiment is calling the actual pass of Polly by specifying the appropriate clang options using \texttt{-Xclang}, collects the generated data and persists it.\\
     The pass itself is a FunctionPass.
     Thus it is processing every function of the program.
     In this case the pass is called twice.
-    Once for instrumenting the actual \scops within, which also includes that ones classified by Polly as \enquote{unprofitable}, and once for instrumenting their parents.
+    Once for instrumenting the actual \scops within, which also includes regions classified by Polly as \enquote{unprofitable}, and once for instrumenting their parents.
     Even the \enquote{unprofitable} \scops are included because they may get profitable to optimize when they are extended to the size of their parents.
     To include these \scops the option \texttt{-polly-process-unprofitable} has to be specified using the \texttt{-mllvm} option of clang.
     While doing so the information about why these parents were rejected as \scops are collected.\\
@@ -210,7 +213,7 @@ The third experiment \dyncovp and \dyncovs are compared to check whether \dyncov
 \end{table}
 
 \section{Deviations}\label{sec:deviations}
-Only about \usefulRatio of the measured execution times can be used due to bugs in the implementation and the projects measured which could not be fixed because of time constraints.
+Only about \usefulRatio of the measured execution times can be used due to on the one hand bugs in the implementation and one the other hand the projects measured which could not be fixed because of time constraints.
 The bug in the implementation is occurring in certain constellations of the basic blocks when instrumenting a parent like the following one which is found in the project bzip2 within the file bzlib.c:
 \begin{code}
     \caption[Example of a non working parent]{
@@ -223,4 +226,4 @@ The bug in the implementation is occurring in certain constellations of the basi
 To cope with it measurements of regions which have a bigger duration than the hole execution time of the project are excluded.
 Also measurements of coverages are excluded where the coverage is greater than 100\%.
 These occur because the filtering of the obviously bad measurements is not enough to exclude all bad ones.\\
-Further for minimizing the influences of the underlying OS multithreading is deactivated, the node is used exclusively the number of tasks is limited to one and the number of CPUs used per task is limited to 10.
+Further for minimizing the influences of the underlying OS multithreading is deactivated, the cluster node is used exclusively, the number of tasks is limited to one and the number of CPUs used per task is limited to 10.

@@ -1,6 +1,6 @@
 \chapter{Motivation}
 As the number of cores of processors and the variety of devices and platforms is increasing there is a need for an efficient compiler infrastructure which is capable of performing language and platform independent optimizations allowing to utilize the capacity of the underlying hardware as much as possible.
-A popular approach of such a compiler infrastructure is LLVM. \cite{LLVMUsers}
+A popular approach of such a compiler infrastructure is LLVM \cite{LLVMUsers}.
 This infrastructure has options to extend it by adding plugins like Polly.
 Polly is a plugin implementing loop optimizations on the basis of the polyhedral model.
 When using Polly there arises the question about the coverage of the parts which can currently be automatically optimized, what are the common reasons of these parts for not being even bigger and the theoretical speedup.\\
