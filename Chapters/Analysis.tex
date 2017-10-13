@@ -1,10 +1,10 @@
 \chapter{Analysis}
 All results of the measurements are listed in \autoref{sec:dataTables}.
-The complete set of all data is available at the GitHub repository TrackerSB/BachelorthesisData.
+The complete set of all data is available at \url{https://github.com/TrackerSB/BachelorthesisData}.
 The script used for generating the plots and calculating statistical variables is included in \autoref{lst:rscript}.
 
 \section{Descriptive Statistics}
-In \autoref{fig:coverages} the distribution density of \dyncovs (left) and \dyncovp (right) over the projects is shown.
+The violin plots in \autoref{fig:coverages} describe the distribution density of \dyncovs (left) and \dyncovp (right) over the projects.
 The plots also contain marks for 25\% quantiles.
 The higher these lines the more projects have a higher coverage observing the regions automatically optimizable by Polly.
 \begin{figure}[!h]
@@ -19,8 +19,8 @@ In both plots the lowest quantile is the broadest one and has almost the same si
 Also in both plots the quantile between 25\% and 50\% is the thinnest one.
 When looking at the left plot the quantile between 50\% and 75\% is broader than the upper one.
 In the right plot it is the other way round.\\
-As a result the speedup \(S_p=\speedupMaxRegions\) is only slightly higher than \(S_s=\speedupScops\).
-The speedups are calculated with \(N=8\) cores.\\
+As a result the theoretical speedup \(S_p=\speedupMaxRegions\) is only slightly higher than \(S_s=\speedupScops\).
+The theoretical speedups are calculated with \(N=8\) cores.\\
 \autoref{tab:statsMatrix} shows the mean (\(\mu\)), the standard deviation (s) and the variance (\(s^2\)) of either \dyncovp and \dyncovs and how much \dyncovp is bigger than \dyncovs (\(\Delta\)) in \%.
 \begin{table}[!h]
     \myfloatalign
@@ -51,8 +51,8 @@ The concrete values can be found in \autoref{tab:rejectionReasons}.
 
 \section{Hypothesis Testing}
 To check the significance of the collected data first the independence of the two data sets \scops and MaxRegions has to be stated.
-Further a Shapiro-Wilk-Test \cite{shapiroWilkTest} reveals that neither of these data sets is distributed normally (\(p \ll 0.05\)).
-Further a T-Test \cite{ttest} reveals that both datasets are significant (\(p \ll 0.05\)).\\
+Furthermore a Shapiro-Wilk-Test \cite{shapiroWilkTest} reveals that neither of these data sets is distributed normally (\(p \ll 0.05\)).
+A T-Test \cite{ttest} reveals that both datasets are significant (\(p \ll 0.05\)).\\
 All p values are listed in \autoref{tab:pValues}.\\
 \begin{table}[!h]
     \myfloatalign

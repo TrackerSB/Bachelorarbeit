@@ -3,8 +3,8 @@ The first point to mention is that the coverage of the regions automatically opt
 The next point concerns the limits of polyhedral compilation in real world scenarios.
 Due to the fact that the main reasons for rejection -- also including regions classified as unprofitable by Polly -- can not be solved or at least not simply.
 Accordingly speedup is also limited using current approaches.\\
-So the next steps could include investigating the impact of certain rejection reasons to the execution time and methods to solve some of these.
-Solving could include \jit compilation for solving problems with undefined values, inlining for extending the possible sizes of \scops or non-affine approaches for handling problems arising from non-affinity.
+So the next steps could include investigating the impact of certain rejection reasons to the execution time and methods to solve some of these by used different methods of gaining more information about the regions.
+This could include \jit compilation for solving problems with undefined values, inlining for extending the possible sizes of \scops or non-affine approaches for handling problems arising from non-affinity.
 When thinking about how to solve reasons for rejection a region being a valid \scop also research should be done for finding out whether there are multiple reasons for rejecting a region.
-Further other \scops having the same (grant) parent would have to be checked whether they have different reasons for not being extended.\\
-It may also be investigated how the coverage increases if allowing Polly to classify top level regions as valid \scops.\\
+Furthermore other \scops having the same (grand-) parent would have to be checked whether they have different reasons for not being extended.\\
+It may also be investigated how the coverage increases if allowing Polly to analyze also top level regions.

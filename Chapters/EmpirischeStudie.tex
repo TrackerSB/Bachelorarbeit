@@ -151,14 +151,14 @@ This may be a result of the fact that \dyncovp ignores whether the reasons of pa
 
 \section{Subject Programs}
 The intention is to measure programs which are well known and often used by the community to get a more realistic picture.
-The selection of programs (\autoref{tab:subjectPrograms}) is limited due the list of programs available using benchbuild\footnote{Benchbuild is a tool for automating the process of downloading, building, applying an experiment at compile time and executing a project on a SLURM \cite{slurm} Cluster.}.
+The selection of programs (\autoref{tab:subjectPrograms}) is limited due the list of programs available using benchbuild\footnote{Benchbuild is a tool for automating the process of downloading, building, applying an experiment at compile time and executing a project on a SLURM \cite{slurm} Cluster.} \cite{benchbuild}.
 \LTXtable{\textwidth}{tables/subjectPrograms.tex}
 
 \section{Tasks}
 \begin{sloppypar}
-    To create a setup which targets as much as possible real world scenarios integrated benchmarks of programs or SPEC2006 are used.
-    Further the \lnt provides a hole range of benchmarks of various programs.
-    Projects annotated like \enquote{\(program_{lnt}\)} belong to \lnt.
+    We use benchmarks and scenarios integrated into the projects or test-suites that are respected by the corresponding development communities to get as close to a real-world scenario as possible.
+    Furthermore, \lnt provides a whole range of benchmarks used by \llvm.
+    Projects annotated with \enquote{\(program_{lnt}\)} belong to \lnt.
 \end{sloppypar}
 
 \section{Design}
@@ -173,7 +173,7 @@ The third experiment \dyncovp and \dyncovs are compared to check whether \dyncov
     The measurement is realized using the \papi library \cite{papi}.\\
     To take these measurement the following steps are performed:\\
     The first step is implementing a new pass for Polly for instrumenting regions.
-    Afterwards a so called experiment for benchbuild has to be created.
+    Afterwards a so called experiment for benchbuild \cite{benchbuild} has to be created.
     This experiment is calling the actual pass of Polly by specifying the appropriate clang options using \texttt{-Xclang}, collects the generated data and persists it.\\
     The pass itself is a FunctionPass.
     Thus it is processing every function of the program.
@@ -187,7 +187,17 @@ The third experiment \dyncovp and \dyncovs are compared to check whether \dyncov
     Within this new node an instruction is placed starting the measurement of the execution time.
     This instruction has the same for regions unique id and remembers the system time at the point where it was called.
     The same way every outgoing edges in the \cfg of this region is also split introducing a further new node in which an instruction is placed for stopping the measurement having the same id.
-    When it is called the current system time is requested again and the difference to the starting call is calculated providing the duration of the measured region.\\
+    When it is called the current system time is requested again and the difference to the starting call is calculated providing the duration of the measured region.
+    The instrumented version of \autoref{lst:matmulcpp} is shown in \autoref{fig:afterInstrument} (The nodes having names ending with \enquote{.profile.exit.split} are the newly introduced nodes).
+    \begin{figure}[!h]
+        \caption[Example of instrumented method]{
+            This figure shows \autoref{lst:matmulcpp} after it is instrumented.
+            The nodes introduced through the instrumentation are the nodes having names ending with \enquote{.profile.exit.split}.
+            In this case Polly warns about \enquote{Call instruction: tail call @enter\_region(...) [...]} which are exactly these entry calls.
+        }
+        \includegraphics[width=\textwidth]{gfx/matmulScopsAfterInstrumentation.png}
+        \label{fig:afterInstrument}
+    \end{figure}
     The exact versions of the used software components are listed in \autoref{tab:usedSoftware}.\\
     All measurements are executed on an Intel Xeon E5-2650 v2 machine (2 Sockets with each 8 physical cores each 2.6GHz) with 128GB RAM.
     The precise specifications are listed in \autoref{tab:lscpu} and \autoref{tab:meminfo}.
@@ -226,4 +236,4 @@ The bug in the implementation is occurring in certain constellations of the basi
 To cope with it measurements of regions which have a bigger duration than the hole execution time of the project are excluded.
 Also measurements of coverages are excluded where the coverage is greater than 100\%.
 These occur because the filtering of the obviously bad measurements is not enough to exclude all bad ones.\\
-Further for minimizing the influences of the underlying OS multithreading is deactivated, the cluster node is used exclusively, the number of tasks is limited to one and the number of CPUs used per task is limited to 10.
+Furthermore for minimizing the influences of the underlying OS multithreading is deactivated, the cluster node is used exclusively, the number of tasks is limited to one and the number of CPUs used per task is limited to 10.

@@ -1,5 +1,5 @@
 \chapter{Polly}
-One of the numerous sub projects of the \llvm is Polly\footnote{The name \enquote{Polly} is a combination of \enquote{Polyhedral} and \enquote{\llvm} \cite{PollyGrosser}.} which provides plenty of options for automatic optimizations based on the polyhedral model operating on \llvmir.
+One of the numerous sub projects of the \llvm is Polly\footnote{The name \enquote{Polly} is a combination of \enquote{Polyhedral} and \enquote{\llvm} \cite{PollyGrosser}.} which provides options for automatic loop optimizations based on the polyhedral model.
 
 \section{History}
 Polly is an implementation of a loop optimizer based on the polyhedral model.\\
@@ -121,7 +121,7 @@ In \autoref{fig:exampleRegion} the regions of \autoref{lst:matmulcpp} are shown.
 A \scop is a specific region with further restrictions for being representable by the polyhedral model.\\
 For being a valid \scop such a region has to have \enquote{static control flow}.
 This includes that the region is a single entry single exit region, the loops within have to have only affine linear bounds, \eg the limits only depend on structure parameters\footnote{Structure parameter are integer variables whose values remain unchanged inside a \scop.}, numerical constants and iteration variables of enclosing loops \cite{GanserIterativeSchedule}. %\cite{ScopDetection.cpp}
-Further top level regions are excluded per default from being a \scop not because of conceptional constraints but because Polly needs a safe space to put code for maintenance.
+Furthermore top level regions are excluded per default from being a \scop not because of conceptional constraints but because Polly needs a safe space to put code for maintenance.
 This means a \scop usually has maximum size if its parent is a top level region.\\
 The visualization of the \scops of \autoref{lst:matmulcpp} is shown in \autoref{fig:exampleScop}.
 \begin{figure}[!h]

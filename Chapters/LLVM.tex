@@ -53,7 +53,7 @@ But when operating on multiple files the \linker links the optimized \llvmir fil
 \subsection{LLVM Code Generator}
 When all desired passes are performed the \generator translates \llvmir into target assembler.
 \subsection{Basic Blocks}\label{subsec:basicBlock}
-The underlying structure the pipeline is working on are basic blocks.
+A crucial part of it are basic blocks.
 According to \cite[chapter 8.4, p.~525]{Drachenbuch} basic blocks
 \begin{comment}
     Seite 525, Chapter 8. Code Generation, 8.4 Basic Blocks and Flow Graphs
@@ -66,7 +66,8 @@ According to \cite[chapter 8.4, p.~525]{Drachenbuch} basic blocks
     \end{enumerate}
 \end{quotation}
 \subsection{Control Flow Graph (CFG)}\label{subsec:cfg}
-The \cfg is a representation of the connections between basic blocks called control flow \cite[chapter 8.4.3, p.~529]{Drachenbuch}.
+Basic blocks and the edges connecting them form a \cfg.
+In \cite[chapter 8.4.3, p.~529]{Drachenbuch} it is described as follows.
 \begin{comment}
     Seite 529, Chapter 8. Code Generation, 8.4.3 Flow Graphs
 \end{comment}
@@ -88,13 +89,13 @@ The \cfg is a representation of the connections between basic blocks called cont
     \caption[The CFG of \autoref{lst:matmulcpp}]{
         This figure contains the \cfg of \autoref{lst:matmulcpp}.
         It visualizes the connections of the basic blocks (see \autoref{subsec:basicBlock}).
-        Every loop of the five within \autoref{lst:matmulcpp} consists out of four basic block which are typically called \texttt{for.condX} (Deciding whether to perform a further iteration or not), \texttt{for.bodyX} (Part of the loop body to execute), \texttt{for.incX} (Increment the iteration variable) and \texttt{for.endX} (The block called when leaving the loop) where \texttt{X} is a placeholder for an optional number.
+        Every loop of the five within \autoref{lst:matmulcpp} consists out of four basic block which are typically called \texttt{for.condX} (Deciding whether to perform the next iteration or not), \texttt{for.bodyX} (Part of the loop body to execute), \texttt{for.incX} (Increment the iteration variable) and \texttt{for.endX} (The block called when leaving the loop) where \texttt{X} is a placeholder for an optional number.
         When using a release build of \llvm these names are stripped and replaced by simple numbers.
     }
     \label{fig:exampleCfg}
     \includegraphics[width=\textwidth]{gfx/matmulCfg.png}
 \end{figure}
-Therefore the \cfg is very important to the pipeline as it is needed by many analysis and optimization passes to determine whether certain optimizations can be applied and in which way.
+So many analysis and optimization passes in \llvm operate on the \cfg.
 The current \cfg of a \llvmir file can be generated at any point of the pipeline.
 It also can be visualized (like \autoref{fig:exampleCfg}) by passing one of the options \texttt{-view-cfg} or \texttt{-view-cfg-only} to the \opt.
 \begin{enumerate}

@@ -9,6 +9,7 @@
 \usepackage{longtable}
 \usepackage{ltxtable}
 \usepackage{wrapfig}
+\usepackage{siunitx}
 \usepackage{smartdiagram}
 \usesmartdiagramlibrary{additions}
 
@@ -342,6 +343,12 @@
 
 %Has to be loaded after graphicx
 \usepackage[svgpath=svg/,clean]{svg}
+
+%siunitx setup
+\sisetup{
+    round-mode = places,
+    round-precision = 3
+}%
 
 %Shortcuts
 \newcommand{\cfg}{\ac{CFG}\xspace}
